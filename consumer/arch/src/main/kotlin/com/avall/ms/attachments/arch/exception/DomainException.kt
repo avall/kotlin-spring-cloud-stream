@@ -3,9 +3,16 @@ package com.avall.ms.attachments.arch.exception
 import com.avall.ms.attachments.arch.errors.ErrorReasonDTO
 
 open class DomainException(
-    val code: String,
-    val responseCode:Int,
-    message:String,
+    message:String?,
+    val code: String?,
+    val responseCode:Int?,
     val errorReasons: List<ErrorReasonDTO>? = null)
-: Exception(message) {}
+: RuntimeException(message) {
+
+    constructor(message: String?) : this(message, null, null, null) {}
+    constructor(messageFormat: String?, vararg args: Any?) : this(String.format(messageFormat!!, *args), null, null, null) {}
+
+
+}
+
 

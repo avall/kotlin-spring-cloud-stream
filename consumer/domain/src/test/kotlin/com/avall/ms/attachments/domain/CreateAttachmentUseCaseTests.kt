@@ -3,7 +3,7 @@ package com.avall.ms.attachments.domain
 import com.avall.ms.attachments.domain.model.Attachment
 import com.avall.ms.attachments.domain.port.input.ICreateAttachmentUseCase
 import com.avall.ms.attachments.domain.port.output.ISaveAttachmentPort
-import com.avall.ms.attachments.domain.service.CreateAttachmentUseCase
+import com.avall.ms.attachments.domain.usecase.CreateAttachmentUseCase
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.extension.ExtendWith
