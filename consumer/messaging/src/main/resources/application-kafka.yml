@@ -1,0 +1,39 @@
+spring:
+  # kafka
+  cloud:
+    stream:
+      default-binder: kafka
+      function:
+        definition: "execute-create-crm-documents-command"
+      bindings:
+        # consumer
+        execute-create-crm-documents-command-in-0:
+          destination: ${APP_TOPIC_EXECUTE_CREATE_CRM_DOCUMENT_COMMAND:command.comms.execute-create-crm-documents}
+          group: ${APP_TOPIC_EXECUTE_CREATE_CRM_DOCUMENT_GROUP:group.comms.crm-documents}
+          consumer:
+            concurrency: 6
+
+      kafka:
+        bindings:
+          execute-create-crm-documents-command-in-0:
+            consumer:
+              #              auto-commit-offset: false
+              #              auto-commit-on-error: false
+              enable-dlq: true
+              dlq-name: ${APP_TOPIC_EXECUTE_CREATE_CRM_DOCUMENT_ERROR:command.comms.execute-create-crm-documents.dlq}
+              dlq-partitions: 1
+              topic:
+                properties:
+                  retention.ms: ${APP_TOPIC_EXECUTE_CREATE_CRM_DOCUMENT_RETENTIONTIME:604800000}
+
+        binder:
+          brokers: ${APP_KAFKA_BROKERS:localhost:29092}
+          replication-factor: ${APP_KAFKA_REPLICATION_FACTOR:1}
+          auto-create-topics: true
+          auto-add-partitions: true
+#          required-acks: all
+          configuration:
+            security.protocol: ${APP_KAFKA_SECURITY_PROTOCOL:PLAINTEXT}
+            ssl.truststore.location: ${APP_KAFKA_TRUSTSTORE:}
+#            auto.offset.reset: earliest
+

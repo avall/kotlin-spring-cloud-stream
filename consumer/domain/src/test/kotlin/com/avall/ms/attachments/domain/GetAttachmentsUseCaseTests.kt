@@ -1,0 +1,65 @@
+package com.avall.ms.attachments.domain
+
+import com.avall.ms.attachments.domain.model.Attachment
+import com.avall.ms.attachments.domain.port.input.IGetAttachmentsUseCase
+import com.avall.ms.attachments.domain.port.output.IGetAttachmentsPort
+import com.avall.ms.attachments.domain.service.GetAttachmentsUseCase
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestInstance
+import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.InjectMocks
+import org.mockito.Mock
+import org.mockito.Mockito.`when`
+import org.mockito.junit.jupiter.MockitoExtension
+import org.mockito.kotlin.any
+import org.mockito.kotlin.times
+import org.mockito.kotlin.verify
+import strikt.api.expectThat
+import strikt.assertions.isEqualTo
+
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@ExtendWith(MockitoExtension::class)
+class GetAttachmentsUseCaseTests {
+    @Mock lateinit var getAttachmentsPort: IGetAttachmentsPort
+    @InjectMocks lateinit var useCase: GetAttachmentsUseCase
+
+    @Test
+    fun `When Calling useCase_execute Then GetAttachmentsPort is called`() {
+        // Given
+        val attachment = attachment()
+        `when`(getAttachmentsPort.findByParentId(any())).thenReturn(listOf(attachment))
+
+        val input = IGetAttachmentsUseCase.Input("")
+
+        // When: Calling useCase.execute method passing null as parameter
+        val result = useCase.execute(input)
+
+        // Then: Should return null
+        verify(getAttachmentsPort, times(1)).findByParentId(any())
+        expectThat(result.attachments.get(0)) {
+            get { id } isEqualTo attachment.id
+            get { parentId } isEqualTo attachment.parentId
+            get { parentObjectName } isEqualTo attachment.parentObjectName
+            get { contentType } isEqualTo attachment.contentType
+            get { docType } isEqualTo attachment.docType
+            get { type } isEqualTo attachment.type
+            get { path } isEqualTo attachment.path
+            get { fileName } isEqualTo attachment.fileName
+            get { description } isEqualTo attachment.description
+        }
+    }
+
+    fun attachment():Attachment {
+        return Attachment(
+            id = "UUID",
+            parentId = "parentId",
+            parentObjectName = "parentObjectName",
+            contentType = "contentType",
+            docType = "docType",
+            type = "type",
+            path = "path",
+            fileName = "fileName",
+            description = "description"
+        )
+    }
+}

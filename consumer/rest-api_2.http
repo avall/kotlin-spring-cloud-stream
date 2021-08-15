@@ -1,0 +1,187 @@
+#Switzerland.
+POST http://localhost:8080/crm-attachments/api/v1/attachments
+#POST https://oneback-ms-account-contract.30d437346.eu-central-1.one-wefoxgroup.cloud/api/v1/contracts/
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json; charset=utf-8
+#Authorization: Basic dXNlcjowbjM4NGNrIUMwbnRyNGN0JEQzdg==
+#Authorization: Basic dXNlcjowbjM4NGNrIUNvbnRyYWN0JFN0OQ==
+
+#"documents": [{
+#"type": "image/png",
+#"url": "one-broker-portal/12221815617580PMNWQYJS7XA/SWT/p_YsMwxuaCF9RAcnDXTvkGwSWT/SWT_p_YsMwxuaCF9RAcnDXTvkGwSWT_1579253753915.png"
+#}
+#]
+
+{
+  "documents": [
+    {
+      "parent_id": "mw-88c17638-3943-4a73-b75c-b54759a00daa",
+      "file_name": "jandri.jpeg",
+      "description": "description",
+      "content_type": "image/jpeg",
+      "type": "Other",
+      "doc_type": "Other",
+      "path": "Claim/mw-88c17638-3943-4a73-b75c-b54759a00daa",
+      "bucket": "one-dev-bucket",
+      "parent_object_name": "Claim__c",
+      "country": "de",
+      "language": "de",
+      "is_document": true,
+      "is_private": true
+    },
+    {
+      "parent_id": "mw-88c17638-3943-4a73-b75c-b54759a00daa",
+      "file_name": "jandri photo 2.jpeg",
+      "description": "description",
+      "content_type": "image/jpeg",
+      "type": "Other",
+      "doc_type": "Other",
+      "path": "Claim/mw-88c17638-3943-4a73-b75c-b54759a00daa",
+      "bucket": "one-dev-bucket",
+      "parent_object_name": "Claim__c",
+      "country": "de",
+      "language": "de",
+      "is_document": true,
+      "is_private": true
+    }
+  ]
+}
+
+####
+
+#Germany
+POST http://localhost:8080/api/v1/contracts
+#POST https://oneback-ms-account-contract.30d437346.eu-central-1.one-wefoxgroup.cloud/api/v1/contracts/
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json; charset=utf-8
+Authorization: Basic dXNlcjowbjM4NGNrIUMwbnRyNGN0JEQzdg==
+
+#"documents": [{
+#"type": "image/png",
+#"url": "one-broker-portal/12221815617580PMNWQYJS7XA/SWT/p_YsMwxuaCF9RAcnDXTvkGwSWT/SWT_p_YsMwxuaCF9RAcnDXTvkGwSWT_1579253753915.png"
+#}
+#]
+
+{
+  "external_id": "g5aaaqwgrISm13000105",
+  "customer": {
+    "email": "alex.vall.mainou+0105@gmail.com",
+    "first_name": "alex0105",
+    "last_name": "vall0105",
+    "address": {
+      "country": "DE",
+      "house_number": "23",
+      "place": "Berlin",
+      "postal_code": "10178",
+      "street": "Alexanderplatz"
+    },
+    "birthdate": "1982-03-03T23:00:00.000Z",
+    "gender": "0",
+    "mobile_number": "1111111",
+    "phone_number": "11111111"
+  },
+  "inputs": [
+    {
+      "name": "private-liability.payment.frequency",
+      "value": "Yearly"
+    },
+    {
+      "name": "private-liability.package",
+      "value": "SWITCH_PL"
+    },
+    {
+      "name": "private-liability.deductible",
+      "value": "300"
+    },
+    {
+      "name": "private-liability.children.number",
+      "value": 0
+    },
+    {
+      "name": "private-liability.adults.number",
+      "value": 1
+    },
+    {
+      "name": "private-liability.premium-with-tax-previous-insurance",
+      "value": 100
+    },
+    {
+      "name": "person.birthdate",
+      "value": "1982-03-03T23:00:00.000Z"
+    }
+  ],
+  "payment_details": {
+    "credit_card_cvc": "111",
+    "credit_card_exp_month": "12",
+    "credit_card_exp_year": "2024",
+    "credit_card_name": "alex perez006",
+    "credit_card_number": "4111 1111 1111 1111",
+    "direct_debit_iban": "",
+    "direct_debit_iban_name_holder": "",
+    "type": "CreditCard"
+  },
+  "calculation_date": "2020-04-18T00:00:00.000Z",
+  "premium_without_tax": 79.83,
+  "premium_with_tax": 95.00,
+  "tax": 15.17,
+  "currency": "EUR",
+  "payment_frequency": "Yearly",
+  "product_id": "p_YsMwxuaCF9RAcnDXTvkGcwsssdPISW",
+  "product_version": "1",
+  "start_date": "2020-08-18T22:00:00.000Z",
+  "s3_attachment_url": "one-broker-portal/45235823817620PUT6HXD8BGO/SWT/p_YsMwxuaCF9RAcnDXTvkGcwsssdPISW/SWT_p_YsMwxuaCF9RAcnDXTvkGcwsssdPISW_1596012350820.png",
+  "portfolio_owners": [
+    {
+      "type": "BROKER",
+      "legal_id": "45235823817620PUT6HXD8BGO"
+    }
+  ],
+  "documents": [{
+    "type": "image/png",
+    "url": "one-broker-portal/12221815617580PMNWQYJS7XA/SWT/p_YsMwxuaCF9RAcnDXTvkGwSWT/SWT_p_YsMwxuaCF9RAcnDXTvkGwSWT_1579253753915.png"
+  }
+  ]
+}
+
+
+
+###
+
+#POST http://localhost:8080/api/v1/Customer/auth
+#Accept: */*
+#Cache-Control: no-cache
+#Content-Type: application/json; charset=utf-8
+#
+#{
+#  "email":"a@a.com",
+#  "password":"ppppppppppp"
+#}
+#> {% client.global.set("auth_token", response.body.token); %}
+#
+####
+#
+#GET http://localhost:8080/api/v1/Store
+#Accept: */*
+#Cache-Control: no-cache
+#Content-Type: application/json; charset=utf-8
+#
+####
+#
+#POST http://localhost:8080/api/v1/Order
+#Accept: */*
+#Cache-Control: no-cache
+#Content-Type: application/json; charset=utf-8
+#Authorization: Bearer {{auth_token}}
+#
+#{
+#  "storeId":1,
+#  "orderItems":[
+#    {
+#      "id": 1,
+#      "quantity": 1
+#    }
+#  ]
+#}
+#
