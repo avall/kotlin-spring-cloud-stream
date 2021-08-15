@@ -1,4 +1,4 @@
-package com.avall.ms.attachments.domain.usecase
+package com.avall.ms.attachments.domain.usecase.attachment
 
 import com.avall.ms.attachments.domain.annotation.Interactor
 import com.avall.ms.attachments.domain.port.input.IGetAttachmentsUseCase

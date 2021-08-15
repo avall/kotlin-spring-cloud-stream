@@ -1,4 +1,4 @@
-package com.avall.ms.attachments.domain.usecase
+package com.avall.ms.attachments.domain.usecase.attachment
 
 import com.avall.ms.attachments.arch.extensions.loggerFor
 import com.avall.ms.attachments.domain.annotation.Interactor
