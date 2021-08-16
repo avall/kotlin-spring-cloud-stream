@@ -1,7 +1,7 @@
 package com.avall.ms.attachments.domain.usecase.attachment
 
 import com.avall.ms.attachments.arch.extensions.loggerFor
-import com.avall.ms.attachments.domain.annotation.Interactor
+import com.avall.ms.attachments.arch.annotation.Interactor
 import com.avall.ms.attachments.domain.port.input.ICreateAttachmentUseCase
 import com.avall.ms.attachments.domain.port.output.ISaveAttachmentPort
 

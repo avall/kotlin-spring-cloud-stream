@@ -1,7 +1,7 @@
 package com.avall.ms.attachments.domain.usecase.product
 
 import com.avall.ms.attachments.arch.usecase.UseCase
-import com.avall.ms.attachments.domain.annotation.Interactor
+import com.avall.ms.attachments.arch.annotation.Interactor
 import com.avall.ms.attachments.domain.model.Product
 import com.avall.ms.attachments.domain.port.output.IProductRepository
 

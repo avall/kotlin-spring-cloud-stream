@@ -61,7 +61,7 @@
 						<plugin>all-open</plugin>
 					</compilerPlugins>
 					<pluginOptions>
-						<option>all-open:annotation=com.avall.ms.attachments.domain.annotation.Interactor</option>
+						<option>all-open:annotation=com.avall.ms.attachments.arch.annotation.Interactor</option>
 					</pluginOptions>
 				</configuration>
 				<dependencies>

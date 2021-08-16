@@ -10,12 +10,12 @@ spring:
     active: ${APP_PROFILE:dev}
     include:
       - kafka
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: ${APP_OAUTH_SERVER:https://id-dev.wefox.com/auth/realms/wefox}
-          jwk-set-uri: ${APP_OAUTH_SERVER_CERTS:https://id-dev.wefox.com/auth/realms/wefox/protocol/openid-connect/certs}
+#  security:
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          issuer-uri: ${APP_OAUTH_SERVER:https://id-dev.wefox.com/auth/realms/wefox}
+#          jwk-set-uri: ${APP_OAUTH_SERVER_CERTS:https://id-dev.wefox.com/auth/realms/wefox/protocol/openid-connect/certs}
   jackson:
     property-naming-strategy: SNAKE_CASE
     default-property-inclusion: non_null
@@ -38,6 +38,11 @@ spring:
     default-schema: ${APP_POSTGRES_SCHEMA:public}
     contexts: ${spring.profiles.active}
 
+
+app:
+  security:
+    jwtSecret: JWTSuperSecretKey
+    jwtExpirationInMs: 604800000
 
 
 # ACTUATOR ENDPOINTS
@@ -71,6 +76,7 @@ logging:
   config: classpath:logback-spring.xml
   level:
     org.zalando.logbook: TRACE
+    liquibase: INFO
 
 logbook:
   format.style: json

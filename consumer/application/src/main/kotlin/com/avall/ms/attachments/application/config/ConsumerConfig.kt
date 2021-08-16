@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration
 import java.util.function.Consumer
 
 @Configuration
-open class ConsumerConfig(
+class ConsumerConfig(
     private val createAttachmentUseCsse: ICreateAttachmentUseCase
 ) {
     private val log = loggerFor(javaClass)
@@ -20,7 +20,7 @@ open class ConsumerConfig(
      * @return Consumer<CommandPayload>
      */
     @Bean(EXECUTE_CREATE_CRM_DOCUMENTS_COMMAND)
-    open fun consumer():Consumer<CommandPayload> {
+    fun consumer():Consumer<CommandPayload> {
         return Consumer<CommandPayload> {
             log.info("consuming event {}", it)// l get dispatched to DefaultDispatcher
             createAttachmentUseCsse.execute(it.toCreateUseCaseInput())

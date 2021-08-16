@@ -2,7 +2,7 @@ package com.avall.ms.attachments.domain.usecase.customer
 
 import com.avall.ms.attachments.arch.exception.EntityAlreadyExistsException
 import com.avall.ms.attachments.arch.usecase.UseCase
-import com.avall.ms.attachments.domain.annotation.Interactor
+import com.avall.ms.attachments.arch.annotation.Interactor
 import com.avall.ms.attachments.domain.model.Customer
 import com.avall.ms.attachments.domain.model.Identity
 import com.avall.ms.attachments.domain.port.output.ICustomerRepository

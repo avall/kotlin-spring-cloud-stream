@@ -1,4 +1,4 @@
-package com.avall.ms.attachments.domain.annotation
+package com.avall.ms.attachments.arch.annotation
 
 import java.lang.annotation.Inherited
 

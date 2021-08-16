@@ -22,9 +22,9 @@ import javax.validation.Valid
         version = "v1",
         description = "CRM Attachment (send attachments to Salesforce)",
         contact = Contact(
-            url = "http://www.wefoxgroup.com/support",
+            url = "http://www.jandrinet.com/support",
             name = "Comms Team",
-            email = "wibe.core.insurance.group@wefox.com"
+            email = "alex.vall.mainou@gmail.com"
         )
     )
 )

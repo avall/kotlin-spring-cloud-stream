@@ -1,7 +1,7 @@
 package com.avall.ms.attachments.domain.usecase.cousine
 
 import com.avall.ms.attachments.arch.usecase.UseCase
-import com.avall.ms.attachments.domain.annotation.Interactor
+import com.avall.ms.attachments.arch.annotation.Interactor
 import com.avall.ms.attachments.domain.model.Cousine
 import com.avall.ms.attachments.domain.port.output.ICousineRepository
 

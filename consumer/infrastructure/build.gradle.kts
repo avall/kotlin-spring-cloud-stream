@@ -1,6 +1,7 @@
 plugins {
 	id("org.springframework.boot")
 	id("org.jetbrains.kotlin.plugin.allopen")
+	id("org.liquibase.gradle") version "2.0.4"
 
 	kotlin(Plugins.jvm)
 	kotlin(Plugins.spring)
@@ -22,8 +23,17 @@ dependencies {
 	implementation(project(ModulesApp.messaging))
 
 	implementation(SpringLibraries.springBootStarterDataJPa)
+	implementation(SpringLibraries.springBootStarterSecurity)
+	implementation(SpringLibraries.springBootStarterTomcat)
+	implementation(Libraries.customJwtToken)
 
 	implementation(Libraries.jacksonModuleKotlin)
+
+
+	implementation(Libraries.liquibaseCore)
+	implementation(Libraries.liquibasePlugin)
+	liquibaseRuntime(Libraries.liquibaseHibernate)
+
 	implementation(Libraries.logbook)
 	runtimeOnly(Libraries.postgress)
 	runtimeOnly(Testlibraries.h2)
@@ -44,4 +54,19 @@ tasks.jar {
 	enabled = true
 //	archiveFileName.set("app.jar")
 //	mainClass.set("com.avall.ms.attachments.MSAttachmentApplication")
+}
+
+tasks.register("liquibase") {
+	// depend on the liquibase status task
+	dependsOn("run")
+	liquibase {
+		activities.register("main") {
+			this.arguments = mapOf(
+				"logLevel" to "info",
+				"changeLogFile" to "src/main/resources/db/changelog/changelog-master.xml",
+				"url" to "jdbc:h2:mem:qamyapp",
+				"username" to "sa",
+				"password" to "")
+		}
+	}
 }

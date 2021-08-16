@@ -5,6 +5,8 @@ dependencies {
 	implementation(Libraries.jacksonModuleKotlin)
 	implementation(Libraries.swaggerCore)
 	implementation(SpringLibraries.springWeb)
+	implementation(SpringLibraries.springBootStarterTomcat)
+	implementation(SpringLibraries.springBootStarterSecurity)
 
 	developmentOnly(SpringLibraries.springDevtools)
 }

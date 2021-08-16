@@ -39,6 +39,8 @@ object Versions {
     const val mockitoKotlinVersion = "3.2.0"
     const val slf4jVersion = "1.7.30"
     const val sonarQube = "3.2.0"
+    const val liquibase = "2.0.4"
+    const val liquibaseHibernate = "3.8"
 
 }
 
@@ -63,6 +65,10 @@ object Libraries {
     const val jacksonDataTypeJsr310 = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
     const val logstashEncoder = "net.logstash.logback:logstash-logback-encoder:${Versions.logstashLogbackEncoderVersion}"
     const val micrometer = "io.micrometer:micrometer-registry-prometheus"
+    const val customJwtToken = "io.jsonwebtoken:jjwt:0.9.0"
+    const val liquibaseCore = "org.liquibase:liquibase-core"
+    const val liquibasePlugin = "org.liquibase:liquibase-gradle-plugin:${Versions.liquibase}"
+    const val liquibaseHibernate = "org.liquibase.ext:liquibase-hibernate5:${Versions.liquibaseHibernate}"
 }
 
 object SpringLibraries {
@@ -72,6 +78,7 @@ object SpringLibraries {
     const val springCloudStreamKafkaBinder = "org.springframework.cloud:spring-cloud-stream-binder-kafka"
     const val springBootStarterActuator = "org.springframework.boot:spring-boot-starter-actuator"
     const val springBootStarterWeb = "org.springframework.boot:spring-boot-starter-web"
+    const val springBootStarterTomcat = "org.springframework.boot:spring-boot-starter-tomcat"
     const val springBootStarterSecurity = "org.springframework.boot:spring-boot-starter-security"
     const val springBootStarter = "org.springframework.boot:spring-boot-starter"
     const val springSecurityOauth2ResourceServer = "org.springframework.security:spring-security-oauth2-resource-server"
