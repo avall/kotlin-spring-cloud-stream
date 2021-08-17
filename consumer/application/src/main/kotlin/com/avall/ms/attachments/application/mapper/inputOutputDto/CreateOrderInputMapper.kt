@@ -2,10 +2,11 @@ package com.avall.ms.attachments.application.mapper.inputOutputDto
 
 import com.avall.ms.attachments.api.dto.request.OrderRequest
 import com.avall.ms.attachments.api.dto.request.OrderRequestItem
+import com.avall.ms.attachments.api.dto.request.UserPrincipal
 import com.avall.ms.attachments.domain.model.Customer
 import com.avall.ms.attachments.domain.model.Identity
+import com.avall.ms.attachments.domain.model.OrderItem
 import com.avall.ms.attachments.domain.usecase.order.CreateOrderUseCase
-import com.avall.ms.attachments.infrastructure.security.UserPrincipal
 import org.springframework.stereotype.Component
 
 @Component
@@ -20,16 +21,27 @@ object CreateOrderInputMapper {
                 address = userPrincipal.address!!,
                 password = userPrincipal.password
             ),
-            storeId = Identity(orderRequest.storeId), orderItems = orderRequest.orderItems)
+            storeId = Identity(orderRequest.storeId), orderItems = orderRequest.orderItems.map())
     }
 
-    fun OrderRequestItem.map(): CreateOrderUseCase.InputItem {
-        return CreateOrderUseCase.InputItem(id = Identity(this.id), quantity = this.quantity)
+//    private fun OrderRequestItem.map(): CreateOrderUseCase.InputItem {
+//        return CreateOrderUseCase.InputItem(id = Identity(this.id), quantity = this.quantity)
+//    }
+//
+//    fun List<OrderRequestItem>.map(): List<CreateOrderUseCase.InputItem> {
+//        val orderRequestItemList = ArrayList<CreateOrderUseCase.InputItem>()
+//        forEach { orderRequestItem -> orderRequestItemList.add(orderRequestItem.map()) }
+//        return orderRequestItemList
+//    }
+
+    private fun OrderRequestItem.map(): OrderItem {
+        return OrderItem(id = Identity(this.id), quantity = this.quantity)
     }
 
-    fun List<OrderRequestItem>.map(): List<CreateOrderUseCase.InputItem> {
-        val orderRequestItemList = ArrayList<CreateOrderUseCase.InputItem>()
+    fun List<OrderRequestItem>.map(): List<OrderItem> {
+        val orderRequestItemList = ArrayList<OrderItem>()
         forEach { orderRequestItem -> orderRequestItemList.add(orderRequestItem.map()) }
         return orderRequestItemList
     }
+
 }

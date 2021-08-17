@@ -2,22 +2,26 @@ package com.avall.ms.attachments.domain.usecase.security
 
 import com.avall.ms.attachments.arch.annotation.Interactor
 import com.avall.ms.attachments.arch.usecase.UseCase
-import org.springframework.security.authentication.AuthenticationManager
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import com.avall.ms.attachments.domain.model.AuthenticationUserPassword
+import com.avall.ms.attachments.domain.port.output.AuthenticationPort
 
 @Interactor
 open class AuthenticateCustomerUseCase(
-    private val authenticationManager: AuthenticationManager,
-    private val jwtProvider: IJwtProvider
+    private val authenticationPort: AuthenticationPort
 ) : UseCase<AuthenticateCustomerUseCase.InputValues, AuthenticateCustomerUseCase.OutputValues> {
 
    override fun execute(input: InputValues): OutputValues {
-        val authentication = authenticationManager.authenticate(input.authenticationToken)
-        return OutputValues(jwtProvider.generateToken(authentication))
+        val authentication = authenticationPort.authenticate(
+            AuthenticationUserPassword(
+                principal = input.email,
+                credentials = input.password
+            ))
+        return OutputValues(authenticationPort.generateToken(authentication))
     }
 
     data class InputValues(
-        var authenticationToken: UsernamePasswordAuthenticationToken
+        var email: String,
+        var password: String
     ) : UseCase.InputValues
 
     data class OutputValues(

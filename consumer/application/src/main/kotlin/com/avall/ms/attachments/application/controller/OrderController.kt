@@ -4,6 +4,7 @@ package com.avall.ms.attachments.application.controller
 import com.avall.ms.attachments.api.CurrentUser
 import com.avall.ms.attachments.api.OrderResource
 import com.avall.ms.attachments.api.dto.request.OrderRequest
+import com.avall.ms.attachments.api.dto.request.UserPrincipal
 import com.avall.ms.attachments.api.dto.response.ApiResponse
 import com.avall.ms.attachments.api.dto.response.CustomerResponse
 import com.avall.ms.attachments.api.dto.response.OrderResponse
@@ -13,7 +14,6 @@ import com.avall.ms.attachments.application.mapper.inputOutputDto.CreateOrderInp
 import com.avall.ms.attachments.arch.usecase.UseCaseExecutor
 import com.avall.ms.attachments.domain.model.Identity
 import com.avall.ms.attachments.domain.usecase.order.*
-import com.avall.ms.attachments.infrastructure.security.UserPrincipal
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Component
 import org.springframework.web.bind.annotation.PathVariable
@@ -49,7 +49,7 @@ class OrderController(
                 .path("/order/{id}")
                 .buildAndExpand(outputValues.order!!.id.number)
                 .toUri()
-            ResponseEntity.created(location).body(outputValues.order.mapToDto())
+            ResponseEntity.created(location).body(outputValues.order!!.mapToDto())
         }
     }
 

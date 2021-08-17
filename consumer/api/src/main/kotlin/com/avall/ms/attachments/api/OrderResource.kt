@@ -1,6 +1,7 @@
 package com.avall.ms.attachments.api
 
 import com.avall.ms.attachments.api.dto.request.OrderRequest
+import com.avall.ms.attachments.api.dto.request.UserPrincipal
 import com.avall.ms.attachments.api.dto.response.ApiResponse
 import com.avall.ms.attachments.api.dto.response.CustomerResponse
 import com.avall.ms.attachments.api.dto.response.OrderResponse

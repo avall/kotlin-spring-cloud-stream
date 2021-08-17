@@ -42,16 +42,16 @@ open class UserPrincipal(
         return true
     }
 
-    companion object {
-        fun from(customer: CustomerDb): UserPrincipal {
-            return UserPrincipal(
-                customer.id,
-                customer.name,
-                customer.email,
-                customer.password,
-                customer.address,
-                listOf(SimpleGrantedAuthority("ROLE_USER"))
-            )
-        }
-    }
+//    companion object {
+//        fun from(customer: CustomerDb): UserPrincipal {
+//            return UserPrincipal(
+//                customer.id,
+//                customer.name,
+//                customer.email,
+//                customer.password,
+//                customer.address,
+//                listOf(SimpleGrantedAuthority("ROLE_USER"))
+//            )
+//        }
+//    }
 }
