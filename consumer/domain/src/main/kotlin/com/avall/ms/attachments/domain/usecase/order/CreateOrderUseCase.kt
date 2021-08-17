@@ -4,7 +4,7 @@ import com.avall.ms.attachments.arch.usecase.UseCase
 import com.avall.ms.attachments.arch.annotation.Interactor
 import com.avall.ms.attachments.domain.model.*
 import com.avall.ms.attachments.domain.port.output.IOrderRepository
-import com.ferraobox.qamyapp.application.core.usecases.product.GetProductsByStoreAndProductsIdUseCase
+import com.avall.ms.attachments.domain.usecase.product.GetProductsByStoreAndProductsIdUseCase
 import java.time.Instant
 
 @Interactor

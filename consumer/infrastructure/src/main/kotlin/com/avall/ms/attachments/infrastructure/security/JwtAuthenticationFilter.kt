@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 open class JwtAuthenticationFilter(
-    private val tokenProvider: JwtProvider,
+    private val tokenProvider: IJwtProvider,
     private val customUserDetailsService: CustomUserDetailsService
 ) : OncePerRequestFilter() {
 

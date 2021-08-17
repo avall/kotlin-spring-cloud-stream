@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS customer (
 );
 
 INSERT INTO customer (name, email, address, password)
-VALUES ('carlos ferrao', 'carlosferrao@spring.com', 'addressfake', '12345');
+VALUES ('alex vall', 'avall@spring.com', 'addressfake', '12345');
 
 CREATE TABLE IF NOT EXISTS orders (
                         id uuid NOT NULL DEFAULT uuid_generate_v4(),

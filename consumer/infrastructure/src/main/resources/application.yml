@@ -1,7 +1,7 @@
 server:
   port: ${APP_SERVER_PORT:8180}
   servlet:
-    context-path: /crm-attachments/api
+    context-path: /api
 
 spring:
   application:

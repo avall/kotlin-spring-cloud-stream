@@ -15,7 +15,7 @@ import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
-@RequestMapping("/v1/attachments",produces = [MediaType.APPLICATION_JSON_VALUE])
+@RequestMapping("/attachments",produces = [MediaType.APPLICATION_JSON_VALUE])
 @OpenAPIDefinition(
     info = Info(
         title = "Comms Domain API",

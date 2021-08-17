@@ -1,4 +1,4 @@
-package com.ferraobox.qamyapp.application.core.usecases.product
+package com.avall.ms.attachments.domain.usecase.product
 
 import com.avall.ms.attachments.arch.annotation.Interactor
 import com.avall.ms.attachments.arch.exception.NotFoundException
