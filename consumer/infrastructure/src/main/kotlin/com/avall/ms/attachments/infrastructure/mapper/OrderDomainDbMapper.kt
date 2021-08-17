@@ -1,6 +1,5 @@
 package com.avall.ms.attachments.infrastructure.mapper
 
-import com.avall.ms.attachments.domain.model.Identity
 import com.avall.ms.attachments.domain.model.Order
 import com.avall.ms.attachments.domain.model.Status
 import com.avall.ms.attachments.infrastructure.database.OrderDb
@@ -10,14 +9,13 @@ import com.avall.ms.attachments.infrastructure.mapper.CustomerDomainDbMapper.map
 import com.avall.ms.attachments.infrastructure.mapper.OrderItemDomainDbMapper.mapToDomain
 import com.avall.ms.attachments.infrastructure.mapper.StoreDomainDbMapper.mapToDb
 import com.avall.ms.attachments.infrastructure.mapper.StoreDomainDbMapper.mapToDomain
-import kotlin.collections.ArrayList
 
 
 object OrderDomainDbMapper {
 
     fun Order.mapToDb(): OrderDb {
         return OrderDb(
-            id = this.id.number,
+            id = this.id,
             customer = this.customer.mapToDb(),
             store = this.store.mapToDb(),
             total = this.total,
@@ -37,7 +35,7 @@ object OrderDomainDbMapper {
 
     fun OrderDb.mapToDomain(): Order {
         return Order(
-            id = Identity(this.id!!),
+            id = this.id,
             customer = this.customer.mapToDomain(),
             store = this.store.mapToDomain(),
             total = this.total,

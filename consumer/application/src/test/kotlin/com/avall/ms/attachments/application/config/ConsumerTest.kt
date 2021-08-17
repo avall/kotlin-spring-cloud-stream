@@ -73,12 +73,9 @@ class ConsumerTest {
             documents = listOf(
                 CommandAttachment(
                     parentId = "parentId",
-                    parentObjectName = "parentObjectName",
                     contentType = "contentType",
-                    docType = "docType",
-                    type = "type",
-                    path = "path",
-                    fileName = "fileName",
+                    url = "path",
+                    isPrivate = true,
                     description = "description"
                 )
             )
@@ -97,13 +94,13 @@ class ConsumerTest {
                 assertAll(
                     {
                         assertEquals(
-                            event.documents.get(0).parentId, captorValue.documents.get(0).parentId,
+                            event.documents.get(0).description, captorValue.documents.get(0).description,
                             "parentId"
                         )
                     },
                     {
                         assertEquals(
-                            event.documents.get(0).parentObjectName, captorValue.documents.get(0).parentObjectName,
+                            event.documents.get(0).isPrivate, captorValue.documents.get(0).isPrivate,
                             "parentObjectName"
                         )
                     },
@@ -115,7 +112,7 @@ class ConsumerTest {
                     },
                     {
                         assertEquals(
-                            event.documents.get(0).fileName, captorValue.documents.get(0).fileName,
+                            event.documents.get(0).url, captorValue.documents.get(0).url,
                             "fileName"
                         )
                     })

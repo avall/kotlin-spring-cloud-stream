@@ -14,6 +14,11 @@ open class DomainException(
         code = "400",
         responseCode = 400,
         errorReasons = null) {}
+    constructor(message: String, code: String, responseCode: Int) : this(
+        message = message,
+        code = code,
+        responseCode = responseCode,
+        errorReasons = null) {}
     constructor(messageFormat: String, vararg args: Any) :
             this(
                 message = String.format(messageFormat!!, *args),

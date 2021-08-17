@@ -40,7 +40,7 @@ open class CustomerController(
             val location = ServletUriComponentsBuilder
                 .fromContextPath(httpServletRequest)
                 .path("customer/{id}")
-                .buildAndExpand(outputValues.customer.id.number)
+                .buildAndExpand(outputValues.customer.id)
                 .toUri()
             ResponseEntity.created(location).body(outputValues.customer.mapToDto())
         }

@@ -1,10 +1,9 @@
 package com.avall.ms.attachments.domain.usecase.customer
 
+import com.avall.ms.attachments.arch.annotation.Interactor
 import com.avall.ms.attachments.arch.exception.EntityAlreadyExistsException
 import com.avall.ms.attachments.arch.usecase.UseCase
-import com.avall.ms.attachments.arch.annotation.Interactor
 import com.avall.ms.attachments.domain.model.Customer
-import com.avall.ms.attachments.domain.model.Identity
 import com.avall.ms.attachments.domain.port.output.ICustomerRepository
 
 
@@ -18,7 +17,6 @@ open class CreateCustomerUseCase(
             throw EntityAlreadyExistsException("Email address already in use!")
         }
         val customer = Customer(
-            id= Identity(),
             name=input.name,
             email=input.email,
             address=input.address,

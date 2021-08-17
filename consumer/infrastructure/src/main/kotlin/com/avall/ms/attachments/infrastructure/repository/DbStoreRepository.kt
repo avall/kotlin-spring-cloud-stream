@@ -5,12 +5,12 @@ import com.avall.ms.attachments.infrastructure.database.StoreDb
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 
-interface DbStoreRepository : JpaRepository<StoreDb, Long> {
+interface DbStoreRepository : JpaRepository<StoreDb, String> {
     fun findByNameContainingIgnoreCase(name: String?): List<StoreDb?>
 
     @Query("select p from store s join s.products p where s.id = ?1")
-    fun findProductsById(id: Long): List<ProductDb?>
+    fun findProductsById(id: String): List<ProductDb?>
 
     @Query("select s from cousine c join c.stores s where c.id = ?1")
-    fun findStoresById(id: Long): List<StoreDb?>
+    fun findStoresById(id: String): List<StoreDb?>
 }

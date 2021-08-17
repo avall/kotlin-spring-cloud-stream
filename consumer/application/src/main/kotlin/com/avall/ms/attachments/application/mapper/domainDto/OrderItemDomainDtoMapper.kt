@@ -3,9 +3,7 @@ package com.avall.ms.attachments.application.mapper.domainDto
 import com.avall.ms.attachments.api.dto.response.OrderItemResponse
 import com.avall.ms.attachments.application.mapper.domainDto.ProductDomainDtoMapper.mapToDomain
 import com.avall.ms.attachments.application.mapper.domainDto.ProductDomainDtoMapper.mapToDto
-import com.avall.ms.attachments.domain.model.Identity
 import com.avall.ms.attachments.domain.model.OrderItem
-
 import org.springframework.stereotype.Component
 
 @Component
@@ -25,7 +23,7 @@ object OrderItemDomainDtoMapper {
 
     fun OrderItemResponse.mapToDomain(): OrderItem {
         return OrderItem(
-            id = Identity(),
+            id = null,
             quantity = this.quantity,
             product = this.product.mapToDomain(),
             price = this.price,

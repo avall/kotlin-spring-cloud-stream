@@ -7,5 +7,5 @@ interface ICustomerRepository {
     fun persist(customer: Customer): Customer
     fun existsByEmail(email: String): Boolean
     fun findByEmail(email: String): Optional<Customer>
-    fun findById(id: Long): Optional<Customer>
+    fun findById(id: String): Optional<Customer>
 }

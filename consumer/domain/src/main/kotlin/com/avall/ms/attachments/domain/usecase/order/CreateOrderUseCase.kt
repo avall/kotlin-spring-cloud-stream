@@ -20,7 +20,6 @@ open class CreateOrderUseCase(
     private fun createOrder(input: InputValues): Order {
         val orderItems: List<OrderItem> = createOrderItems(input)
         return Order(
-            id = Identity(),
             customer = input.customer,
             store = getFirstProductStore(orderItems),
             orderItems = orderItems,
@@ -32,19 +31,18 @@ open class CreateOrderUseCase(
     }
 
     private fun getFirstProductStore(orderItems: List<OrderItem>): Store {
-        return orderItems[0].product.store
+        return orderItems[0].product!!.store
     }
 
     private fun createOrderItems(input: InputValues): List<OrderItem> {
-        val productMap: Map<Identity, Product> = getProducts(input)
+        val productMap: Map<String, Product> = getProducts(input)
         return input.orderItems.map { inputItem -> createOrderItem(inputItem, productMap) }.toList()
     }
 
-    private fun createOrderItem(inputItem: OrderItem, productMap: Map<Identity, Product>): OrderItem {
+    private fun createOrderItem(inputItem: OrderItem, productMap: Map<String, Product>): OrderItem {
         val productId = inputItem.id
         val product: Product = productMap[productId]!!
         return OrderItem(
-            id = Identity(),
             product = product,
             quantity = inputItem.quantity,
             total = (inputItem.quantity * product.price),
@@ -52,22 +50,22 @@ open class CreateOrderUseCase(
         )
     }
 
-    private fun getProducts(input: InputValues): Map<Identity, Product> {
+    private fun getProducts(input: InputValues): Map<String, Product> {
         val inputValues: GetProductsByStoreAndProductsIdUseCase.InputValues =
             GetProductsByStoreAndProductsIdUseCase.InputValues(
                 storeId = input.storeId,
                 productsId = createListOfProductsId(input.orderItems)
             )
-        return getProductsByStoreAndProductsIdUseCase.execute(inputValues).products.associateBy { it.id }
+        return getProductsByStoreAndProductsIdUseCase.execute(inputValues).products.associateBy { it.id!! }
     }
 
-    private fun createListOfProductsId(inputItems: List<OrderItem>): List<Identity> {
-        return inputItems.map { it.id }.toList<Identity>()
+    private fun createListOfProductsId(inputItems: List<OrderItem>): List<String> {
+        return inputItems.map { it.id!! }.toList<String>()
     }
 
     data class InputValues(
         var customer: Customer,
-        var storeId: Identity,
+        var storeId: String,
         var orderItems: List<OrderItem>
     ) : UseCase.InputValues
 
@@ -76,7 +74,7 @@ open class CreateOrderUseCase(
     ) : UseCase.OutputValues
 
     data class InputItem(
-        var id: Identity,
+        var id: String,
         var quantity: Int = 0
     )
 }

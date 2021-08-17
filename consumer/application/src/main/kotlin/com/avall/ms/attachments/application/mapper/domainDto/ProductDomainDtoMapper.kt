@@ -1,10 +1,9 @@
 package com.avall.ms.attachments.application.mapper.domainDto
 
 import com.avall.ms.attachments.api.dto.response.ProductResponse
-import com.avall.ms.attachments.domain.model.Identity
+import com.avall.ms.attachments.application.mapper.domainDto.StoreDomainDtoMapper.mapToDomain
+import com.avall.ms.attachments.application.mapper.domainDto.StoreDomainDtoMapper.mapToDto
 import com.avall.ms.attachments.domain.model.Product
-import com.ferraobox.qamyapp.application.presenter.mappers.domainDto.StoreDomainDtoMapper.mapToDomain
-import com.ferraobox.qamyapp.application.presenter.mappers.domainDto.StoreDomainDtoMapper.mapToDto
 import org.springframework.stereotype.Component
 
 @Component
@@ -12,7 +11,7 @@ object ProductDomainDtoMapper {
 
     fun Product.mapToDto(): ProductResponse {
         return ProductResponse(
-            id = this.id.number,
+            id = this.id!!,
             name = this.name,
             description = this.description,
             price = this.price,
@@ -29,7 +28,7 @@ object ProductDomainDtoMapper {
 
     fun ProductResponse.mapToDomain(): Product {
         return Product(
-            id = Identity(this.id),
+            id = this.id,
             name = this.name,
             description = this.description,
             price = this.price,

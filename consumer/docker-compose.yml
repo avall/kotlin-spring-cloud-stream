@@ -4,10 +4,10 @@ services:
   db:
     image: postgres:alpine
     ports:
-      - "11008:5432"
+      - "5432:5432"
     environment:
       POSTGRES_USER: 'user'
-      POSTGRES_DB: 'password'
+      POSTGRES_DB: 'claimDB'
       POSTGRES_PASSWORD: 'password'
 
   keycloak:
@@ -15,7 +15,7 @@ services:
     environment:
       DB_VENDOR: POSTGRES
       DB_ADDR: db
-      DB_DATABASE: keycloak
+      DB_DATABASE: claimDB
       DB_USER: user
       DB_SCHEMA: public
       DB_PASSWORD: password

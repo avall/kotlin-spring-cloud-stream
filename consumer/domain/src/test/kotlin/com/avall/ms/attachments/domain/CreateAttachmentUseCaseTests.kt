@@ -44,12 +44,8 @@ class CreateAttachmentUseCaseTests {
         return Attachment(
             id = "UUID",
             parentId = "parentId",
-            parentObjectName = "parentObjectName",
             contentType = "contentType",
-            docType = "docType",
-            type = "type",
-            path = "path",
-            fileName = "fileName",
+            url = "path",
             description = "description"
         )
     }

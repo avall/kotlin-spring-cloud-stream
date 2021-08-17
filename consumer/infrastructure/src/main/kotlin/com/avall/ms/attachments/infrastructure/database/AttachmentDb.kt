@@ -16,6 +16,8 @@ data class AttachmentDb(
     )
     @Column(name ="id",nullable = false)
     var id: String?,
+    @Column(name ="parentId",nullable = false)
+    var parentId: String,
     @Column(name ="content_type",nullable = false)
     val contentType : String,
     @Column(name ="description", nullable = true)

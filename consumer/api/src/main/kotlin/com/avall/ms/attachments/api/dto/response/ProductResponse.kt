@@ -1,7 +1,7 @@
 package com.avall.ms.attachments.api.dto.response
 
 data class ProductResponse (
-    var id: Long,
+    var id: String,
     var name: String,
     var description: String,
     var price: Double,

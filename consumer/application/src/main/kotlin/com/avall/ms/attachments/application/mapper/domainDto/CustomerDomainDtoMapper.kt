@@ -2,7 +2,6 @@ package com.avall.ms.attachments.application.mapper.domainDto
 
 import com.avall.ms.attachments.api.dto.response.CustomerResponse
 import com.avall.ms.attachments.domain.model.Customer
-import com.avall.ms.attachments.domain.model.Identity
 import org.springframework.stereotype.Component
 
 @Component
@@ -10,7 +9,7 @@ object CustomerDomainDtoMapper {
 
     fun Customer.mapToDto(): CustomerResponse {
         return CustomerResponse(
-            id = this.id.number,
+            id = this.id!!,
             name = this.name,
             email = this.email, address = this.address
         )
@@ -24,7 +23,7 @@ object CustomerDomainDtoMapper {
 
     fun CustomerResponse.mapToDomain(): Customer {
         return Customer(
-            id = Identity(this.id),
+            id = this.id,
             name = this.name, email = this.email, address = this.address, password = ""
         )
     }

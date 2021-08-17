@@ -23,7 +23,7 @@ open class CustomUserDetailsService(private val customerRepository: ICustomerRep
     }
 
     @Transactional
-    open fun loadUserById(id: Long): UserDetails {
+    open fun loadUserById(id: String): UserDetails {
         val customer = customerRepository
             .findById(id)
             .orElseThrow { UsernameNotFoundException(String.format("User %s not found", id)) }

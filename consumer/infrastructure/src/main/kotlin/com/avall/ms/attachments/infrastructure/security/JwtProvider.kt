@@ -29,23 +29,23 @@ class JwtProvider(
         return generateToken(userPrincipal.id)
     }
 
-    override fun generateToken(customerId: Long?): String {
+    override fun generateToken(customerId: String?): String {
         val now = Date()
         val expiryDate = Date(now.time + jwtExpirationInMs)
         return Jwts.builder()
-            .setSubject(java.lang.Long.toString(customerId!!))
+            .setSubject(customerId)
             .setIssuedAt(Date())
             .setExpiration(expiryDate)
             .signWith(SignatureAlgorithm.HS512, jwtSecret)
             .compact()
     }
 
-    override fun getUserIdFromToken(token: String?): Long {
+    override fun getUserIdFromToken(token: String?): String {
         val claims: Claims = Jwts.parser()
             .setSigningKey(jwtSecret)
             .parseClaimsJws(token)
             .getBody()
-        return claims.getSubject().toLong()
+        return claims.getSubject()
     }
 
     override fun validateToken(authToken: String?): Boolean {

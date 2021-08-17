@@ -27,7 +27,7 @@ open class CustomerRepositoryImpl(
             .map { c -> c?.mapToDomain() }
     }
 
-    override fun findById(id: Long): Optional<Customer> {
+    override fun findById(id: String): Optional<Customer> {
         return repository
             .findById(id)
             .map { c -> c?.mapToDomain() }

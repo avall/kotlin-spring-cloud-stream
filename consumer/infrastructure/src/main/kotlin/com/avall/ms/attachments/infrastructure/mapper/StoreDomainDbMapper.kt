@@ -1,6 +1,5 @@
 package com.avall.ms.attachments.infrastructure.mapper
 
-import com.avall.ms.attachments.domain.model.Identity
 import com.avall.ms.attachments.domain.model.Store
 import com.avall.ms.attachments.infrastructure.database.StoreDb
 import com.avall.ms.attachments.infrastructure.mapper.CousineDomainDbMapper.mapToDb
@@ -11,7 +10,7 @@ object StoreDomainDbMapper {
 
     fun Store.mapToDb(): StoreDb {
         return StoreDb(
-            id = this.id.number,
+            id = this.id,
             name = this.name,
             address = this.address,
             cousine = this.cousine.mapToDb()
@@ -28,7 +27,7 @@ object StoreDomainDbMapper {
 
     fun StoreDb.mapToDomain(): Store {
         return Store(
-            id = Identity(this.id!!),
+            id = this.id,
             name = this.name,
             address = this.address,
             cousine = this.cousine.mapToDomain()

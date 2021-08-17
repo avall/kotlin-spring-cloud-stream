@@ -8,7 +8,6 @@ import com.avall.ms.attachments.application.mapper.domainDto.OrderItemDomainDtoM
 import com.avall.ms.attachments.application.mapper.domainDto.OrderItemDomainDtoMapper.mapToDto
 import com.avall.ms.attachments.application.mapper.domainDto.StoreDomainDtoMapper.mapToDomain
 import com.avall.ms.attachments.application.mapper.domainDto.StoreDomainDtoMapper.mapToDto
-import com.avall.ms.attachments.domain.model.Identity
 import com.avall.ms.attachments.domain.model.Order
 import org.springframework.stereotype.Component
 
@@ -17,7 +16,7 @@ object OrderDomainDtoMapper {
 
     fun Order.mapToDto(): OrderResponse {
         return OrderResponse(
-            id = this.id.number,
+            id = this.id!!,
             date = this.createdAt,
             customer = this.customer.mapToDto(),
             store = this.store.mapToDto(),
@@ -37,7 +36,7 @@ object OrderDomainDtoMapper {
 
     fun OrderResponse.mapToDomain(): Order {
         return Order(
-            id = Identity(this.id),
+            id = this.id,
             status = com.avall.ms.attachments.domain.model.Status.valueOf(this.status.toString()),
             customer = this.customer.mapToDomain(),
             store = this.store.mapToDomain(),

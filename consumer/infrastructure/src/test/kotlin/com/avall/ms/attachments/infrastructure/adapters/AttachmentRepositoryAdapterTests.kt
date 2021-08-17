@@ -86,6 +86,7 @@ internal class attachmentRepositoryAdapterTests {
 
         expectThat(stored.get(0)) {
             get { id } isEqualTo attachmentEntity.id
+            get { parentId } isEqualTo attachmentEntity.parentId
             get { contentType } isEqualTo attachmentEntity.contentType
             get { description } isEqualTo attachmentEntity.description
             get { url } isEqualTo attachmentEntity.url
@@ -97,6 +98,7 @@ internal class attachmentRepositoryAdapterTests {
     private fun buildAttachment(): Attachment {
         return Attachment(
             id = UUID.randomUUID().toString(),
+            parentId = "parentId",
             contentType = "contentType",
             description = "description",
             url = "url",

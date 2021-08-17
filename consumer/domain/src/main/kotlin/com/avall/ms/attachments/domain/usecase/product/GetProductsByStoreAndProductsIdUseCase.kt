@@ -1,9 +1,8 @@
 package com.ferraobox.qamyapp.application.core.usecases.product
 
+import com.avall.ms.attachments.arch.annotation.Interactor
 import com.avall.ms.attachments.arch.exception.NotFoundException
 import com.avall.ms.attachments.arch.usecase.UseCase
-import com.avall.ms.attachments.arch.annotation.Interactor
-import com.avall.ms.attachments.domain.model.Identity
 import com.avall.ms.attachments.domain.model.Product
 import com.avall.ms.attachments.domain.port.output.IProductRepository
 import java.util.stream.Collectors
@@ -14,7 +13,7 @@ class GetProductsByStoreAndProductsIdUseCase(private val repository: IProductRep
     UseCase<GetProductsByStoreAndProductsIdUseCase.InputValues, GetProductsByStoreAndProductsIdUseCase.OutputValues> {
 
     override fun execute(input: InputValues): OutputValues {
-        val distinctProductsId: List<Identity> = input.productsId
+        val distinctProductsId: List<String> = input.productsId
         val foundProducts: List<Product> =
             repository.searchProductsByStoreAndProductsId(input.storeId, distinctProductsId)
         throwIfAnyProductIsNotFound(distinctProductsId, foundProducts)
@@ -22,7 +21,7 @@ class GetProductsByStoreAndProductsIdUseCase(private val repository: IProductRep
     }
 
     private fun throwIfAnyProductIsNotFound(
-        distinctProductsId: List<Identity>,
+        distinctProductsId: List<String>,
         foundProducts: List<Product>
     ) {
         if (distinctProductsId.size != foundProducts.size) {
@@ -31,36 +30,35 @@ class GetProductsByStoreAndProductsIdUseCase(private val repository: IProductRep
         }
     }
 
-    private fun createErrorMessage(distinctProductsId: List<Identity>, foundProducts: List<Product>): String {
+    private fun createErrorMessage(distinctProductsId: List<String>, foundProducts: List<Product>): String {
         val missingProductsId = getMissingProductsId(distinctProductsId, foundProducts)
         return String.format("Product(s) %s not found", java.lang.String.join(", ", missingProductsId))
     }
 
-    private fun getMissingProductsId(distinctProductsId: List<Identity>, foundProducts: List<Product>): List<String> {
+    private fun getMissingProductsId(distinctProductsId: List<String>, foundProducts: List<Product>): List<String> {
         val distinctProductsIdSet = createDistinctProductsIdSet(distinctProductsId)
         val foundProductsId = createFoundProductsIdSet(foundProducts)
         distinctProductsIdSet.removeAll(foundProductsId)
         return distinctProductsIdSet
             .stream()
-            .map { obj: Long -> obj.toString() }
             .collect(Collectors.toList())
     }
 
-    private fun createFoundProductsIdSet(foundProducts: List<Product>): Set<Long> {
-        return foundProducts.map { product -> product.id }.map { identity -> identity.number }.toSet<Long>()
+    private fun createFoundProductsIdSet(foundProducts: List<Product>): Set<String> {
+        return foundProducts.map { product -> product.id!! }.toSet<String>()
     }
 
-    private fun createDistinctProductsIdSet(distinctProductsId: List<Identity>): MutableSet<Long> {
-        return distinctProductsId.map { identity -> identity.number }.toMutableSet<Long>()
+    private fun createDistinctProductsIdSet(distinctProductsId: List<String>): MutableSet<String> {
+        return distinctProductsId.toMutableSet<String>()
     }
 
-    private fun distinctIds(identities: List<Identity>): List<Identity> {
-        return identities.distinct().toList<Identity>()
+    private fun distinctIds(identities: List<String>): List<String> {
+        return identities.distinct().toList<String>()
     }
 
     data class InputValues(
-        var storeId: Identity,
-        var productsId: List<Identity>
+        var storeId: String,
+        var productsId: List<String>
     ) : UseCase.InputValues
 
     data class OutputValues(

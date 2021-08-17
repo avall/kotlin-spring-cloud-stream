@@ -3,7 +3,7 @@ package com.avall.ms.attachments.domain.model
 import java.time.Instant
 
 data class Order(
-    override var id: Identity,
+    override var id: String?,
     var status: Status,
     var customer: Customer,
     var store: Store,
@@ -14,9 +14,12 @@ data class Order(
 
 ) : BaseDomainEntity() {
 
+    constructor(status: Status, customer: Customer, store: Store, orderItems: List<OrderItem>,total: Double,createdAt: Instant,updatedAt: Instant):
+            this(null, status, customer, store, orderItems, total, createdAt, updatedAt)
+
     companion object{
         fun calculateTotal(orderItems: List<OrderItem?>): Double {
-            return orderItems.sumOf { it!!.total }
+            return orderItems.sumOf { it!!.total!! }
         }
     }
 

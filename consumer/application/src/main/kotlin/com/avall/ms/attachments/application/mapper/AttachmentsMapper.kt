@@ -26,6 +26,7 @@ fun CreateAttachmentWrapperRequest.toCreateUseCaseInput(): ICreateAttachmentUseC
                 .map {
                     Attachment(
                         id                  = null,
+                        parentId            = it.parentId!!,
                         description         = it.description,
                         contentType         = it.contentType!!,
                         isPrivate           = it.isPrivate,
@@ -42,6 +43,7 @@ fun CommandPayload.toCreateUseCaseInput(): ICreateAttachmentUseCase.Input {
             .map { a ->
                 Attachment(
                     id                  = null,
+                    parentId            = a.parentId,
                     description         = a.description,
                     contentType         = a.contentType,
                     isPrivate           = a.isPrivate,
@@ -63,6 +65,7 @@ fun ICreateAttachmentUseCase.Output.toCreateAttachmentWrapperResponse(): CreateA
 fun Attachment.toGetAttachmentResponse(): GetAttachmentResponse {
     return GetAttachmentResponse(
         id                  = id!!,
+        parentId            = parentId,
         contentType         = contentType,
         description         = description,
         isPrivate           = isPrivate,
@@ -73,6 +76,7 @@ fun Attachment.toGetAttachmentResponse(): GetAttachmentResponse {
 fun Attachment.toCreateAttachmentResponse(): CreateAttachmentResponse {
     return CreateAttachmentResponse(
         id                  = id!!,
+        parentId            = parentId,
         contentType         = contentType,
         description         = description,
         isPrivate           = isPrivate,

@@ -3,7 +3,6 @@ package com.avall.ms.attachments.application.mapper.domainDto
 import com.avall.ms.attachments.api.dto.response.StoreResponse
 import com.avall.ms.attachments.application.mapper.domainDto.CousineDomainDtoMapper.mapToDomain
 import com.avall.ms.attachments.application.mapper.domainDto.CousineDomainDtoMapper.mapToDto
-import com.avall.ms.attachments.domain.model.Identity
 import com.avall.ms.attachments.domain.model.Store
 import org.springframework.stereotype.Component
 
@@ -12,7 +11,7 @@ object StoreDomainDtoMapper {
 
     fun Store.mapToDto(): StoreResponse {
         return StoreResponse(
-            id = this.id.number,
+            id = this.id!!,
             name = this.name,
             address = this.address,
             cousine = this.cousine.mapToDto()
@@ -28,7 +27,7 @@ object StoreDomainDtoMapper {
 
     fun StoreResponse.mapToDomain(): Store {
         return Store(
-            id = Identity(this.id),
+            id = this.id,
             name = this.name,
             address = this.address,
             cousine = this.cousine.mapToDomain()

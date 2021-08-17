@@ -7,5 +7,5 @@ import javax.persistence.Id
 open class BaseDbEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    open var id: Long? = null
+    open var id: String? = null
 }

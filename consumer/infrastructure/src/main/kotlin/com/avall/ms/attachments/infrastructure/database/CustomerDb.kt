@@ -7,7 +7,7 @@ import javax.persistence.*
 class CustomerDb(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    override var id: Long?,
+    override var id: String?,
 
     @Column(nullable = false)
     var name: String,

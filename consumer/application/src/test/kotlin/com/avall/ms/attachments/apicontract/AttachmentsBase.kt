@@ -67,17 +67,10 @@ open class AttachmentsBase {
     private fun attachment(): Attachment {
         return Attachment(
             id = "7d2c830c-5e62-11eb-ae93-0242ac130002",
-            parentId = "7d2c830c-5e62-11eb-ae93-0242ac130002",
-            parentObjectName = "parentObjectName",
+            parentId = "parentId",
             contentType = "contentType",
-            docType = "docType",
-            type = "type",
-            path = "path",
-            fileName = "fileName",
+            url = "path",
             description = "description",
-            country = "de",
-            language = "de",
-            isDocument = false,
             isPrivate = false
         )
 

@@ -25,21 +25,21 @@ interface OrderResource {
 
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('USER')")
-    fun getById(@PathVariable id: Long): CompletableFuture<OrderResponse?>?
+    fun getById(@PathVariable id: String): CompletableFuture<OrderResponse?>?
 
     @GetMapping("/{id}/customer")
     @PreAuthorize("hasRole('USER')")
-    fun getCustomerById(@PathVariable id: Long): CompletableFuture<CustomerResponse?>?
+    fun getCustomerById(@PathVariable id: String): CompletableFuture<CustomerResponse?>?
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('USER')")
-    fun delete(@PathVariable id: Long): CompletableFuture<ApiResponse?>?
+    fun delete(@PathVariable id: String): CompletableFuture<ApiResponse?>?
 
     @PostMapping("/{id}/payment")
     @PreAuthorize("hasRole('USER')")
-    fun pay(@PathVariable id: Long): CompletableFuture<ApiResponse?>?
+    fun pay(@PathVariable id: String): CompletableFuture<ApiResponse?>?
 
     @PostMapping("/{id}/delivery")
     @PreAuthorize("hasRole('USER')")
-    fun delivery(@PathVariable id: Long): CompletableFuture<ApiResponse?>?
+    fun delivery(@PathVariable id: String): CompletableFuture<ApiResponse?>?
 }

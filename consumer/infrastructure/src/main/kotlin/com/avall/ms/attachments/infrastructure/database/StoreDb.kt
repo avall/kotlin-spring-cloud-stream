@@ -8,7 +8,7 @@ import javax.persistence.*
 class StoreDb(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    override var id: Long?,
+    override var id: String?,
 
     @Column(unique = true, nullable = false)
     var name: String,

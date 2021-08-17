@@ -1,8 +1,6 @@
-package com.avall.ms.attachments.infrastructure.security
+package com.avall.ms.attachments.api.dto.request
 
-import com.avall.ms.attachments.infrastructure.database.CustomerDb
 import org.springframework.security.core.GrantedAuthority
-import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
 open class UserPrincipal(
@@ -42,16 +40,16 @@ open class UserPrincipal(
         return true
     }
 
-    companion object {
-        fun from(customer: CustomerDb): UserPrincipal {
-            return UserPrincipal(
-                customer.id,
-                customer.name,
-                customer.email,
-                customer.password,
-                customer.address,
-                listOf(SimpleGrantedAuthority("ROLE_USER"))
-            )
-        }
-    }
+//    companion object {
+//        fun from(customer: CustomerDb): UserPrincipal {
+//            return UserPrincipal(
+//                customer.id,
+//                customer.name,
+//                customer.email,
+//                customer.password,
+//                customer.address,
+//                listOf(SimpleGrantedAuthority("ROLE_USER"))
+//            )
+//        }
+//    }
 }

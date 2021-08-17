@@ -56,17 +56,17 @@ tasks.jar {
 //	mainClass.set("com.avall.ms.attachments.MSAttachmentApplication")
 }
 
-tasks.register("liquibase") {
-	// depend on the liquibase status task
-	dependsOn("run")
-	liquibase {
-		activities.register("main") {
-			this.arguments = mapOf(
-				"logLevel" to "info",
-				"changeLogFile" to "src/main/resources/db/changelog/changelog-master.xml",
-				"url" to "jdbc:h2:mem:qamyapp",
-				"username" to "sa",
-				"password" to "")
-		}
-	}
-}
+//tasks.register("liquibase") {
+//	// depend on the liquibase status task
+//	dependsOn("run")
+//	liquibase {
+//		activities.register("main") {
+//			this.arguments = mapOf(
+//				"logLevel" to "info",
+//				"changeLogFile" to "src/main/resources/db/changelog/changelog-master.xml",
+//				"url" to "jdbc:h2:mem:qamyapp",
+//				"username" to "sa",
+//				"password" to "")
+//		}
+//	}
+//}

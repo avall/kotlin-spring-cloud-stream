@@ -10,7 +10,7 @@ import javax.persistence.*
 class OrderDb(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    override var id: Long?,
+    override var id: String?,
 
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)

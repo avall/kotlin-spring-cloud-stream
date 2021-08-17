@@ -49,13 +49,8 @@ class AttachmentsControllerTest {
         verify(createAttachmentUseCase, times(1)).execute(any())
         expectThat(result.documents.get(0)) {
             get { id } isEqualTo attachment.id
-            get { parentId } isEqualTo attachment.parentId
             get { contentType } isEqualTo attachment.contentType
-            get { parentObjectName } isEqualTo attachment.parentObjectName
-            get { path } isEqualTo attachment.path
-            get { fileName } isEqualTo attachment.fileName
-            get { type } isEqualTo attachment.type
-            get { docType } isEqualTo attachment.docType
+            get { url } isEqualTo attachment.url
         }
 
     }
@@ -81,13 +76,8 @@ class AttachmentsControllerTest {
 
         expectThat(result.get(0)) {
             get { id } isEqualTo attachment.id
-            get { parentId } isEqualTo attachment.parentId
             get { contentType } isEqualTo attachment.contentType
-            get { parentObjectName } isEqualTo attachment.parentObjectName
-            get { path } isEqualTo attachment.path
-            get { fileName } isEqualTo attachment.fileName
-            get { type } isEqualTo attachment.type
-            get { docType } isEqualTo attachment.docType
+            get { url } isEqualTo attachment.url
         }
     }
 
@@ -109,25 +99,16 @@ class AttachmentsControllerTest {
 
         expectThat(result) {
             get { id } isEqualTo attachment.id
-            get { parentId } isEqualTo attachment.parentId
             get { contentType } isEqualTo attachment.contentType
-            get { parentObjectName } isEqualTo attachment.parentObjectName
-            get { path } isEqualTo attachment.path
-            get { fileName } isEqualTo attachment.fileName
-            get { type } isEqualTo attachment.type
-            get { docType } isEqualTo attachment.docType
+            get { url } isEqualTo attachment.url
         }
     }
 
     private fun getAttachment() = Attachment(
         id = "UUID",
         parentId = "parentId",
-        parentObjectName = "parentObjectName",
         contentType = "contentType",
-        docType = "docType",
-        type = "type",
-        path = "path",
-        fileName = "fileName",
+        url = "path",
         description = "description"
     )
 
@@ -135,17 +116,10 @@ class AttachmentsControllerTest {
         return CreateAttachmentWrapperRequest(
                     listOf(
                         CreateAttachmentRequest(
-                            parentId = UUID.randomUUID().toString(),
                             contentType = "contentType",
-                            parentObjectName = "parentObjectName",
+                            parentId = "parentId",
                             description = "description",
-                            fileName = "fileName",
-                            docType = "docType",
-                            type = "type",
-                            path = "path",
-                            country = "country",
-                            language = "language",
-                            isDocument = false,
+                            url = "path",
                             isPrivate = true
                         )
                     )

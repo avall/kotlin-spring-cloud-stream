@@ -1,6 +1,5 @@
 package com.avall.ms.attachments.infrastructure.adapters
 
-import com.avall.ms.attachments.domain.model.Identity
 import com.avall.ms.attachments.domain.model.Product
 import com.avall.ms.attachments.domain.port.output.IProductRepository
 import com.avall.ms.attachments.infrastructure.mapper.ProductDomainDbMapper.mapToDomain
@@ -8,7 +7,6 @@ import com.avall.ms.attachments.infrastructure.repository.DbProductRepository
 import org.springframework.stereotype.Repository
 import java.util.*
 import java.util.stream.Collectors
-import kotlin.streams.toList
 
 @Repository
 open class ProductRepositoryImpl(
@@ -23,9 +21,9 @@ open class ProductRepositoryImpl(
             .collect(Collectors.toList<Product>())
     }
 
-    override fun getById(id: Identity): Optional<Product> {
+    override fun getById(id: String): Optional<Product> {
         return repository
-            .findById(id.number)
+            .findById(id)
             .map { p -> p?.mapToDomain() }
     }
 
@@ -36,16 +34,11 @@ open class ProductRepositoryImpl(
             .collect(Collectors.toList<Product>())
     }
 
-    override fun searchProductsByStoreAndProductsId(storeId: Identity, productsId: List<Identity>): List<Product> {
-        val products = repository.findByStoreIdAndIdIsIn(storeId.number, createListOfLong(productsId))
+    override fun searchProductsByStoreAndProductsId(storeId: String, productsId: List<String>): List<Product> {
+        val products = repository.findByStoreIdAndIdIsIn(storeId, productsId)
         return products.stream()
             .map { p -> p?.mapToDomain() }
             .collect(Collectors.toList<Product>())
     }
 
-    private fun createListOfLong(productsId: List<Identity>): List<Long> {
-        return productsId
-            .stream()
-            .map { it.number }.toList<Long>()
-    }
 }

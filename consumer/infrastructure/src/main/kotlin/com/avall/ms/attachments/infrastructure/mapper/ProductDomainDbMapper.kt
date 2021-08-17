@@ -1,18 +1,15 @@
 package com.avall.ms.attachments.infrastructure.mapper
 
-import com.avall.ms.attachments.domain.model.Identity
 import com.avall.ms.attachments.domain.model.Product
 import com.avall.ms.attachments.infrastructure.database.ProductDb
 import com.avall.ms.attachments.infrastructure.mapper.StoreDomainDbMapper.mapToDb
 import com.avall.ms.attachments.infrastructure.mapper.StoreDomainDbMapper.mapToDomain
-import java.util.*
-import kotlin.collections.ArrayList
 
 object ProductDomainDbMapper {
 
     fun Product.mapToDb(): ProductDb {
         return ProductDb(
-            id = this.id.number,
+            id = this.id,
             name = this.name,
             description = this.description,
             price = this.price,
@@ -28,7 +25,7 @@ object ProductDomainDbMapper {
 
     fun ProductDb.mapToDomain(): Product {
         return Product(
-            id = Identity(this.id!!),
+            id = this.id,
             name = this.name,
             description = this.description,
             price = this.price,

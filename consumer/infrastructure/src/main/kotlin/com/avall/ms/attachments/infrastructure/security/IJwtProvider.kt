@@ -4,7 +4,7 @@ import org.springframework.security.core.Authentication
 
 interface IJwtProvider {
     fun generateToken(authentication: Authentication): String
-    fun generateToken(customerId: Long?): String
-    fun getUserIdFromToken(token: String?): Long
+    fun generateToken(customerId: String?): String
+    fun getUserIdFromToken(token: String?): String
     fun validateToken(authToken: String?): Boolean
 }

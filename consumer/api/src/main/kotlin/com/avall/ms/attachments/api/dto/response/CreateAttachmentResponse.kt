@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
  */
 data class CreateAttachmentResponse /*@JsonCreator*/ (
         var id: String,
+        var parentId: String,
         var description: String?,
         var contentType: String,
         var url: String,

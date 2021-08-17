@@ -7,7 +7,6 @@ import com.avall.ms.attachments.api.dto.response.StoreResponse
 import com.avall.ms.attachments.application.mapper.domainDto.ProductDomainDtoMapper.mapToDto
 import com.avall.ms.attachments.application.mapper.domainDto.StoreDomainDtoMapper.mapToDto
 import com.avall.ms.attachments.arch.usecase.UseCaseExecutor
-import com.avall.ms.attachments.domain.model.Identity
 import com.avall.ms.attachments.domain.usecase.store.GetAllStoresUseCase
 import com.avall.ms.attachments.domain.usecase.store.GetProductsByStoreUseCase
 import com.avall.ms.attachments.domain.usecase.store.GetStoreUseCase
@@ -39,17 +38,17 @@ class StoreController(
         ) { outputValues -> outputValues.stores.mapToDto() }
     }
 
-    override fun getStoreByIdentity(@PathVariable id: Long): CompletableFuture<StoreResponse?> {
+    override fun getStoreByString(@PathVariable id: String): CompletableFuture<StoreResponse?> {
         return useCaseExecutor.execute(
             getStoreUseCase,
-            GetStoreUseCase.InputValues(id= Identity(id))
+            GetStoreUseCase.InputValues(id= id)
         ) { outputValues -> outputValues.store!!.mapToDto() }
     }
 
-    override fun getProductsBy(@PathVariable id: Long): CompletableFuture<List<ProductResponse?>?> {
+    override fun getProductsBy(@PathVariable id: String): CompletableFuture<List<ProductResponse?>?> {
         return useCaseExecutor.execute(
             getProductsByStoreUseCase,
-            GetProductsByStoreUseCase.InputValues(id=Identity(id))
+            GetProductsByStoreUseCase.InputValues(id=id)
         ) { outputValues -> outputValues.products.mapToDto() }
     }
 }

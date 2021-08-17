@@ -6,7 +6,6 @@ import com.avall.ms.attachments.api.dto.response.StoreResponse
 import com.avall.ms.attachments.application.mapper.domainDto.CousineDomainDtoMapper.mapToDto
 import com.avall.ms.attachments.application.mapper.domainDto.StoreDomainDtoMapper.mapToDto
 import com.avall.ms.attachments.arch.usecase.UseCaseExecutor
-import com.avall.ms.attachments.domain.model.Identity
 import com.avall.ms.attachments.domain.usecase.cousine.GetAllCousinesUseCase
 import com.avall.ms.attachments.domain.usecase.cousine.GetStoresByCousineUseCase
 import com.avall.ms.attachments.domain.usecase.cousine.SearchCousineByNameUseCase
@@ -22,10 +21,10 @@ open class CousineController(
     private val searchCousineByNameUseCase: SearchCousineByNameUseCase,
 ) : CousineResource {
 
-    override fun getStoresByCousineId(@PathVariable id: Long): CompletableFuture<List<StoreResponse?>?> {
+    override fun getStoresByCousineId(@PathVariable id: String): CompletableFuture<List<StoreResponse?>?> {
         return useCaseExecutor.execute(
             getStoresByCousineUseCase,
-            GetStoresByCousineUseCase.InputValues(id = Identity(id))
+            GetStoresByCousineUseCase.InputValues(id = id)
         ) { (outputValues) -> outputValues.mapToDto() }
     }
 

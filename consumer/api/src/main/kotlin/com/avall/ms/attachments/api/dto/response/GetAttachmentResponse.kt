@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 data class GetAttachmentResponse (
         val id: String,
+        val parentId: String,
         val contentType : String,
         val url : String,
         val description: String?,

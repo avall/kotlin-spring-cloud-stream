@@ -29,8 +29,8 @@ spring:
   datasource:
     url: jdbc:postgresql://${APP_POSTGRES_HOST:localhost}:${APP_POSTGRES_PORT:5432}/${APP_POSTGRES_DB:claimDB}
     platform: postgres
-    username: ${APP_POSTGRES_USER:postgres}
-    password: ${APP_POSTGRES_PASSWORD:}
+    username: ${APP_POSTGRES_USER:user}
+    password: ${APP_POSTGRES_PASSWORD:password}
     driverClassName: org.postgresql.Driver
   liquibase:
     enabled: true

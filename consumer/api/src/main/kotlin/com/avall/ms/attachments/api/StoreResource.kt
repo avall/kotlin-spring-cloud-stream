@@ -18,8 +18,8 @@ interface StoreResource {
     fun getAllStoresByNameMatching(@PathVariable text: String): CompletableFuture<List<StoreResponse?>?>
 
     @GetMapping("/{id}")
-    fun getStoreByIdentity(@PathVariable id: Long): CompletableFuture<StoreResponse?>
+    fun getStoreByString(@PathVariable id: String): CompletableFuture<StoreResponse?>
 
     @GetMapping("/{id}/product")
-    fun getProductsBy(@PathVariable id: Long): CompletableFuture<List<ProductResponse?>?>
+    fun getProductsBy(@PathVariable id: String): CompletableFuture<List<ProductResponse?>?>
 }

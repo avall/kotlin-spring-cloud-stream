@@ -2,7 +2,6 @@ package com.avall.ms.attachments.application.mapper.domainDto
 
 import com.avall.ms.attachments.api.dto.response.CousineResponse
 import com.avall.ms.attachments.domain.model.Cousine
-import com.avall.ms.attachments.domain.model.Identity
 import org.springframework.stereotype.Component
 
 @Component
@@ -10,7 +9,7 @@ object CousineDomainDtoMapper {
 
     fun Cousine.mapToDto(): CousineResponse {
         return CousineResponse(
-            id = this.id.number,
+            id = this.id!!,
             name = this.name
         )
     }
@@ -23,7 +22,7 @@ object CousineDomainDtoMapper {
 
     fun CousineResponse.mapToDomain(): Cousine {
         return Cousine(
-            id = Identity(this.id),
+            id = this.id,
             name = this.name
         )
     }

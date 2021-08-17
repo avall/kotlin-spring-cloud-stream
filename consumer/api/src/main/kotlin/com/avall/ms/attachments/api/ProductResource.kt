@@ -15,7 +15,7 @@ interface ProductResource {
     fun allProducts(): CompletableFuture<List<Any?>?>
 
     @GetMapping("/{id}")
-    fun getByIdentity(@PathVariable id: Long): CompletableFuture<ProductResponse?>?
+    fun getByString(@PathVariable id: String): CompletableFuture<ProductResponse?>?
 
     @GetMapping("/search/{text}")
     fun getByMatchingName(@PathVariable text: String): CompletableFuture<List<ProductResponse?>?>?

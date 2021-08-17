@@ -5,7 +5,6 @@ import com.avall.ms.attachments.api.ProductResource
 import com.avall.ms.attachments.api.dto.response.ProductResponse
 import com.avall.ms.attachments.application.mapper.domainDto.ProductDomainDtoMapper.mapToDto
 import com.avall.ms.attachments.arch.usecase.UseCaseExecutor
-import com.avall.ms.attachments.domain.model.Identity
 import com.avall.ms.attachments.domain.usecase.product.GetAllProductsUseCase
 import com.avall.ms.attachments.domain.usecase.product.GetProductUseCase
 import com.avall.ms.attachments.domain.usecase.product.SearchProductsByNameOrDescriptionUseCase
@@ -28,10 +27,10 @@ class ProductController(
         ) { outputValues -> outputValues.products.mapToDto() }
     }
 
-    override fun getByIdentity(@PathVariable id: Long): CompletableFuture<ProductResponse?> {
+    override fun getByString(@PathVariable id: String): CompletableFuture<ProductResponse?> {
         return useCaseExecutor.execute(
             getProductUseCase,
-            GetProductUseCase.InputValues(id = Identity(id))
+            GetProductUseCase.InputValues(id = id)
         ) { outputValues -> outputValues.product!!.mapToDto() }
     }
 

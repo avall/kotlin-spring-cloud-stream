@@ -1,16 +1,14 @@
 package com.avall.ms.attachments.infrastructure.mapper
 
 import com.avall.ms.attachments.domain.model.Customer
-import com.avall.ms.attachments.domain.model.Identity
 import com.avall.ms.attachments.infrastructure.database.CustomerDb
-import java.util.*
 
 
 object CustomerDomainDbMapper {
 
     fun Customer.mapToDb(): CustomerDb {
         return CustomerDb(
-            id = this.id.number,
+            id = this.id,
             name = this.name,
             email = this.email,
             address = this.address,
@@ -28,7 +26,7 @@ object CustomerDomainDbMapper {
 
     fun CustomerDb.mapToDomain(): Customer {
         return Customer(
-            id = Identity(this.id!!),
+            id = this.id,
             name = this.name,
             email = this.email,
             address = this.address,

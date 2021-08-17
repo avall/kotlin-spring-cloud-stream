@@ -12,7 +12,6 @@ import com.avall.ms.attachments.application.mapper.domainDto.CustomerDomainDtoMa
 import com.avall.ms.attachments.application.mapper.domainDto.OrderDomainDtoMapper.mapToDto
 import com.avall.ms.attachments.application.mapper.inputOutputDto.CreateOrderInputMapper
 import com.avall.ms.attachments.arch.usecase.UseCaseExecutor
-import com.avall.ms.attachments.domain.model.Identity
 import com.avall.ms.attachments.domain.usecase.order.*
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Component
@@ -47,44 +46,44 @@ class OrderController(
             val location = ServletUriComponentsBuilder
                 .fromContextPath(httpServletRequest!!)
                 .path("/order/{id}")
-                .buildAndExpand(outputValues.order!!.id.number)
+                .buildAndExpand(outputValues.order!!.id)
                 .toUri()
             ResponseEntity.created(location).body(outputValues.order!!.mapToDto())
         }
     }
 
-    override fun getById(@PathVariable id: Long): CompletableFuture<OrderResponse?> {
+    override fun getById(@PathVariable id: String): CompletableFuture<OrderResponse?> {
         return useCaseExecutor.execute(
             getOrderUseCase,
-            GetOrderUseCase.InputValues(id = Identity(id))
+            GetOrderUseCase.InputValues(id = id)
         ) { outputValues -> outputValues.order!!.mapToDto() }
     }
 
-    override fun getCustomerById(@PathVariable id: Long): CompletableFuture<CustomerResponse?> {
+    override fun getCustomerById(@PathVariable id: String): CompletableFuture<CustomerResponse?> {
         return useCaseExecutor.execute(
             getCustomerOrderUseCase,
-            GetCustomerOrderUseCase.InputValues(id = Identity(id))
+            GetCustomerOrderUseCase.InputValues(id = id)
         ) { outputValues -> outputValues.customer!!.mapToDto() }
     }
 
-    override fun delete(@PathVariable id: Long): CompletableFuture<ApiResponse?> {
+    override fun delete(@PathVariable id: String): CompletableFuture<ApiResponse?> {
         return useCaseExecutor.execute(
             deleteOrderUseCase,
-            UpdateOrderUseCase.InputValues(id = Identity(id))
+            UpdateOrderUseCase.InputValues(id = id)
         ) { ApiResponse(true, "Order successfully canceled") }
     }
 
-    override fun pay(@PathVariable id: Long): CompletableFuture<ApiResponse?> {
+    override fun pay(@PathVariable id: String): CompletableFuture<ApiResponse?> {
         return useCaseExecutor.execute(
             payOrderUseCase,
-            UpdateOrderUseCase.InputValues(id = Identity(id))
+            UpdateOrderUseCase.InputValues(id = id)
         ) { ApiResponse(true, "Order successfully paid") }
     }
 
-    override fun delivery(@PathVariable id: Long): CompletableFuture<ApiResponse?> {
+    override fun delivery(@PathVariable id: String): CompletableFuture<ApiResponse?> {
         return useCaseExecutor.execute(
             deliveryOrderUseCase,
-            UpdateOrderUseCase.InputValues(id = Identity(id))
+            UpdateOrderUseCase.InputValues(id = id)
         ) { ApiResponse(true, "Order successfully delivered") }
     }
 }

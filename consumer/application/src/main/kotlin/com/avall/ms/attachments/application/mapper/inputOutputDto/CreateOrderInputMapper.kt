@@ -4,7 +4,6 @@ import com.avall.ms.attachments.api.dto.request.OrderRequest
 import com.avall.ms.attachments.api.dto.request.OrderRequestItem
 import com.avall.ms.attachments.api.dto.request.UserPrincipal
 import com.avall.ms.attachments.domain.model.Customer
-import com.avall.ms.attachments.domain.model.Identity
 import com.avall.ms.attachments.domain.model.OrderItem
 import com.avall.ms.attachments.domain.usecase.order.CreateOrderUseCase
 import org.springframework.stereotype.Component
@@ -15,17 +14,17 @@ object CreateOrderInputMapper {
     fun map(orderRequest: OrderRequest, userPrincipal: UserPrincipal): CreateOrderUseCase.InputValues {
         return CreateOrderUseCase.InputValues(
             customer = Customer(
-                id = Identity(userPrincipal.id!!),
+                id = userPrincipal.id!!,
                 name = userPrincipal.name!!,
                 email = userPrincipal.email!!,
                 address = userPrincipal.address!!,
                 password = userPrincipal.password
             ),
-            storeId = Identity(orderRequest.storeId), orderItems = orderRequest.orderItems.map())
+            storeId = orderRequest.storeId, orderItems = orderRequest.orderItems.map())
     }
 
 //    private fun OrderRequestItem.map(): CreateOrderUseCase.InputItem {
-//        return CreateOrderUseCase.InputItem(id = Identity(this.id), quantity = this.quantity)
+//        return CreateOrderUseCase.InputItem(id = String(this.id), quantity = this.quantity)
 //    }
 //
 //    fun List<OrderRequestItem>.map(): List<CreateOrderUseCase.InputItem> {
@@ -35,7 +34,7 @@ object CreateOrderInputMapper {
 //    }
 
     private fun OrderRequestItem.map(): OrderItem {
-        return OrderItem(id = Identity(this.id), quantity = this.quantity)
+        return OrderItem(id = this.id, quantity = this.quantity)
     }
 
     fun List<OrderRequestItem>.map(): List<OrderItem> {

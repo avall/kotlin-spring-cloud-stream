@@ -1,9 +1,8 @@
 package com.avall.ms.attachments.domain.usecase.order
 
-import com.avall.ms.attachments.arch.usecase.UseCase
 import com.avall.ms.attachments.arch.annotation.Interactor
+import com.avall.ms.attachments.arch.usecase.UseCase
 import com.avall.ms.attachments.domain.model.Customer
-import com.avall.ms.attachments.domain.model.Identity
 import com.avall.ms.attachments.domain.model.Order
 
 
@@ -18,7 +17,7 @@ open class GetCustomerOrderUseCase(private val getOrderUseCase: GetOrderUseCase)
     }
 
     data class InputValues (
-        var id: Identity
+        var id: String
     ) : UseCase.InputValues
 
     data class OutputValues (

@@ -1,6 +1,5 @@
 package com.avall.ms.attachments.infrastructure.adapters
 
-import com.avall.ms.attachments.domain.model.Identity
 import com.avall.ms.attachments.domain.model.Order
 import com.avall.ms.attachments.domain.port.output.IOrderRepository
 import com.avall.ms.attachments.infrastructure.database.OrderDb
@@ -23,9 +22,9 @@ open class OrderRepositoryImpl(
         return repository.save(orderDb).mapToDomain()
     }
 
-    override fun getById(id: Identity): Optional<Order> {
+    override fun getById(id: String): Optional<Order> {
         return repository
-            .findById(id.number)
+            .findById(id)
             .map { o -> o?.mapToDomain() }
     }
 }

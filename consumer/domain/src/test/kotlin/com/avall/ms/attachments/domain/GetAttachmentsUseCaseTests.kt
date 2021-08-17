@@ -39,12 +39,8 @@ class GetAttachmentsUseCaseTests {
         expectThat(result.attachments.get(0)) {
             get { id } isEqualTo attachment.id
             get { parentId } isEqualTo attachment.parentId
-            get { parentObjectName } isEqualTo attachment.parentObjectName
             get { contentType } isEqualTo attachment.contentType
-            get { docType } isEqualTo attachment.docType
-            get { type } isEqualTo attachment.type
-            get { path } isEqualTo attachment.path
-            get { fileName } isEqualTo attachment.fileName
+            get { url } isEqualTo attachment.url
             get { description } isEqualTo attachment.description
         }
     }
@@ -53,12 +49,8 @@ class GetAttachmentsUseCaseTests {
         return Attachment(
             id = "UUID",
             parentId = "parentId",
-            parentObjectName = "parentObjectName",
             contentType = "contentType",
-            docType = "docType",
-            type = "type",
-            path = "path",
-            fileName = "fileName",
+            url = "path",
             description = "description"
         )
     }

@@ -22,6 +22,7 @@ internal class AttachmentDbMapperTest {
         // then
         expectThat(attachment) {
             get { id }          isEqualTo attachmentEntity.id
+            get { parentId }    isEqualTo attachmentEntity.parentId
             get { contentType } isEqualTo attachmentEntity.contentType
             get { url }         isEqualTo attachmentEntity.url
             get { description } isEqualTo attachmentEntity.description
@@ -40,6 +41,7 @@ internal class AttachmentDbMapperTest {
         // then
         expectThat(attachments.get(0)) {
             get { id }          isEqualTo attachmentsEntity.get(0).id
+            get { parentId }    isEqualTo attachmentsEntity.get(0).parentId
             get { contentType } isEqualTo attachmentsEntity.get(0).contentType
             get { url }         isEqualTo attachmentsEntity.get(0).url
             get { description } isEqualTo attachmentsEntity.get(0).description
@@ -58,6 +60,7 @@ internal class AttachmentDbMapperTest {
         // then
         expectThat(attachmentEntity) {
             get { id }          isEqualTo attachmentEntity.id
+            get { parentId }    isEqualTo attachmentEntity.parentId
             get { contentType } isEqualTo attachmentEntity.contentType
             get { url }         isEqualTo attachmentEntity.url
             get { description } isEqualTo attachmentEntity.description
@@ -76,6 +79,7 @@ internal class AttachmentDbMapperTest {
         // then
         expectThat(attachmentsEntity.get(0)) {
             get { id }          isEqualTo attachmentsEntity.get(0).id
+            get { parentId }    isEqualTo attachmentsEntity.get(0).parentId
             get { contentType } isEqualTo attachmentsEntity.get(0).contentType
             get { url }         isEqualTo attachmentsEntity.get(0).url
             get { description } isEqualTo attachmentsEntity.get(0).description
@@ -90,6 +94,7 @@ internal class AttachmentDbMapperTest {
     private fun getAttachment(): Attachment {
         return Attachment(
             id = "UUID",
+            parentId = "parentId",
             contentType = "contentType",
             url = "url",
             description = "description",
@@ -104,6 +109,7 @@ internal class AttachmentDbMapperTest {
     private fun getAttachmentEntity(): AttachmentDb {
         return AttachmentDb(
             id = "UUID",
+            parentId = "parentId",
             contentType = "contentType",
             url = "url",
             description = "description",

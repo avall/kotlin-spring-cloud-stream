@@ -1,8 +1,6 @@
 package com.avall.ms.attachments.infrastructure.mapper
 
-import com.avall.ms.attachments.domain.model.Identity
 import com.avall.ms.attachments.domain.model.OrderItem
-import com.avall.ms.attachments.infrastructure.database.IdConverter
 import com.avall.ms.attachments.infrastructure.database.OrderItemDb
 import com.avall.ms.attachments.infrastructure.mapper.ProductDomainDbMapper.mapToDb
 import com.avall.ms.attachments.infrastructure.mapper.ProductDomainDbMapper.mapToDomain
@@ -12,12 +10,12 @@ object OrderItemDomainDbMapper {
 
     fun OrderItem.mapToDb(): OrderItemDb {
         return OrderItemDb(
-            id = IdConverter.convertId(this.id),
+            id = this.id,
             order = null,
             quantity = this.quantity,
-            product = this.product.mapToDb(),
-            total = this.total,
-            price = this.price
+            product = this.product!!.mapToDb(),
+            total = this.total ?: 0.0,
+            price = this.price ?: 0.0
         )
     }
 
@@ -30,7 +28,7 @@ object OrderItemDomainDbMapper {
 
     fun OrderItemDb.mapToDomain(): OrderItem {
         return OrderItem(
-            id = Identity(this.id!!),
+            id = this.id,
             quantity = this.quantity,
             product = this.product.mapToDomain(),
             total = this.total,
