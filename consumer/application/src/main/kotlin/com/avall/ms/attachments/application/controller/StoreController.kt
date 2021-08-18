@@ -1,4 +1,4 @@
-package com.ferraobox.qamyapp.application.presenter.rest.api.customer
+package com.avall.ms.attachments.application.controller
 
 
 import com.avall.ms.attachments.api.StoreResource
