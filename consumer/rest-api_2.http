@@ -1,4 +1,67 @@
-#Switzerland.
+POST http://localhost:8080/api/v1/customer
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json; charset=utf-8
+
+{
+  "email":"a@a.com",
+  "address":"aadfadf",
+  "name":"avall",
+  "password":"ppppppppppp"
+}
+> {% client.global.set("customer_id", response.body.id); %}
+
+###
+
+POST http://localhost:8080/api/v1/customer/auth
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json; charset=utf-8
+
+{
+  "email":"a@a.com",
+  "password":"ppppppppppp"
+}
+> {% client.global.set("auth_token", response.body.token); %}
+
+###
+
+GET http://localhost:8080/api/v1/store
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json; charset=utf-8
+
+###
+
+POST http://localhost:8080/api/v1/order
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json; charset=utf-8
+Authorization: Bearer {{auth_token}}
+
+{
+  "storeId":1,
+  "orderItems":[
+    {
+      "id": 1,
+      "quantity": 1
+    }
+  ]
+}
+> {% client.global.set("order_id", response.body.id); %}
+
+
+###
+
+GET http://localhost:8080/api/v1/order/{{order_id}}
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json; charset=utf-8
+Authorization: Bearer {{auth_token}}
+
+
+###
+
 POST http://localhost:8080/crm-attachments/api/v1/attachments
 #POST https://oneback-ms-account-contract.30d437346.eu-central-1.one-wefoxgroup.cloud/api/v1/contracts/
 Accept: */*

@@ -41,12 +41,12 @@ class SecurityConfig(
     }
 
     @Bean
-    open fun passwordEncoder(): PasswordEncoder {
+    fun passwordEncoder(): PasswordEncoder {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
     @Bean
-    open fun jwtAuthenticationFilter(): JwtAuthenticationFilter {
+    fun jwtAuthenticationFilter(): JwtAuthenticationFilter {
         return JwtAuthenticationFilter(tokenProvider, customUserDetailsService)
     }
 
@@ -57,8 +57,8 @@ class SecurityConfig(
             .passwordEncoder(passwordEncoder())
     }
 
+    @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
-
         // @formatter:off
         http
             .cors().disable()
@@ -71,48 +71,16 @@ class SecurityConfig(
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeRequests()
-//            .antMatchers("/v2/api-docs",
-//                "/configuration/ui",
-//                "/swagger-resources",
-//                "/configuration/security",
-//                "/swagger-ui.html",
-//                "/webjars/**").authenticated()
-//            .antMatchers("/api/**").authenticated()
-//            .antMatchers("/actuator/prometheus").authenticated()
-//            .antMatchers("/actuator/info").authenticated()
-            .antMatchers("/actuator/health").permitAll()
-            .antMatchers("/actuator/health/*").permitAll()
-            .antMatchers("/api/customer/**").permitAll()
-//            .antMatchers("/api/cousine/**").permitAll()
-//            .antMatchers("/api/store/**").permitAll()
-//            .antMatchers("/api/product/**").permitAll()
-//            .antMatchers("/h2-console/**").permitAll()
-//            .antMatchers(HttpMethod.GET, "/api/order/**").permitAll()
+            .antMatchers("/customer/**").permitAll()
+            .antMatchers("/cousine/**").permitAll()
+            .antMatchers("/store/**").permitAll()
+            .antMatchers("/product/**").permitAll()
+            .antMatchers("/h2-console/**").permitAll()
+            .antMatchers(HttpMethod.GET, "/order/**").permitAll()
             .anyRequest().authenticated()
         // @formatter:on
         // Add our custom JWT security filter
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter::class.java)
-
-
-
-//        http
-//            .sessionManagement()
-//            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//            .and().csrf().disable()
-//            .authorizeRequests()
-//            .antMatchers("/v2/api-docs",
-//                "/configuration/ui",
-//                "/swagger-resources",
-//                "/configuration/security",
-//                "/swagger-ui.html",
-//                "/webjars/**").authenticated()
-//            .antMatchers("/api/**").authenticated()
-//            .antMatchers("/actuator/prometheus").authenticated()
-//            .antMatchers("/actuator/info").authenticated()
-//            .antMatchers("/actuator/health").permitAll()
-//            .antMatchers("/actuator/health/*").permitAll()
-//            .anyRequest().authenticated()
-//            .and().httpBasic()
     }
 
     override fun configure(web: WebSecurity) {

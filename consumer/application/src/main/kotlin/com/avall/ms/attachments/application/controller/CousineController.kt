@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import java.util.concurrent.CompletableFuture
 
 @Component
-open class CousineController(
+class CousineController(
     private val useCaseExecutor: UseCaseExecutor,
     private val getAllCousinesUseCase: GetAllCousinesUseCase,
     private val getStoresByCousineUseCase: GetStoresByCousineUseCase,

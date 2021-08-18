@@ -9,7 +9,7 @@ import java.util.*
 import java.util.stream.Collectors
 
 @Repository
-open class ProductRepositoryImpl(
+class ProductRepositoryImpl(
     private val repository: DbProductRepository,
 ) : IProductRepository {
 

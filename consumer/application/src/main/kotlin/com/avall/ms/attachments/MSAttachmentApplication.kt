@@ -14,7 +14,7 @@ import org.springframework.context.annotation.FilterType
 		classes = [Interactor::class]
 	)]
 )
-open class MSAttachmentApplication
+class MSAttachmentApplication
 
 fun main(args: Array<String>) {
 	runApplication<MSAttachmentApplication>(*args)

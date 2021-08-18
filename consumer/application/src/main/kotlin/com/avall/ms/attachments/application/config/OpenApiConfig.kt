@@ -9,12 +9,12 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-open class OpenApiConfig {
+class OpenApiConfig {
     @Value("\${openapi-server-url:https://localhost:8006/crm-attachments/api}")
     private val serverUrl: String? = null
 
     @Bean
-    open fun customOpenAPI(): OpenAPI? {
+    fun customOpenAPI(): OpenAPI? {
         return OpenAPI()
             .addServersItem(Server().url(serverUrl))
             .addSecurityItem(SecurityRequirement().addList("bearerAuth"))

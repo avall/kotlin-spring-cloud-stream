@@ -12,7 +12,7 @@ import java.util.stream.Collectors
 
 
 @Repository
-open class StoreRepositoryImpl(
+class StoreRepositoryImpl(
     private val repository: DbStoreRepository,
 ) : IStoreRepository {
 

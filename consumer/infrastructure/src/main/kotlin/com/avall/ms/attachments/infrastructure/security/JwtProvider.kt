@@ -17,7 +17,7 @@ import java.util.*
 
 @Component
 class JwtProvider(
-    @param:Value("\${app.security.jwtSecret}") private val jwtSecret: String,
+    @param:Value("\${app.security.jwtSigningSecret}") private val jwtSecret: String,
     @param:Value("\${app.security.jwtExpirationInMs}") private val jwtExpirationInMs: Int
 ) : IJwtProvider {
     companion object {

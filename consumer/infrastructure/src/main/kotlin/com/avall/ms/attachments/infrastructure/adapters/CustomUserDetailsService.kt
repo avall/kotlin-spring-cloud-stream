@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional
 
 
 @Service
-open class CustomUserDetailsService(private val customerRepository: ICustomerRepository) : UserDetailsService {
+class CustomUserDetailsService(private val customerRepository: ICustomerRepository) : UserDetailsService {
 
     @Transactional
     @Throws(UsernameNotFoundException::class)
@@ -23,7 +23,7 @@ open class CustomUserDetailsService(private val customerRepository: ICustomerRep
     }
 
     @Transactional
-    open fun loadUserById(id: String): UserDetails {
+    fun loadUserById(id: String): UserDetails {
         val customer = customerRepository
             .findById(id)
             .orElseThrow { UsernameNotFoundException(String.format("User %s not found", id)) }

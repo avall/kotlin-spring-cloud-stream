@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-open class CustomerRepositoryImpl(
+class CustomerRepositoryImpl(
     private val repository: DbCustomerRepository,
 ) : ICustomerRepository {
 

@@ -13,7 +13,7 @@ open class LoggerConfig {
     var body: List<String>? = null
 
     @Bean
-    open fun bodyFilter(): BodyFilter {
+    fun bodyFilter(): BodyFilter {
         return BodyFilter.merge(
             BodyFilters.defaultValue(),
             JsonBodyFilters.replaceJsonStringProperty(HashSet(body), LOGBOOK_BODY_REPLACEMENT)
