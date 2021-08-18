@@ -29,7 +29,7 @@ class AttachmentEntityMapper() {
         private fun attachmentDb(attachment: Attachment):AttachmentDb =
             AttachmentDb(
                 id = attachment.id,
-                parentId = attachment.parentId,
+                objectId = attachment.objectId,
                 contentType = attachment.contentType,
                 description = attachment.description,
                 isPrivate   = attachment.isPrivate,
@@ -39,7 +39,7 @@ class AttachmentEntityMapper() {
         private fun attachment(attachmentDb: AttachmentDb) =
             Attachment(
                 id               = attachmentDb.id,
-                parentId         = attachmentDb.parentId,
+                objectId         = attachmentDb.objectId,
                 description      = attachmentDb.description,
                 contentType      = attachmentDb.contentType,
                 isPrivate        = attachmentDb.isPrivate,

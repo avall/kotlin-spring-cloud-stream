@@ -15,8 +15,8 @@ object AttachmentsMapper {
     fun buildGetAttachmentQuery(id: String): IGetAttachmentUseCase.Input {
         return IGetAttachmentUseCase.Input(id)
     }
-    fun buildGetAttachmentsQuery(parentId: String): IGetAttachmentsUseCase.Input {
-        return IGetAttachmentsUseCase.Input(parentId)
+    fun buildGetAttachmentsQuery(objectId: String): IGetAttachmentsUseCase.Input {
+        return IGetAttachmentsUseCase.Input(objectId)
     }
 }
 
@@ -26,7 +26,7 @@ fun CreateAttachmentWrapperRequest.toCreateUseCaseInput(): ICreateAttachmentUseC
                 .map {
                     Attachment(
                         id                  = null,
-                        parentId            = it.parentId!!,
+                        objectId            = it.objectId!!,
                         description         = it.description,
                         contentType         = it.contentType!!,
                         isPrivate           = it.isPrivate,
@@ -43,7 +43,7 @@ fun CommandPayload.toCreateUseCaseInput(): ICreateAttachmentUseCase.Input {
             .map { a ->
                 Attachment(
                     id                  = null,
-                    parentId            = a.parentId,
+                    objectId            = a.objectId,
                     description         = a.description,
                     contentType         = a.contentType,
                     isPrivate           = a.isPrivate,
@@ -65,7 +65,7 @@ fun ICreateAttachmentUseCase.Output.toCreateAttachmentWrapperResponse(): CreateA
 fun Attachment.toGetAttachmentResponse(): GetAttachmentResponse {
     return GetAttachmentResponse(
         id                  = id!!,
-        parentId            = parentId,
+        objectId            = objectId,
         contentType         = contentType,
         description         = description,
         isPrivate           = isPrivate,
@@ -76,7 +76,7 @@ fun Attachment.toGetAttachmentResponse(): GetAttachmentResponse {
 fun Attachment.toCreateAttachmentResponse(): CreateAttachmentResponse {
     return CreateAttachmentResponse(
         id                  = id!!,
-        parentId            = parentId,
+        objectId            = objectId,
         contentType         = contentType,
         description         = description,
         isPrivate           = isPrivate,

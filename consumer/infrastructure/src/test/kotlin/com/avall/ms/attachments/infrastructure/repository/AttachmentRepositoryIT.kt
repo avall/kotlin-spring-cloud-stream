@@ -43,7 +43,7 @@ class AttachmentRepositoryIT /*: PostgreSqlContainer()*/ {
 //        expectThat(this.attachmentRepository.findById(attachment.id.toString()).get())
 //        {
 //            get { id } isEqualTo attachment.id
-//            get { parentId } isEqualTo attachment.parentId
+//            get { objectId } isEqualTo attachment.objectId
 //            get { parentObjectName } isEqualTo attachment.parentObjectName
 //            get { fileName } isEqualTo attachment.fileName
 //            get { contentType } isEqualTo attachment.contentType
@@ -62,7 +62,7 @@ class AttachmentRepositoryIT /*: PostgreSqlContainer()*/ {
 //        attachment = this.attachmentRepository.save(attachment)!!
 //
 //        // Then
-//        expectThat(this.attachmentRepository.findByParentId(attachment.parentId).size).isEqualTo(1)
+//        expectThat(this.attachmentRepository.findByParentId(attachment.objectId).size).isEqualTo(1)
 //    }
 //
 //    @Test
@@ -80,7 +80,7 @@ class AttachmentRepositoryIT /*: PostgreSqlContainer()*/ {
 //
 //    private fun buildAttachment(
 //        id: String = UUID.randomUUID().toString(),
-//        parentId : String = UUID.randomUUID().toString(),
+//        objectId : String = UUID.randomUUID().toString(),
 //        contentType : String = "contentType",
 //        parentObjectName : String = "parentObjectName",
 //        path : String = "path",
@@ -96,7 +96,7 @@ class AttachmentRepositoryIT /*: PostgreSqlContainer()*/ {
 //        return AttachmentEntity(
 //            id = id,
 //            contentType = contentType,
-//            parentId = parentId,
+//            objectId = objectId,
 //            parentObjectName = parentObjectName,
 //            fileName =  fileName,
 //            path = path,

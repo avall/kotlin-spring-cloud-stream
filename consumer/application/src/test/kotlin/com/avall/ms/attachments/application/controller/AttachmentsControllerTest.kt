@@ -56,7 +56,7 @@ class AttachmentsControllerTest {
     }
 
     @Test
-    fun `Give correct fields and verify methods When Get Attachments by parentId`() {
+    fun `Give correct fields and verify methods When Get Attachments by objectId`() {
         //Give
         val attachment = getAttachment()
 
@@ -70,7 +70,7 @@ class AttachmentsControllerTest {
         )
 
         // then
-        val result = attachmentsController.getAttachments("parentId")
+        val result = attachmentsController.getAttachments("objectId")
 
         verify(getAttachmentsUseCase, times(1)).execute(any())
 
@@ -106,7 +106,7 @@ class AttachmentsControllerTest {
 
     private fun getAttachment() = Attachment(
         id = "UUID",
-        parentId = "parentId",
+        objectId = "objectId",
         contentType = "contentType",
         url = "path",
         description = "description"
@@ -117,7 +117,7 @@ class AttachmentsControllerTest {
                     listOf(
                         CreateAttachmentRequest(
                             contentType = "contentType",
-                            parentId = "parentId",
+                            objectId = "objectId",
                             description = "description",
                             url = "path",
                             isPrivate = true

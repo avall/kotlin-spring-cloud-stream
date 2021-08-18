@@ -27,6 +27,6 @@ class AttachmentRepositoryAdapter(
     override fun get(id: String): Attachment =
         attachmentRepository.findById(id).map { a -> AttachmentEntityMapper.toDomain(a) }.orElseThrow{ NotFoundException("404","No 'attachment' found with id $id") }
 
-    override fun findByParentId(parentId:String): List<Attachment> =
-        attachmentRepository.findByParentId(parentId).map { AttachmentEntityMapper.toDomain(it) }
+    override fun findByParentId(objectId:String): List<Attachment> =
+        attachmentRepository.findByParentId(objectId).map { AttachmentEntityMapper.toDomain(it) }
 }

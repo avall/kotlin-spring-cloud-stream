@@ -4,11 +4,11 @@ import org.springframework.cloud.contract.spec.ContractDsl.Companion.contract
 import org.springframework.cloud.contract.spec.withQueryParameters
 
 contract {
-    description = "When Get Attachments by parentId Then OK"
+    description = "When Get Attachments by objectId Then OK"
     request {
         method = GET
         url = url("/v1/attachments") withQueryParameters {
-            parameter("parentId", "7d2c830c-5e62-11eb-ae93-0242ac130002")
+            parameter("objectId", "7d2c830c-5e62-11eb-ae93-0242ac130002")
         }
         headers {
             accept = APPLICATION_JSON

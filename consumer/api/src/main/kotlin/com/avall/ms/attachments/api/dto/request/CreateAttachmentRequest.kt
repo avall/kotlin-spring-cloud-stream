@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank
  */
 data class CreateAttachmentRequest /*@JsonCreator*/ (
         var description: String?,
-        @NotBlank var parentId : String?,
+        @NotBlank var objectId : String?,
         @NotBlank var contentType: String?,
         @NotBlank var url: String?,
         @set:JsonProperty("is_private")
@@ -17,7 +17,7 @@ data class CreateAttachmentRequest /*@JsonCreator*/ (
 
 ) {
         constructor():this(
-                parentId = null,
+                objectId = null,
                 description = null,
                 contentType =  null,
                 url = null,

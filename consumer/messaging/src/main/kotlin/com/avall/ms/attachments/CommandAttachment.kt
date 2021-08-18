@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
      Attachment message
  */
 data class CommandAttachment @JsonCreator constructor(
-    @JsonProperty("parentId") val parentId: String,
+    @JsonProperty("objectId") val objectId: String,
     @JsonProperty("description") val description: String?=null,
     @JsonProperty("contentType") val contentType: String,
     @JsonProperty("isPrivate") val isPrivate: Boolean?=null,

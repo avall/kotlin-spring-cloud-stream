@@ -66,7 +66,7 @@ interface AttachmentApi {
             content = [Content()]
         )]
     )
-    fun getAttachments(@RequestParam(required = true) parentId:String): List<GetAttachmentResponse>
+    fun getAttachments(@RequestParam(required = true) objectId:String): List<GetAttachmentResponse>
 
     @GetMapping("/{id}")
     @ResponseStatus(value = HttpStatus.OK)

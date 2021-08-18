@@ -30,12 +30,12 @@ class AttachmentsController(
             .toCreateAttachmentWrapperResponse()
 
     /**
-     * Get AttachmentsWrappers by parentId.
-     * @param parentId String
+     * Get AttachmentsWrappers by objectId.
+     * @param objectId String
      * @return List<GetAttachmentsResponse>
      */
-    override fun getAttachments(parentId:String): List<GetAttachmentResponse> =
-        getAttachmentsUseCase.execute(AttachmentsMapper.buildGetAttachmentsQuery(parentId))
+    override fun getAttachments(objectId:String): List<GetAttachmentResponse> =
+        getAttachmentsUseCase.execute(AttachmentsMapper.buildGetAttachmentsQuery(objectId))
             .toGetAttachmentResponse()
 
     /**

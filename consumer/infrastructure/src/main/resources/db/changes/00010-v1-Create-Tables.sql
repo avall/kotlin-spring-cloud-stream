@@ -2,6 +2,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE TABLE IF NOT EXISTS attachment (
         id varchar(255) NOT NULL ,
         contenttype varchar(255) NOT NULL,
+        object_id varchar(255),
         description varchar(255),
         url varchar(255) NOT NULL,
         is_private bool NOT NULL,

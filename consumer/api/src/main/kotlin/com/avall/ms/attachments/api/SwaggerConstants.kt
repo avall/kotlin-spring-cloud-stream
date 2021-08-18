@@ -3,7 +3,7 @@ package com.avall.ms.attachments.api
 object SwaggerConstants {
     const val CERATE_ATTACHMENT_DESC = "Create Attachments"
     const val RETRIEVE_ATTACHMENT_DESC = "Retrieve Attachment by Id"
-    const val RETRIEVE_ATTACHMENTS_DESC = "Retrieve Attachments by parentId"
+    const val RETRIEVE_ATTACHMENTS_DESC = "Retrieve Attachments by objectId"
     const val VAR_ATTACHMENT_ID_DESC = "Attachment Id"
     const val GENERIC_MESSAGE200 = "OK"
     const val GENERIC_MESSAGE400 = "Bad request"

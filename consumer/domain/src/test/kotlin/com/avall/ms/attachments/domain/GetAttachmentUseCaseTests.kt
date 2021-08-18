@@ -38,7 +38,7 @@ class GetAttachmentUseCaseTests {
         verify(getAttachmentPort, times(1)).get(any())
         expectThat(result.attachment) {
             get { id } isEqualTo attachment.id
-            get { parentId } isEqualTo attachment.parentId
+            get { objectId } isEqualTo attachment.objectId
             get { contentType } isEqualTo attachment.contentType
             get { url } isEqualTo attachment.url
             get { description } isEqualTo attachment.description
@@ -48,7 +48,7 @@ class GetAttachmentUseCaseTests {
     fun attachment():Attachment {
         return Attachment(
             id = "UUID",
-            parentId = "parentId",
+            objectId = "objectId",
             contentType = "contentType",
             url = "path",
             description = "description"

@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface AttachmentRepository : JpaRepository<AttachmentDb, String> {
-    fun findByParentId(parentId: String): List<AttachmentDb>
+    fun findByParentId(objectId: String): List<AttachmentDb>
 }

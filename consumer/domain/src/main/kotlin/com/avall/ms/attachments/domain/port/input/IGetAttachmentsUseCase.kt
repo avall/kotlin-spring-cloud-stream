@@ -6,7 +6,7 @@ import com.avall.ms.attachments.domain.model.Attachment
 interface IGetAttachmentsUseCase :
     Query<IGetAttachmentsUseCase.Input, IGetAttachmentsUseCase.Output> {
     data class Input(
-        val parentId: String
+        val objectId: String
     )
 
     data class Output(

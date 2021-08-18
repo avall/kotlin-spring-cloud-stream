@@ -72,7 +72,7 @@ class ConsumerTest {
         val event: CommandPayload = CommandPayload(
             documents = listOf(
                 CommandAttachment(
-                    parentId = "parentId",
+                    objectId = "objectId",
                     contentType = "contentType",
                     url = "path",
                     isPrivate = true,
@@ -95,7 +95,7 @@ class ConsumerTest {
                     {
                         assertEquals(
                             event.documents.get(0).description, captorValue.documents.get(0).description,
-                            "parentId"
+                            "objectId"
                         )
                     },
                     {

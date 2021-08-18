@@ -43,7 +43,7 @@ class CreateAttachmentUseCaseTests {
     fun attachment():Attachment {
         return Attachment(
             id = "UUID",
-            parentId = "parentId",
+            objectId = "objectId",
             contentType = "contentType",
             url = "path",
             description = "description"

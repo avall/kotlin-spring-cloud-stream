@@ -31,7 +31,7 @@ class AttachmentRepositoryTest {
         expectThat(this.attachmentRepository.findById(attachment.id.toString()).get())
         {
             get { id } isEqualTo attachment.id
-            get { parentId } isEqualTo attachment.parentId
+            get { objectId } isEqualTo attachment.objectId
             get { contentType } isEqualTo attachment.contentType
             get { url } isEqualTo attachment.url
             get { isPrivate } isEqualTo attachment.isPrivate
@@ -60,7 +60,7 @@ class AttachmentRepositoryTest {
     private fun getAttachment(): AttachmentDb {
         return AttachmentDb(
             id = "UUID",
-            parentId = "parentId",
+            objectId = "objectId",
             contentType = "contentType",
             url = "url",
             description = "description",

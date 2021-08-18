@@ -33,14 +33,14 @@ class AttachmentMapperTest {
     @Test
     fun `Given String buildGetAttachmentsQuery returns IGetAttachmentUseCase Input`() {
         // Given
-        val given = "parentId"
+        val given = "objectId"
 
         // when
         val result = AttachmentsMapper.buildGetAttachmentsQuery(given)
 
         // then
         expectThat(result) {
-            get { parentId } isEqualTo given
+            get { objectId } isEqualTo given
         }
     }
 
@@ -57,7 +57,7 @@ class AttachmentMapperTest {
         expectThat(useCaseInput.attachments[0]) {
             get { id } isEqualTo null
             get { contentType } isEqualTo createAttachmentWrapperRequest.documents.get(0).contentType
-            get { parentId } isEqualTo createAttachmentWrapperRequest.documents.get(0).parentId
+            get { objectId } isEqualTo createAttachmentWrapperRequest.documents.get(0).objectId
             get { url } isEqualTo createAttachmentWrapperRequest.documents.get(0).url
             get { description } isEqualTo createAttachmentWrapperRequest.documents.get(0).description
             get { isPrivate } isEqualTo createAttachmentWrapperRequest.documents.get(0).isPrivate
@@ -75,7 +75,7 @@ class AttachmentMapperTest {
         // then
         expectThat(useCaseInput.attachments[0]) {
             get { id } isEqualTo null
-            get { parentId } isEqualTo commandPayload.documents.get(0).parentId
+            get { objectId } isEqualTo commandPayload.documents.get(0).objectId
             get { contentType } isEqualTo commandPayload.documents.get(0).contentType
             get { url } isEqualTo commandPayload.documents.get(0).url
             get { description } isEqualTo commandPayload.documents.get(0).description
@@ -94,7 +94,7 @@ class AttachmentMapperTest {
         // then
         expectThat(getAttachmentResponse) {
             get { id } isEqualTo getAttachmentResponse.id
-            get { parentId } isEqualTo getAttachmentResponse.parentId
+            get { objectId } isEqualTo getAttachmentResponse.objectId
             get { contentType } isEqualTo getAttachmentResponse.contentType
             get { url } isEqualTo getAttachmentResponse.url
             get { description } isEqualTo getAttachmentResponse.description
@@ -113,7 +113,7 @@ class AttachmentMapperTest {
         // then
         expectThat(getAttachmentsResponse) {
             get { id } isEqualTo getAttachmentsResponse.id
-            get { parentId } isEqualTo getAttachmentsResponse.parentId
+            get { objectId } isEqualTo getAttachmentsResponse.objectId
             get { contentType } isEqualTo getAttachmentsResponse.contentType
             get { url } isEqualTo getAttachmentsResponse.url
             get { description } isEqualTo getAttachmentsResponse.description
@@ -132,7 +132,7 @@ class AttachmentMapperTest {
         // then
         expectThat(result.documents[0]) {
             get { id } isEqualTo output.attachments.get(0).id
-            get { parentId } isEqualTo output.attachments.get(0).parentId
+            get { objectId } isEqualTo output.attachments.get(0).objectId
             get { contentType } isEqualTo output.attachments.get(0).contentType
             get { url } isEqualTo output.attachments.get(0).url
             get { description } isEqualTo output.attachments.get(0).description
@@ -148,7 +148,7 @@ class AttachmentMapperTest {
     private fun getAttachment(): Attachment {
         return Attachment(
             id = "UUID",
-            parentId = "parentId",
+            objectId = "objectId",
             contentType = "contentType",
             url = "url",
             description = "description",
@@ -160,7 +160,7 @@ class AttachmentMapperTest {
         return CreateAttachmentRequest(
             contentType = "contentType",
             url = "url",
-            parentId = "parentId",
+            objectId = "objectId",
             description = "description",
             isPrivate = true
         )
@@ -168,7 +168,7 @@ class AttachmentMapperTest {
 
     private fun getCommandAttachment(): CommandAttachment {
         return CommandAttachment(
-            parentId = "parentId",
+            objectId = "objectId",
             contentType = "contentType",
             url = "url",
             description = "description",
