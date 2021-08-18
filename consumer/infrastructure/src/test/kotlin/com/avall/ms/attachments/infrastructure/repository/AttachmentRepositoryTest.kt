@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
+import org.springframework.test.context.TestPropertySource
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
@@ -14,6 +15,9 @@ import strikt.assertions.isEqualTo
 @DataJpaTest(properties = ["show_sql = true"])
 @ExtendWith(value = [SpringExtension::class])
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
+@TestPropertySource(properties = [
+    "spring.liquibase.enabled=false"
+])
 class AttachmentRepositoryTest {
 
     @Autowired

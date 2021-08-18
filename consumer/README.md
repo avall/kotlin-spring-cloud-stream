@@ -3,8 +3,6 @@
 ## Build project
 Setup environment
 ```shell
-export NEXUS_REGISTRY_USERNAME=wefox-server
-export NEXUS_REGISTRY_PASSWORD=<<password>>
 ```
 
 ### Project specifics
@@ -72,8 +70,8 @@ List of environment variables that may be available during runtime
 | APP_TOPIC_EXECUTE_CREATE_CRM_DOCUMENT_GROUP | group.comms.documents| kafka topic group |
 | APP_TOPIC_EXECUTE_CREATE_CRM_DOCUMENT_ERROR | command.comms.execute-create-crm-documents.dlq | kafka topic dlq |
 | LOGSTASH_HOST | localhost:5000 | Not used unless "logstash" is spring profile is active |
-| APP_OAUTH_SERVER | https://id-dev.wefox.com/auth/realms/wefox | - |
-| APP_OAUTH_SERVER_CERTS | https://id-dev.wefox.com/auth/realms/wefox/protocol/openid-connect/certs | - |
+| APP_OAUTH_SERVER | https://id-dev.jandrinet.com/auth/realms/jandrinet | - |
+| APP_OAUTH_SERVER_CERTS | https://id-dev.jandrinet.com/auth/realms/jandrinet/protocol/openid-connect/certs | - |
 | APP_OAUTH_SCOPE | crm-attachments | - |
 
 ### Docker compose

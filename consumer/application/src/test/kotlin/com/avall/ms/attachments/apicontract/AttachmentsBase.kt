@@ -7,7 +7,7 @@ import com.avall.ms.attachments.domain.port.input.ICreateAttachmentUseCase
 import com.avall.ms.attachments.domain.port.input.IGetAttachmentUseCase
 import com.avall.ms.attachments.domain.port.input.IGetAttachmentsUseCase
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.databind.PropertyNamingStrategy
+import com.fasterxml.jackson.databind.PropertyNamingStrategies
 import io.restassured.config.EncoderConfig
 import io.restassured.module.mockmvc.RestAssuredMockMvc
 import io.restassured.module.mockmvc.config.RestAssuredMockMvcConfig
@@ -67,7 +67,7 @@ open class AttachmentsBase {
     private fun attachment(): Attachment {
         return Attachment(
             id = "7d2c830c-5e62-11eb-ae93-0242ac130002",
-            objectId = "objectId",
+            objectId = "7d2c830c-5e62-11eb-ae93-0242ac130002",
             contentType = "contentType",
             url = "path",
             description = "description",
@@ -79,7 +79,7 @@ open class AttachmentsBase {
     private fun snakeCaseConverter(): MappingJackson2HttpMessageConverter? {
         val mappingJackson2HttpMessageConverter = MappingJackson2HttpMessageConverter()
         mappingJackson2HttpMessageConverter.objectMapper =
-            ObjectMapper().setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE)
+            ObjectMapper().setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE)
         return mappingJackson2HttpMessageConverter
     }
 

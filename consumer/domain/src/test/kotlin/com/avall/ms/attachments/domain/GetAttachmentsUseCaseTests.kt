@@ -27,7 +27,7 @@ class GetAttachmentsUseCaseTests {
     fun `When Calling useCase_execute Then GetAttachmentsPort is called`() {
         // Given
         val attachment = attachment()
-        `when`(getAttachmentsPort.findByParentId(any())).thenReturn(listOf(attachment))
+        `when`(getAttachmentsPort.findByObjectId(any())).thenReturn(listOf(attachment))
 
         val input = IGetAttachmentsUseCase.Input("")
 
@@ -35,7 +35,7 @@ class GetAttachmentsUseCaseTests {
         val result = useCase.execute(input)
 
         // Then: Should return null
-        verify(getAttachmentsPort, times(1)).findByParentId(any())
+        verify(getAttachmentsPort, times(1)).findByObjectId(any())
         expectThat(result.attachments.get(0)) {
             get { id } isEqualTo attachment.id
             get { objectId } isEqualTo attachment.objectId

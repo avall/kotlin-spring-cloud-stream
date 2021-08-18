@@ -63,7 +63,6 @@ Authorization: Bearer {{auth_token}}
 ###
 
 POST http://localhost:8080/crm-attachments/api/v1/attachments
-#POST https://oneback-ms-account-contract.30d437346.eu-central-1.one-wefoxgroup.cloud/api/v1/contracts/
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json; charset=utf-8
@@ -115,7 +114,6 @@ Content-Type: application/json; charset=utf-8
 
 #Germany
 POST http://localhost:8080/api/v1/contracts
-#POST https://oneback-ms-account-contract.30d437346.eu-central-1.one-wefoxgroup.cloud/api/v1/contracts/
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json; charset=utf-8

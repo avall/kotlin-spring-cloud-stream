@@ -71,18 +71,18 @@ internal class attachmentRepositoryAdapterTests {
 
 
     @Test
-    fun `When "findByParentId" Then AttachmentEntityMapper_toEntity and AttachmentRepository_save called`() {
+    fun `When "findByObjectId" Then AttachmentEntityMapper_toEntity and AttachmentRepository_save called`() {
         // Given
         val attachment = buildAttachment()
         val attachmentEntity = AttachmentEntityMapper.toEntity(attachment)
 
-        `when`(attachmentRepository.findByParentId(any())).thenReturn(listOf(attachmentEntity))
+        `when`(attachmentRepository.findByObjectId(any())).thenReturn(listOf(attachmentEntity))
 
         // When
-        val stored:List<Attachment> = attachmentRepositoryAdapter.findByParentId("")
+        val stored:List<Attachment> = attachmentRepositoryAdapter.findByObjectId("")
 
         // Then
-        verify(attachmentRepository, times(1)).findByParentId(any())
+        verify(attachmentRepository, times(1)).findByObjectId(any())
 
         expectThat(stored.get(0)) {
             get { id } isEqualTo attachmentEntity.id

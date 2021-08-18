@@ -44,6 +44,7 @@ import java.util.function.Consumer
         "logging.level.org.springframework.integration=debug",
         "logging.level.kafka=warn",
 
+        "spring.liquibase.enabled=false",
         "spring.jpa.database = h2",
         "spring.datasource.url=jdbc:hsqldb:mem:testdb",
         "spring.datasource.username=sa",

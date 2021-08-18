@@ -8,6 +8,6 @@ import com.avall.ms.attachments.domain.port.output.IGetAttachmentsPort
 @Interactor
 class GetAttachmentsUseCase(private val getAttachmentsPort: IGetAttachmentsPort) : IGetAttachmentsUseCase {
     override fun execute(input: IGetAttachmentsUseCase.Input) : IGetAttachmentsUseCase.Output {
-        return IGetAttachmentsUseCase.Output(getAttachmentsPort.findByParentId(input.objectId))
+        return IGetAttachmentsUseCase.Output(getAttachmentsPort.findByObjectId(input.objectId))
     }
 }

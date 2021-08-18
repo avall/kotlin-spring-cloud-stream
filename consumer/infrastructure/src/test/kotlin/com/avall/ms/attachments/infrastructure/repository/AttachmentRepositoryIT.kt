@@ -54,7 +54,7 @@ class AttachmentRepositoryIT /*: PostgreSqlContainer()*/ {
 //    }
 //
 //    @Test
-//    fun `Given a new Attachment When the Attachment stored in database Then you can retrieve using findByParentId`() {
+//    fun `Given a new Attachment When the Attachment stored in database Then you can retrieve using findByObjectId`() {
 //        // Given
 //        var attachment = buildAttachment()
 //
@@ -62,7 +62,7 @@ class AttachmentRepositoryIT /*: PostgreSqlContainer()*/ {
 //        attachment = this.attachmentRepository.save(attachment)!!
 //
 //        // Then
-//        expectThat(this.attachmentRepository.findByParentId(attachment.objectId).size).isEqualTo(1)
+//        expectThat(this.attachmentRepository.findByObjectId(attachment.objectId).size).isEqualTo(1)
 //    }
 //
 //    @Test

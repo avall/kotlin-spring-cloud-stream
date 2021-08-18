@@ -14,8 +14,8 @@ spring:
 #    oauth2:
 #      resourceserver:
 #        jwt:
-#          issuer-uri: ${APP_OAUTH_SERVER:https://id-dev.wefox.com/auth/realms/wefox}
-#          jwk-set-uri: ${APP_OAUTH_SERVER_CERTS:https://id-dev.wefox.com/auth/realms/wefox/protocol/openid-connect/certs}
+#          issuer-uri: ${APP_OAUTH_SERVER:https://id-dev.jandrinet.com/auth/realms/jandrinet}
+#          jwk-set-uri: ${APP_OAUTH_SERVER_CERTS:https://id-dev.jandrinet.com/auth/realms/jandrinet/protocol/openid-connect/certs}
   jackson:
     property-naming-strategy: SNAKE_CASE
     default-property-inclusion: non_null

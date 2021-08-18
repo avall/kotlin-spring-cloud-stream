@@ -28,7 +28,7 @@ object Versions {
     const val springCloudVersion = "2020.0.3"
     const val springDocVersion = "1.5.2"
     const val swaggerVersion = "2.1.6"
-    const val striktVersion = "0.28.1"
+    const val striktVersion = "0.31.0"
     const val testcontainersVersion = "1.15.1"
     const val mavenFailsafePluginVersion = "2.22.2"
     const val sonarMavenPluginVersion = "3.7.0.1746"
