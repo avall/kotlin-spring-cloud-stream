@@ -1,30 +1,17 @@
-FROM adoptopenjdk/openjdk11:jdk-11.0.10_9-slim as compiler
-LABEL stage=compiler
-WORKDIR workdir
+#FROM adoptopenjdk/openjdk11:jdk-11.0.10_9-slim as compiler
+FROM gradle:jdk11-openj9
+WORKDIR app
 
-COPY . .
-ARG NEXUS_USERNAME
-ARG NEXUS_PASSWORD
-RUN ./mvnw --settings settings.xml package
+ARG USERNAME
+ARG PASSWORD
 
-# build
-FROM adoptopenjdk:11-jre-hotspot as builder
-LABEL stage=builder
-WORKDIR application
+COPY docker/wait-for-it.sh .
+COPY docker/wait-for-it.sh /
+COPY docker/start.sh .
+COPY docker/start.sh /
 
-COPY --from=compiler workdir/application/target/application.jar ./
-RUN java -Djarmode=layertools -jar application.jar extract
+RUN chmod +x wait-for-it.sh
+RUN chmod +x /wait-for-it.sh
+RUN chmod +x start.sh
+RUN chmod +x /start.sh
 
-# image
-FROM adoptopenjdk:11-jre-hotspot
-WORKDIR application
-COPY --from=builder application/dependencies/ ./
-COPY --from=builder application/spring-boot-loader/ ./
-COPY --from=builder application/snapshot-dependencies/ ./
-COPY --from=builder application/application/ ./
-
-RUN cp /opt/java/openjdk/lib/security/cacerts /application/kafka.client.truststore.jks
-
-VOLUME /tmp
-EXPOSE 8081
-ENTRYPOINT ["java","-Xms256m","-Xmx512m", "org.springframework.boot.loader.JarLauncher"]
