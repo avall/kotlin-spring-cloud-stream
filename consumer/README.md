@@ -51,30 +51,13 @@ List of environment variables that may be available during runtime
 | APP_KAFKA_SECURITY_PROTOCOL | - | For secure communication use: SSL |
 | APP_KAFKA_TRUSTSTORE | - | For secure communication use: /application/kafka.client.truststore.jks |
 | APP_KAFKA_REPLICATION_FACTOR | 1 | should be increased on production |
-| APP_TOPIC_EXECUTE_CREATE_CRM_DOCUMENT_COMMAND | command.comms.execute-create-crm-documents | kafka topic command |
-| APP_TOPIC_EXECUTE_CREATE_CRM_DOCUMENT_GROUP | group.comms.documents| kafka topic group |
-| APP_TOPIC_EXECUTE_CREATE_CRM_DOCUMENT_ERROR | command.comms.execute-create-crm-documents.dlq | kafka topic dlq |
+| APP_TOPIC_EXECUTE_CREATE_ATTACHMENTS_COMMAND | command.comms.execute-create-crm-documents | kafka topic command |
+| APP_TOPIC_EXECUTE_CREATE_ATTACHMENTS_GROUP | group.comms.documents| kafka topic group |
+| APP_TOPIC_EXECUTE_CREATE_ATTACHMENTS_ERROR | command.comms.execute-create-crm-documents.dlq | kafka topic dlq |
 | LOGSTASH_HOST | localhost:5000 | Not used unless "logstash" is spring profile is active |
 | APP_OAUTH_SERVER | https://dev.jandrinet.com/auth/realms/jandrinet | - |
 | APP_OAUTH_SERVER_CERTS | https://dev.jandrinet.com/auth/realms/jandrinet/protocol/openid-connect/certs | - |
 | APP_OAUTH_SCOPE | crm-attachments | - |
-
-### Docker compose
-1. `./mvnw clean package`
-1. `docker-compose -f docker-compose.yml build`
-1. `docker-compose up -d`
-1. Navigate to OpenApi definition http://localhost:8100/v3/api-docs/
-1. OpenAPI YAML file http://localhost:8100/v3/api-docs.yaml
-1. Swagger specification http://localhost:8100/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config
-1. Stop local environment `docker-compose down`
-1. Delete all containers `docker rm -f $(docker ps -a -q)`
-1. Delete all volums (Optional) `docker volume rm $(docker volume ls -q)`
-
-### Maven
-1. `docker-compose up -d postgres` -> Start the database locally
-1. `docker-compose up -d zookeeper kafka` -> Start kafka locally
-1. `./mvnw clean install`
-1. `./mvnw -pl main spring-boot:run`
 
 ### Kafkacat
 Install</br>

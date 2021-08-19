@@ -2,7 +2,7 @@ package com.avall.ms.attachments.application.config
 
 import com.avall.ms.attachments.CommandAttachment
 import com.avall.ms.attachments.CommandPayload
-import com.avall.ms.attachments.EXECUTE_CREATE_CRM_DOCUMENTS_COMMAND
+import com.avall.ms.attachments.EXECUTE_CREATE_ATTACHMENTS_COMMAND
 import com.avall.ms.attachments.application.service.PublisherService
 import com.avall.ms.attachments.domain.port.input.ICreateAttachmentUseCase
 import org.awaitility.Awaitility.waitAtMost
@@ -65,7 +65,7 @@ class ConsumerTest {
     @Captor private val commandPayloadCaptor: ArgumentCaptor<CommandPayload>?=null
     @MockBean lateinit var  createAttachmentUseCase: ICreateAttachmentUseCase
 
-    @MockBean(name = EXECUTE_CREATE_CRM_DOCUMENTS_COMMAND) lateinit var consumer: Consumer<CommandPayload>
+    @MockBean(name = EXECUTE_CREATE_ATTACHMENTS_COMMAND) lateinit var consumer: Consumer<CommandPayload>
 
     @Test
     fun Given_an_CommandPayload_When_send_to_topic_Then_consumed() {
@@ -83,7 +83,7 @@ class ConsumerTest {
         )
 
         //When
-        publisher.send(event, EXECUTE_CREATE_CRM_DOCUMENTS_COMMAND+"-in-0")
+        publisher.send(event, EXECUTE_CREATE_ATTACHMENTS_COMMAND+"-in-0")
 
         // then
         waitAtMost(5, TimeUnit.SECONDS)
