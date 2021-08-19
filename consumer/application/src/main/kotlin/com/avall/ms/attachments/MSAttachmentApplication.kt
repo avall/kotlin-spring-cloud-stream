@@ -1,8 +1,8 @@
 package com.avall.ms.attachments
 
 import com.avall.ms.attachments.arch.annotation.Interactor
+import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.FilterType
 
@@ -14,8 +14,14 @@ import org.springframework.context.annotation.FilterType
 		classes = [Interactor::class]
 	)]
 )
-class MSAttachmentApplication
-
-fun main(args: Array<String>) {
-	runApplication<MSAttachmentApplication>(*args)
+class MSAttachmentApplication {
+	companion object {
+		@JvmStatic
+		fun main(args: Array<String>) {
+			SpringApplication.run(
+				MSAttachmentApplication::class.java,
+				*args
+			)
+		}
+	}
 }

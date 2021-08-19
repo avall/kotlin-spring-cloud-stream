@@ -10,43 +10,28 @@ Setup environment
 
 ### Maven build
 ```shell
-./mvnw --settings settings.xml clean package
+./mvnw clean package
 ```
 Produces a spring boot application located at `application/target/application.jar`
 
-### Docker Image build
+### Gradle build
+```shell
+./gradlew clean build
+```
+Produces a spring boot application located at `application/target/application.jar`
+
+### Build & run
 
 Compile and then build the image
 ```shell
-# compile
-./mvnw --settings settings.xml clean package
-# build image
-docker build . --build-arg JAR_FILE=application/target/application.jar --build-arg NEXUS_USERNAME=${NEXUS_USERNAME} --build-arg NEXUS_PASSWORD=${NEXUS_PASSWORD} -t comms-server-ms-crm-attachment
+chmod +x start.sh
+# open terminal & run docker 
+docker compose up
+# open another terminal session & run
+./start.sh
 ```
 
-Compile during the docker build
-```shell
-docker build . -f compile.Dockerfile --build-arg NEXUS_USERNAME=${NEXUS_USERNAME} --build-arg NEXUS_PASSWORD=${NEXUS_PASSWORD} -t comms-server-ms-crm-attachment
-```
-Test the image
-```shell
-docker run -d --name comms-server-ms-crm-attachment \
-  -p 8100:8080 \
-  -e APP_POSTGRES_HOST=localhost \
-  -e APP_POSTGRES_PORT=5432 \
-  -e APP_POSTGRES_SCHEMA=salesforce \
-  -e APP_POSTGRES_DB=attachments \
-  -e APP_POSTGRES_USER=user \
-  -e APP_POSTGRES_PASSWORD=password \
-  -e APP_SERVER_PORT=8080 \
-  -e APP_KAFKA_BROKERS=kafka:9092
-  comms-server-ms-crm-attachment
-
-curl --request GET -vsL \
-     --url 'http://localhost:8100/actuator/health'
-```
 ## :running_man: Run locally
-
 
 ### Environment
 List of environment variables that may be available during runtime
@@ -70,8 +55,8 @@ List of environment variables that may be available during runtime
 | APP_TOPIC_EXECUTE_CREATE_CRM_DOCUMENT_GROUP | group.comms.documents| kafka topic group |
 | APP_TOPIC_EXECUTE_CREATE_CRM_DOCUMENT_ERROR | command.comms.execute-create-crm-documents.dlq | kafka topic dlq |
 | LOGSTASH_HOST | localhost:5000 | Not used unless "logstash" is spring profile is active |
-| APP_OAUTH_SERVER | https://id-dev.jandrinet.com/auth/realms/jandrinet | - |
-| APP_OAUTH_SERVER_CERTS | https://id-dev.jandrinet.com/auth/realms/jandrinet/protocol/openid-connect/certs | - |
+| APP_OAUTH_SERVER | https://dev.jandrinet.com/auth/realms/jandrinet | - |
+| APP_OAUTH_SERVER_CERTS | https://dev.jandrinet.com/auth/realms/jandrinet/protocol/openid-connect/certs | - |
 | APP_OAUTH_SCOPE | crm-attachments | - |
 
 ### Docker compose
