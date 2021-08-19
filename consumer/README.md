@@ -6,7 +6,8 @@ Setup environment
 ```
 
 ### Project specifics
-- Maven wrapper is used by Dockerfile
+- Docker must be installed.
+- Gradle wrapper is used to create the build.
 
 ### Maven build
 ```shell

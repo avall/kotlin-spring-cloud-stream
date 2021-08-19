@@ -1,3 +1,4 @@
+docker compose up -d
 ./docker/wait-for-it.sh --timeout=0 localhost:5432
 ./docker/wait-for-it.sh --timeout=0 localhost:2181
 ./docker/wait-for-it.sh --timeout=0 localhost:9092
