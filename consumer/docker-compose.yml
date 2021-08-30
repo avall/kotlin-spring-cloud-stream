@@ -30,7 +30,7 @@ services:
 
 
 #  kotlin:
-#    container_name: ms-attachment-kotlin
+#    container_name: kotlin-spring-cloud-stream-kotlin
 #    build:
 #      context: .
 #      dockerfile: Dockerfile
@@ -62,7 +62,7 @@ services:
 
 
   zookeeper:
-    container_name: ms-attachment-zookeeper
+    container_name: kotlin-spring-cloud-stream-zookeeper
     image: "bitnami/zookeeper:3.6.2"
     ports:
       - "2181:2181"
@@ -70,7 +70,7 @@ services:
       - ALLOW_ANONYMOUS_LOGIN=yes
 
   kafka:
-    container_name: ms-attachment-kafka
+    container_name: kotlin-spring-cloud-stream-kafka
     image: "bitnami/kafka:2.7.0"
     ports:
       - "9092:9092"
@@ -90,7 +90,7 @@ services:
   #           ELK
   #########################################
   elasticsearch:
-    container_name: ms-attachment-elasticsearch
+    container_name: kotlin-spring-cloud-stream-elasticsearch
     user: elasticsearch:elasticsearch
     build:
       context: docker/elasticsearch/
@@ -117,7 +117,7 @@ services:
       bash -c "/usr/local/bin/docker-entrypoint.sh"
 
   logstash:
-    container_name: ms-attachment-logstash
+    container_name: kotlin-spring-cloud-stream-logstash
     build:
       context: docker/logstash/
       dockerfile: ./Dockerfile
@@ -144,7 +144,7 @@ services:
       bash -c "/usr/local/bin/docker-entrypoint"
 
   kibana:
-    container_name: ms-attachment-kibana
+    container_name: kotlin-spring-cloud-stream-kibana
     build:
       context: docker/kibana/
       dockerfile: ./Dockerfile

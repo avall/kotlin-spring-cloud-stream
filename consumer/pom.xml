@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.avall.ms.attachments</groupId>
-    <artifactId>ms-attachments</artifactId>
+    <artifactId>kotlin-spring-cloud-stream</artifactId>
     <version>1.0.4</version>
     <description>Comms ms crm attachment</description>
     <packaging>pom</packaging>

@@ -52,9 +52,9 @@ List of environment variables that may be available during runtime
 | APP_KAFKA_SECURITY_PROTOCOL | - | For secure communication use: SSL |
 | APP_KAFKA_TRUSTSTORE | - | For secure communication use: /application/kafka.client.truststore.jks |
 | APP_KAFKA_REPLICATION_FACTOR | 1 | should be increased on production |
-| APP_TOPIC_EXECUTE_CREATE_ATTACHMENTS_COMMAND | command.comms.execute-create-crm-documents | kafka topic command |
+| APP_TOPIC_EXECUTE_CREATE_ATTACHMENTS_COMMAND | command.comms.create-documents | kafka topic command |
 | APP_TOPIC_EXECUTE_CREATE_ATTACHMENTS_GROUP | group.comms.documents| kafka topic group |
-| APP_TOPIC_EXECUTE_CREATE_ATTACHMENTS_ERROR | command.comms.execute-create-crm-documents.dlq | kafka topic dlq |
+| APP_TOPIC_EXECUTE_CREATE_ATTACHMENTS_ERROR | command.comms.create-documents.dlq | kafka topic dlq |
 | LOGSTASH_HOST | localhost:5000 | Not used unless "logstash" is spring profile is active |
 | APP_OAUTH_SERVER | https://dev.jandrinet.com/auth/realms/jandrinet | - |
 | APP_OAUTH_SERVER_CERTS | https://dev.jandrinet.com/auth/realms/jandrinet/protocol/openid-connect/certs | - |
@@ -68,17 +68,17 @@ brew install kafkacat
 
 Send something to a topic</br>
 ```
-kafkacat -b localhost:29092 -t command.comms.execute-create-crm-documents -P
+kafkacat -b localhost:29092 -t command.comms.create-documents -P
 ```
 
 View a topic</br>
 ```
-kafkacat -L -b localhost:29092 -t command.comms.execute-create-crm-documents
+kafkacat -L -b localhost:29092 -t command.comms.create-documents
 ```
 
 View number of messsages into topic</br>
 ```
-kafkacat -b localhost:29092 -t command.comms.execute-create-crm-documents -C -e -q| wc -l
+kafkacat -b localhost:29092 -t command.comms.create-documents -C -e -q| wc -l
 ```
 
 ## :jigsaw: Naming and modules

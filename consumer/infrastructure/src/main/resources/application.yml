@@ -5,7 +5,7 @@ server:
 
 spring:
   application:
-    name: ms-attachment
+    name: kotlin-spring-cloud-stream
   profiles:
     active: ${APP_PROFILE:dev}
     include:

@@ -1,7 +1,6 @@
 package com.avall.ms.attachments.application.config;
 
 import com.avall.ms.attachments.CommandPayload
-import com.avall.ms.attachments.EXECUTE_CREATE_ATTACHMENTS_COMMAND
 import com.avall.ms.attachments.application.mapper.toCreateUseCaseInput
 import com.avall.ms.attachments.arch.extensions.loggerFor
 import com.avall.ms.attachments.domain.port.input.ICreateAttachmentUseCase
@@ -19,7 +18,7 @@ class ConsumerConfig(
      * Consumer to create an attachment in the CRM (salesforce)
      * @return Consumer<CommandPayload>
      */
-    @Bean(EXECUTE_CREATE_ATTACHMENTS_COMMAND)
+    @Bean
     fun consumer():Consumer<CommandPayload> {
         return Consumer<CommandPayload> {
             log.info("consuming event {}", it)// l get dispatched to DefaultDispatcher

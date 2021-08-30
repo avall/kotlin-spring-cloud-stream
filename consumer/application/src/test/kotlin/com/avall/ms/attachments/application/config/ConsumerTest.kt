@@ -2,7 +2,6 @@ package com.avall.ms.attachments.application.config
 
 import com.avall.ms.attachments.CommandAttachment
 import com.avall.ms.attachments.CommandPayload
-import com.avall.ms.attachments.EXECUTE_CREATE_ATTACHMENTS_COMMAND
 import com.avall.ms.attachments.application.service.PublisherService
 import com.avall.ms.attachments.domain.port.input.ICreateAttachmentUseCase
 import org.awaitility.Awaitility.waitAtMost
@@ -30,11 +29,11 @@ import java.util.function.Consumer
         "spring.jackson.default-property-inclusion=non_null",
 
         "spring.cloud.stream. default-binder=kafka",
-        "spring.cloud.stream.function.definition=execute-create-crm-documents-command",
+        "spring.cloud.stream.function.definition=consumer",
         "spring.cloud.stream.kafka.binder.brokers=\${spring.embedded.kafka.brokers}",
 
-        "spring.cloud.stream.bindings.execute-create-crm-documents-command-in-0.destination=command.comms.execute-create-crm-documents",
-        "spring.cloud.stream.bindings.execute-create-crm-documents-command-in-0.destination=group.comms.crm-documents",
+        "spring.cloud.stream.bindings.consumer-in-0.destination=command.comms.create-documents",
+        "spring.cloud.stream.bindings.consumer-in-0.destination=group.comms.documents",
 
         "spring.cloud.stream.kafka.binder.consumer-properties.key.deserializer=org.apache.kafka.common.serialization.StringDeserializer",
         "spring.cloud.stream.kafka.binder.consumer-properties.value.deserializer=io.confluent.kafka.serializers.KafkaJsonDeserializer",
@@ -57,7 +56,7 @@ import java.util.function.Consumer
 @EmbeddedKafka(
     partitions = 1,
     controlledShutdown = true,
-    topics = ["command.comms.execute-create-crm-documents"]
+    topics = ["command.comms.create-documents"]
 )
 @AutoConfigureTestDatabase
 class ConsumerTest {
@@ -65,7 +64,7 @@ class ConsumerTest {
     @Captor private val commandPayloadCaptor: ArgumentCaptor<CommandPayload>?=null
     @MockBean lateinit var  createAttachmentUseCase: ICreateAttachmentUseCase
 
-    @MockBean(name = EXECUTE_CREATE_ATTACHMENTS_COMMAND) lateinit var consumer: Consumer<CommandPayload>
+    @MockBean(name = "consumer") lateinit var consumer: Consumer<CommandPayload>
 
     @Test
     fun Given_an_CommandPayload_When_send_to_topic_Then_consumed() {
@@ -83,10 +82,10 @@ class ConsumerTest {
         )
 
         //When
-        publisher.send(event, EXECUTE_CREATE_ATTACHMENTS_COMMAND+"-in-0")
+        publisher.send(event, "consumer"+"-in-0")
 
         // then
-        waitAtMost(5, TimeUnit.SECONDS)
+        waitAtMost(10, TimeUnit.SECONDS)
             .untilAsserted {
                 verify(consumer).accept(commandPayloadCaptor!!.capture())
                 val captorValue: CommandPayload =

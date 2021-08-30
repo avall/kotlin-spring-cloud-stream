@@ -16,7 +16,7 @@ plugins {
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 allprojects {
-	group = "com.avall.ms.attachments"
+	group = "com.avall.ms.kotlin-spring-cloud-stream"
 	version = "1.0.0"
 
 	apply(plugin = "idea")
