@@ -86,22 +86,22 @@ kafkacat -b localhost:29092 -t command.comms.create-documents -C -e -q| wc -l
 ### Architecture
 architecture:
 
-![modules](assets/architecture.png "Modules")
+![modules](assets1/architecture.png "Modules")
 
 ### Modules
 The project is divided in the following modules:
 
-![modules](assets/modules.png "Modules")
+![modules](assets1/modules.png "Modules")
 
 ### Domain Class Diagram
 These are the main entities in the ms-domain:
 
-![modules](assets/domain.png "Modules")
+![modules](assets1/domain.png "Modules")
 
 ### Sequence Class Diagram
 These are the main entities in the ms-domain:
 
-![modules](assets/sequence_diagram.png "Modules")
+![modules](assets1/sequence_diagram.png "Modules")
 
 ### Database
 * Optimistic locking [link](https://docs.spring.io/spring-data/r2dbc/docs/current/reference/html/#r2dbc.optimistic-locking)
