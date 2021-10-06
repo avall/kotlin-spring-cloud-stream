@@ -44,8 +44,8 @@ component [main] <<Spring Boot>> as main {
         S3 bucket <<impl>> (out)
       end note
     component [http] as http {
-      component feignMonolit
-      component oneoauth as oneoauth
+'      component feignMonolit
+      component oauth as oauth
     }
     component [messagging] as messagging
   }
