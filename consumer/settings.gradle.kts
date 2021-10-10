@@ -1,3 +1,3 @@
-rootProject.name = "kotlin-spring-cloud-stream"
+rootProject.name = "consumer"
 
 include("arch","messaging","api","domain","infrastructure","application")

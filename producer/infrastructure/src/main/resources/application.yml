@@ -1,0 +1,74 @@
+server:
+  port: ${APP_SERVER_PORT:8088}
+  servlet:
+    context-path: /api/v1
+
+spring:
+  application:
+    name: producer
+  profiles:
+    active: ${APP_PROFILE:dev}
+    include:
+      - kafka
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    default-property-inclusion: non_null
+  # DATABASE
+
+
+
+# ACTUATOR ENDPOINTS
+management:
+  security:
+    enabled: false
+  context-path: /actuator
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
+    web:
+      base-path: /actuator
+      exposure:
+        include: actuator, health, info, prometheus
+  health:
+    probes:
+      enabled: true
+
+# OPENAPI GENERATION
+springdoc:
+  api-docs:
+    path: api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+openapi-server-url: ${APP_GATEWAY_URL:http://localhost:8003/attachments/api}
+
+# LOGGING
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    org.zalando.logbook: TRACE
+    liquibase: INFO
+
+logbook:
+  format.style: json
+  exclude:
+    - /**/actuator/health
+    - /**/swagger-ui.html
+    - /**/swagger-ui/**
+  obfuscate:
+    headers:
+      - Authorization
+      - X-Secret
+    parameters:
+      - access_token
+      - password
+      - first_name
+      - last_name
+      - birth_date
+      - credit_card
+      - cvc
+    body:
+      - document
+  write:
+    chunk-size: 1000

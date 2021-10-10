@@ -1,0 +1,73 @@
+@startuml
+
+skinparam component<<Spring Boot>> {
+    backgroundColor LightGrey
+    borderColor Grey
+}
+
+skinparam component {
+    backgroundColor LightSteelBlue
+    borderColor CornflowerBlue
+    ArrowColor DarkBlue
+}
+skinparam note {
+    backgroundColor LightYellow
+    borderColor Tan
+}
+
+component [main] <<Spring Boot>> as main {
+  component [domain] as domain {
+    component [shared] as shared
+    component [entity] as entity
+    component [exception] as exception
+    component [port] as port
+      note bottom of port
+        Ports-Input-UseCase / Interactor <<impl>> (out)
+        Port-Output-Interfaces
+      end note
+   }
+  component [binding] as binding
+    note top of binding
+      Payload entities & Topic names
+    end note
+  component [client] as client
+  component [application] as application
+  component [infrastructure] as infrastructure {
+    component [adapter-database] as adapterDatabase
+      note bottom of adapterDatabase
+        Entity
+        Mapper
+        Database Repositories
+      end note
+    component [adapter-documents] as adapterDocuments
+      note bottom of adapterDocuments
+        S3 bucket <<impl>> (out)
+      end note
+    component [http] as http {
+'      component feignMonolit
+      component oauth as oauth
+    }
+    component [messagging] as messagging
+  }
+
+  application -up-> client
+  application -up-> domain
+  application -up-> binding
+  infrastructure -up-> application
+
+
+  note top of domain
+  Domain Model
+  Output Ports <<Interfaces>>
+  Input Ports <<Use Cases>>
+  Input Ports Impl <<Interactors>>
+  end note
+
+  note right of application
+  Consumer
+  Rest Controller
+  Mapper
+  end note
+
+}
+@enduml

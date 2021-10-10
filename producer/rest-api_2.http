@@ -1,0 +1,39 @@
+
+
+###
+
+POST http://localhost:8088/api/v1/attachments
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json; charset=utf-8
+#Authorization: Basic dXNlcjowbjM4NGNrIUMwbnRyNGN0JEQzdg==
+#Authorization: Basic dXNlcjowbjM4NGNrIUNvbnRyYWN0JFN0OQ==
+
+#"documents": [{
+#"type": "image/png",
+#"url": "one-broker-portal/12221815617580PMNWQYJS7XA/SWT/p_YsMwxuaCF9RAcnDXTvkGwSWT/SWT_p_YsMwxuaCF9RAcnDXTvkGwSWT_1579253753915.png"
+#}
+#]
+
+{
+  "documents": [
+    {
+      "object_id": "88c17638-3943-4a73-b75c-b54759a00daa",
+      "object_name": "Claim__c",
+      "description": "description",
+      "content_type": "image/jpeg",
+      "url": "Claim/mw-88c17638-3943-4a73-b75c-b54759a00daa",
+      "is_private": true
+    },
+    {
+      "object_id": "88c17638-3943-4a73-b75c-b54759a00daa",
+      "object_name": "Claim__c",
+      "description": "description",
+      "content_type": "image/jpeg",
+      "url": "Claim/mw-88c17638-3943-4a73-b75c-b54759a00daa",
+      "is_private": true
+    }
+  ]
+}
+
+####

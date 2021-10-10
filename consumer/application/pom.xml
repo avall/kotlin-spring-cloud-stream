@@ -3,33 +3,33 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.avall.ms.attachments</groupId>
-        <artifactId>kotlin-spring-cloud-stream</artifactId>
+        <groupId>com.avall.kotlin.ms.cousine</groupId>
+        <artifactId>consumer</artifactId>
         <version>1.0.4</version>
         <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
-    <artifactId>application</artifactId>
+    <artifactId>consumer-application</artifactId>
     <description>Comms MS Attachment - Application</description>
     <dependencies>
         <dependency>
-            <groupId>com.avall.ms.attachments</groupId>
-            <artifactId>arch</artifactId>
+            <groupId>com.avall.kotlin.ms.cousine</groupId>
+            <artifactId>consumer-arch</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.avall.ms.attachments</groupId>
-            <artifactId>api</artifactId>
+            <groupId>com.avall.kotlin.ms.cousine</groupId>
+            <artifactId>consumer-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.avall.ms.attachments</groupId>
-            <artifactId>domain</artifactId>
+            <groupId>com.avall.kotlin.ms.cousine</groupId>
+            <artifactId>consumer-domain</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.avall.ms.attachments</groupId>
-            <artifactId>infrastructure</artifactId>
+            <groupId>com.avall.kotlin.ms.cousine</groupId>
+            <artifactId>consumer-infrastructure</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.avall.ms.attachments</groupId>
-            <artifactId>messaging</artifactId>
+            <groupId>com.avall.kotlin.ms.cousine</groupId>
+            <artifactId>consumer-messaging</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -231,7 +231,7 @@
                 </dependencies>
                 <configuration>
                     <testFramework>JUNIT5</testFramework>
-                    <packageWithBaseClasses>com.avall.ms.attachments.apicontract</packageWithBaseClasses>
+                    <packageWithBaseClasses>com.avall.kotlin.ms.cousine.consumer.apicontract</packageWithBaseClasses>
                     <nameSuffixForTests>ContractTest</nameSuffixForTests>
                 </configuration>
             </plugin>

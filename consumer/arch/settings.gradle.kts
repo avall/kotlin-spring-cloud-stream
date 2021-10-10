@@ -1,1 +1,1 @@
-rootProject.name = "arch"
+rootProject.name = "consumer-arch"

@@ -4,12 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.avall.ms.attachments</groupId>
-        <artifactId>kotlin-spring-cloud-stream</artifactId>
+        <groupId>com.avall.kotlin.ms.cousine</groupId>
+        <artifactId>consumer</artifactId>
         <version>1.0.4</version>
         <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
-    <artifactId>arch</artifactId>
+    <artifactId>consumer-arch</artifactId>
     <dependencies>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>

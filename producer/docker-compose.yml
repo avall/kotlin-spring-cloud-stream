@@ -1,0 +1,167 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: 'user'
+      POSTGRES_DB: 'claimDB'
+      POSTGRES_PASSWORD: 'password'
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    environment:
+      DB_VENDOR: POSTGRES
+      DB_ADDR: db
+      DB_DATABASE: claimDB
+      DB_USER: user
+      DB_SCHEMA: public
+      DB_PASSWORD: password
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: Pa55w0rd
+      # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
+      #JDBC_PARAMS: "ssl=true"
+    ports:
+      - 8880:8080
+    depends_on:
+      - db
+
+
+#  kotlin:
+#    container_name: kotlin-spring-cloud-stream-kotlin
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#      args:
+#        USERNAME: user
+#        PASSWORD: password
+#    volumes:
+#      - .:/app
+#      - ~/.m2:/root/.m2
+#    working_dir: /app
+#    ports:
+#      - 8080:8080
+#      - 5005:5005
+#    command: >
+#      bash -c "chmod +x ./docker/start.sh && chmod +x ./docker/wait-for-it.sh && ./docker/start.sh"
+##      bash -c "gradle assemble && java -jar -Xss1024k  -Xms128m  -Xmx128m  -XX:+UnlockExperimentalVMOptions  -XX:+UseCGroupMemoryLimitForHeap -XX:CICompilerCount=2 -XX:+UseG1GC   -XX:+UseStringDeduplication   -XX:MaxGCPauseMillis=1000  -XX:+ParallelRefProcEnabled   -XX:+PrintReferenceGC  -XX:G1HeapRegionSize=4m application/build/libs/application-1.0.0.jar"
+##    command: >
+##      bash -c "/wait-for-it.sh --timeout=0 kibana:5601 && /wait-for-it.sh --timeout=0 logstash:5002 && /wait-for-it.sh --timeout=0 elasticsearch:9200 && /wait-for-it.sh --timeout=0 kafka:9092 && /wait-for-it.sh --timeout=0 zookeeper:2181 && /wait-for-it.sh --timeout=0 keycloak:8880 && /wait-for-it.sh --timeout=0 db:5432 && /wait-for-it.sh --timeout=0 kafka:29092 && ./gradlew assemble && java -jar -Xss1024k  -Xms128m  -Xmx128m  -XX:+UnlockExperimentalVMOptions  -XX:+UseCGroupMemoryLimitForHeap -XX:CICompilerCount=2 -XX:+UseG1GC   -XX:+UseStringDeduplication   -XX:MaxGCPauseMillis=1000  -XX:+ParallelRefProcEnabled   -XX:+PrintReferenceGC  -XX:G1HeapRegionSize=4m /application/build/libs/application-1.0.0.jar"
+#
+##    entrypoint: ["./app/start.sh'"]
+##    entrypoint: ["/bin/sh", "-c", "'./wait-for-it.sh --timeout=0 kibana:5601 && ./wait-for-it.sh --timeout=0 logstash:5002 && ./wait-for-it.sh --timeout=0 elasticsearch:9200 && ./wait-for-it.sh --timeout=0 kafka:9092 && ./wait-for-it.sh --timeout=0 zookeeper:2181 && ./wait-for-it.sh --timeout=0 keycloak:8880 && ./wait-for-it.sh --timeout=0 db:5432 && ./wait-for-it.sh --timeout=0 kafka:29092 && ./start.sh'"]
+#    #    command: mvn clean spring-boot:run
+##    command: >
+##      bash -c "/wait-for-it.sh --timeout=0 kibana:5601 && /wait-for-it.sh --timeout=0 logstash:5002 && /wait-for-it.sh --timeout=0 elasticsearch:9200 && /wait-for-it.sh --timeout=0 kafka:9092 && /wait-for-it.sh --timeout=0 zookeeper:2181 && /wait-for-it.sh --timeout=0 keycloak:8880 && /wait-for-it.sh --timeout=0 db:5432 && /wait-for-it.sh --timeout=0 kafka:29092 && ./gradlew assemble && java -jar -Xss1024k  -Xms128m  -Xmx128m  -XX:+UnlockExperimentalVMOptions  -XX:+UseCGroupMemoryLimitForHeap -XX:CICompilerCount=2 -XX:+UseG1GC   -XX:+UseStringDeduplication   -XX:MaxGCPauseMillis=1000  -XX:+ParallelRefProcEnabled   -XX:+PrintReferenceGC  -XX:G1HeapRegionSize=4m /application/build/libs/application-1.0.0.jar"
+#    ##      bash -c "/docker_virtual_ms_data/wait-for-it.sh --timeout=0 redis:6379 eureka:8300 && mvn -Dmaven.test.skip=true spring-boot:run"
+#    depends_on:
+#      - kafka
+#      - db
+
+
+  zookeeper:
+    container_name: kotlin-spring-cloud-stream-zookeeper
+    image: "bitnami/zookeeper:3.6.2"
+    ports:
+      - "2181:2181"
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+
+  kafka:
+    container_name: kotlin-spring-cloud-stream-kafka
+    image: "bitnami/kafka:2.7.0"
+    ports:
+      - "9092:9092"
+      - "29092:29092"
+    environment:
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_ZOOKEEPER_PROTOCOL=PLAINTEXT
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,PLAINTEXT_HOST://:29092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+    depends_on:
+      - zookeeper
+
+
+  #########################################
+  #           ELK
+  #########################################
+  elasticsearch:
+    container_name: kotlin-spring-cloud-stream-elasticsearch
+    user: elasticsearch:elasticsearch
+    build:
+      context: docker/elasticsearch/
+      dockerfile: ./Dockerfile
+      args:
+        ELK_VERSION: 7.5.1
+    volumes:
+      - ./docker/:/virtual_elastic
+      - type: bind
+        source: ./docker/elasticsearch/config/elasticsearch.yml
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+        read_only: true
+      - type: volume
+        source: elasticsearch
+        target: /usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      ELASTIC_PASSWORD: changeme
+      ALLOW_INSECURE_DEFAULT_TLS_CERT: "true"
+    command: >
+      bash -c "/usr/local/bin/docker-entrypoint.sh"
+
+  logstash:
+    container_name: kotlin-spring-cloud-stream-logstash
+    build:
+      context: docker/logstash/
+      dockerfile: ./Dockerfile
+      args:
+        ELK_VERSION: 7.5.1
+    volumes:
+      - ./docker/:/virtual_logstash
+      - type: bind
+        source: ./docker/logstash/config/logstash.yml
+        target: /usr/share/logstash/config/logstash.yml
+        read_only: true
+      - type: bind
+        source: ./docker/logstash/pipeline
+        target: /usr/share/logstash/pipeline
+        read_only: true
+    ports:
+      - "5002:5002"
+      - "9600:9600"
+    environment:
+      LS_JAVA_OPTS: "-Xmx512m -Xms512m"
+    depends_on:
+      - elasticsearch
+    command: >
+      bash -c "/usr/local/bin/docker-entrypoint"
+
+  kibana:
+    container_name: kotlin-spring-cloud-stream-kibana
+    build:
+      context: docker/kibana/
+      dockerfile: ./Dockerfile
+      args:
+        ELK_VERSION: 7.5.1
+    volumes:
+      - ./docker/:/virtual_kibana
+      - type: bind
+        source: ./docker/kibana/config/kibana.yml
+        target: /usr/share/kibana/config/kibana.yml
+        read_only: true
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+    command: >
+      bash -c "/usr/local/bin/kibana-docker"
+
+volumes:
+  elasticsearch:

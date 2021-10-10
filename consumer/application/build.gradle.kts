@@ -4,7 +4,7 @@ import org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
 
 
 springBoot {
-	mainClass.set("com.avall.ms.attachments.MSAttachmentApplication")
+	mainClass.set("com.avall.kotlin.ms.cousine.consumer.MSAttachmentApplication")
 }
 
 plugins {
@@ -20,11 +20,11 @@ gitProperties {
 
 contracts {
 	testFramework.set(org.springframework.cloud.contract.verifier.config.TestFramework.JUNIT5)
-    packageWithBaseClasses.set("com.avall.ms.attachments.apicontract")
+    packageWithBaseClasses.set("com.avall.kotlin.ms.cousine.consumer.apicontract")
     nameSuffixForTests.set("ContractTest")
 //	contractsDslDir.file("${project.rootDir}/src/contractTest/resources/contracts/attachments")
 //  generatedTestSourcesDir = project.file('src/generatedContract')
-//	basePackageForTests.set("com.avall.ms.attachments.application.contract")
+//	basePackageForTests.set("com.avall.kotlin.ms.cousine.consumer.application.contract")
 //    testMode.set(org.springframework.cloud.contract.verifier.config.TestMode.EXPLICIT)
 }
 

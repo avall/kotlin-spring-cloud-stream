@@ -8,10 +8,10 @@
         <version>2.4.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.avall.ms.attachments</groupId>
-    <artifactId>kotlin-spring-cloud-stream</artifactId>
+    <groupId>com.avall.kotlin.ms.cousine</groupId>
+    <artifactId>consumer</artifactId>
     <version>1.0.4</version>
-    <description>Comms ms crm attachment</description>
+    <description>ms cousine consumer</description>
     <packaging>pom</packaging>
     <properties>
         <java.version>11</java.version>
@@ -48,33 +48,33 @@
         <dependencies>
 
             <dependency>
-                <groupId>com.avall.ms.attachments</groupId>
-                <artifactId>application</artifactId>
+                <groupId>com.avall.kotlin.ms.cousine</groupId>
+                <artifactId>consumer-application</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.avall.ms.attachments</groupId>
-                <artifactId>domain</artifactId>
+                <groupId>com.avall.kotlin.ms.cousine</groupId>
+                <artifactId>consumer-domain</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.avall.ms.attachments</groupId>
-                <artifactId>infrastructure</artifactId>
+                <groupId>com.avall.kotlin.ms.cousine</groupId>
+                <artifactId>consumer-infrastructure</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.avall.ms.attachments</groupId>
-                <artifactId>messaging</artifactId>
+                <groupId>com.avall.kotlin.ms.cousine</groupId>
+                <artifactId>consumer-messaging</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.avall.ms.attachments</groupId>
-                <artifactId>api</artifactId>
+                <groupId>com.avall.kotlin.ms.cousine</groupId>
+                <artifactId>consumer-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.avall.ms.attachments</groupId>
-                <artifactId>arch</artifactId>
+                <groupId>com.avall.kotlin.ms.cousine</groupId>
+                <artifactId>consumer-arch</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

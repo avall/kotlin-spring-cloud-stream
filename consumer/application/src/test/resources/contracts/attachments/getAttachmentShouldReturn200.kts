@@ -20,6 +20,7 @@ contract {
         body = body(
             "id" to "7d2c830c-5e62-11eb-ae93-0242ac130002",
             "object_id" to "7d2c830c-5e62-11eb-ae93-0242ac130002",
+            "object_name" to "objectName",
             "content_type" to "contentType",
             "url" to "path",
             "description" to "description",

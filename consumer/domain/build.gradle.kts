@@ -31,11 +31,11 @@ dependencyManagement {
 tasks.bootJar {
 	enabled = false
 //	archiveFileName.set("app.jar")
-//	mainClass.set("com.avall.ms.attachments.MSAttachmentApplication")
+//	mainClass.set("com.avall.kotlin.ms.cousine.consumer.MSAttachmentApplication")
 }
 
 tasks.jar {
 	enabled = true
 //	archiveFileName.set("app.jar")
-//	mainClass.set("com.avall.ms.attachments.MSAttachmentApplication")
+//	mainClass.set("com.avall.kotlin.ms.cousine.consumer.MSAttachmentApplication")
 }
