@@ -10,21 +10,13 @@ spring:
         producer-out-0:
           destination: ${APP_TOPIC_EXECUTE_CREATE_ATTACHMENTS_COMMAND:command.comms.create-documents}
           group: ${APP_TOPIC_EXECUTE_CREATE_ATTACHMENTS_GROUP:group.comms.documents}
-          consumer:
-            concurrency: 6
 
       kafka:
         bindings:
           producer-out-0:
-            consumer:
-              #              auto-commit-offset: false
-              #              auto-commit-on-error: false
-              enable-dlq: true
-              dlq-name: ${APP_TOPIC_EXECUTE_CREATE_ATTACHMENTS_ERROR:command.comms.create-documents.dlq}
-              dlq-partitions: 1
-              topic:
-                properties:
-                  retention.ms: ${APP_TOPIC_EXECUTE_CREATE_ATTACHMENTS_RETENTIONTIME:604800000}
+            producer:
+              topic.properties:
+                message.format.version: 1.0.0
 
         binder:
           brokers: ${APP_KAFKA_BROKERS:localhost:29092}
