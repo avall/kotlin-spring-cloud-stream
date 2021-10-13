@@ -8,8 +8,8 @@ spring:
       bindings:
         # consumer
         producer-out-0:
-          destination: ${APP_TOPIC_EXECUTE_CREATE_ATTACHMENTS_COMMAND:command.comms.create-documents}
-          group: ${APP_TOPIC_EXECUTE_CREATE_ATTACHMENTS_GROUP:group.comms.documents}
+          destination: ${APP_TOPIC_EXECUTE_CREATE_ATTACHMENTS_COMMAND:command.create-documents}
+          group: ${APP_TOPIC_EXECUTE_CREATE_ATTACHMENTS_GROUP:group.documents}
 
       kafka:
         bindings:
@@ -24,6 +24,9 @@ spring:
           auto-create-topics: true
           auto-add-partitions: true
 #          required-acks: all
+          producer-properties:
+            key.serializer: org.apache.kafka.common.serialization.StringSerializer
+            value.serializer: org.springframework.kafka.support.serializer.JsonSerializer
           configuration:
             security.protocol: ${APP_KAFKA_SECURITY_PROTOCOL:PLAINTEXT}
             ssl.truststore.location: ${APP_KAFKA_TRUSTSTORE:}

@@ -19,7 +19,7 @@ class ProducerConfig(
      * @return Consumer<CommandPayload>
      */
     @Bean
-    open fun supplier(): Supplier<CommandPayload> {
+    open fun producer(): Supplier<CommandPayload> {
         return Supplier<CommandPayload> { blockingQueue.poll() }
     }
 }

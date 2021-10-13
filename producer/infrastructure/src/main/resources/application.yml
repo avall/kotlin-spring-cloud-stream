@@ -48,7 +48,7 @@ logging:
   config: classpath:logback-spring.xml
   level:
     org.zalando.logbook: TRACE
-    liquibase: INFO
+#    liquibase: INFO
 
 logbook:
   format.style: json

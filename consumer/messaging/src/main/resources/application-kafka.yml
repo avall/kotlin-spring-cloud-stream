@@ -8,8 +8,8 @@ spring:
       bindings:
         # consumer
         consumer-in-0:
-          destination: ${APP_TOPIC_EXECUTE_CREATE_ATTACHMENTS_COMMAND:command.comms.create-documents}
-          group: ${APP_TOPIC_EXECUTE_CREATE_ATTACHMENTS_GROUP:group.comms.documents}
+          destination: ${APP_TOPIC_EXECUTE_CREATE_ATTACHMENTS_COMMAND:command.create-documents}
+          group: ${APP_TOPIC_EXECUTE_CREATE_ATTACHMENTS_GROUP:group.documents}
           consumer:
             concurrency: 6
 
@@ -20,7 +20,7 @@ spring:
               #              auto-commit-offset: false
               #              auto-commit-on-error: false
               enable-dlq: true
-              dlq-name: ${APP_TOPIC_EXECUTE_CREATE_ATTACHMENTS_ERROR:command.comms.create-documents.dlq}
+              dlq-name: ${APP_TOPIC_EXECUTE_CREATE_ATTACHMENTS_ERROR:command.create-documents.dlq}
               dlq-partitions: 1
               topic:
                 properties:
@@ -32,6 +32,9 @@ spring:
           auto-create-topics: true
           auto-add-partitions: true
 #          required-acks: all
+          consumer-properties:
+            key.serializer: org.apache.kafka.common.serialization.StringDeserializer
+            value.serializer: org.springframework.kafka.support.serializer.JsonDeserializer
           configuration:
             security.protocol: ${APP_KAFKA_SECURITY_PROTOCOL:PLAINTEXT}
             ssl.truststore.location: ${APP_KAFKA_TRUSTSTORE:}

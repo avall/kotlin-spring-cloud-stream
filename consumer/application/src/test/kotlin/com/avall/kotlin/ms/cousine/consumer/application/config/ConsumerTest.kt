@@ -32,8 +32,8 @@ import java.util.function.Consumer
         "spring.cloud.stream.function.definition=consumer",
         "spring.cloud.stream.kafka.binder.brokers=\${spring.embedded.kafka.brokers}",
 
-        "spring.cloud.stream.bindings.consumer-in-0.destination=command.comms.create-documents",
-        "spring.cloud.stream.bindings.consumer-in-0.destination=group.comms.documents",
+        "spring.cloud.stream.bindings.consumer-in-0.destination=command.create-documents",
+        "spring.cloud.stream.bindings.consumer-in-0.group=group.documents",
 
         "spring.cloud.stream.kafka.binder.consumer-properties.key.deserializer=org.apache.kafka.common.serialization.StringDeserializer",
         "spring.cloud.stream.kafka.binder.consumer-properties.value.deserializer=io.confluent.kafka.serializers.KafkaJsonDeserializer",
@@ -56,7 +56,7 @@ import java.util.function.Consumer
 @EmbeddedKafka(
     partitions = 1,
     controlledShutdown = true,
-    topics = ["command.comms.create-documents"]
+    topics = ["command.create-documents"]
 )
 @AutoConfigureTestDatabase
 class ConsumerTest {

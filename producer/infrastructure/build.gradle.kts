@@ -1,7 +1,7 @@
 plugins {
 	id("org.springframework.boot")
 	id("org.jetbrains.kotlin.plugin.allopen")
-	id("org.liquibase.gradle") version "2.0.4"
+//	id("org.liquibase.gradle") version "2.0.4"
 
 	kotlin(Plugins.jvm)
 	kotlin(Plugins.spring)
@@ -30,9 +30,9 @@ dependencies {
 	implementation(Libraries.jacksonModuleKotlin)
 
 
-	implementation(Libraries.liquibaseCore)
-	implementation(Libraries.liquibasePlugin)
-	liquibaseRuntime(Libraries.liquibaseHibernate)
+//	implementation(Libraries.liquibaseCore)
+//	implementation(Libraries.liquibasePlugin)
+//	liquibaseRuntime(Libraries.liquibaseHibernate)
 
 	implementation(Libraries.logbook)
 	runtimeOnly(Libraries.postgress)
