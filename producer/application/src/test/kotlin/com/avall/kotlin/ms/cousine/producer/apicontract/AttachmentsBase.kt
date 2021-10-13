@@ -3,9 +3,7 @@ package com.avall.kotlin.ms.cousine.producer.apicontract
 import com.avall.kotlin.ms.cousine.producer.application.config.GlobalExceptionHandler
 import com.avall.kotlin.ms.cousine.producer.application.controller.AttachmentsController
 import com.avall.kotlin.ms.cousine.producer.domain.model.Attachment
-import com.avall.kotlin.ms.cousine.producer.domain.port.input.ICreateAttachmentUseCase
-import com.avall.kotlin.ms.cousine.producer.domain.port.input.IGetAttachmentUseCase
-import com.avall.kotlin.ms.cousine.producer.domain.port.input.IGetAttachmentsUseCase
+import com.avall.kotlin.ms.cousine.producer.domain.port.input.ISendAttachmentUseCase
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.PropertyNamingStrategies
 import io.restassured.config.EncoderConfig
@@ -17,7 +15,6 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.junit.jupiter.MockitoSettings
 import org.mockito.kotlin.any
 import org.mockito.kotlin.doAnswer
-import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.quality.Strictness
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver
@@ -32,17 +29,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 @MockitoSettings(strictness = Strictness.STRICT_STUBS)
 open class AttachmentsBase {
 
-    var createAttachmentUseCase: ICreateAttachmentUseCase = mock {
-        on { execute(any()) } doAnswer { ICreateAttachmentUseCase.Output(attachments()) }
-    }
-    var getAttachmentUseCase: IGetAttachmentUseCase = mock {
-        on { execute(any()) } doReturn IGetAttachmentUseCase.Output(attachment())
-    }
-    var getAttachmentsUseCase: IGetAttachmentsUseCase = mock {
-        on { execute(any()) } doReturn IGetAttachmentsUseCase.Output(attachments())
+    var createAttachmentUseCase: ISendAttachmentUseCase = mock {
+        on { execute(any()) } doAnswer { ISendAttachmentUseCase.Output(attachments()) }
     }
     var attachmentsController: AttachmentsController = AttachmentsController(
-        createAttachmentUseCase, getAttachmentUseCase, getAttachmentsUseCase
+        createAttachmentUseCase
     )
 
     @BeforeAll
@@ -68,6 +59,7 @@ open class AttachmentsBase {
         return Attachment(
             id = "7d2c830c-5e62-11eb-ae93-0242ac130002",
             objectId = "7d2c830c-5e62-11eb-ae93-0242ac130002",
+            objectName = "objectName",
             contentType = "contentType",
             url = "path",
             description = "description",

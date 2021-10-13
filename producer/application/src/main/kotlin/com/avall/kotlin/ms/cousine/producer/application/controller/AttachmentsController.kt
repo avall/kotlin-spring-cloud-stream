@@ -5,12 +5,12 @@ import com.avall.kotlin.ms.cousine.producer.api.dto.request.CreateAttachmentWrap
 import com.avall.kotlin.ms.cousine.producer.api.dto.response.CreateAttachmentWrapperResponse
 import com.avall.kotlin.ms.cousine.producer.application.mapper.toCreateAttachmentWrapperResponse
 import com.avall.kotlin.ms.cousine.producer.application.mapper.toCreateUseCaseInput
-import com.avall.kotlin.ms.cousine.producer.domain.port.input.ICreateAttachmentUseCase
+import com.avall.kotlin.ms.cousine.producer.domain.port.input.ISendAttachmentUseCase
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class AttachmentsController(
-    private val createAttachmentUseCase: ICreateAttachmentUseCase
+    private val sendAttachmentUseCase: ISendAttachmentUseCase
 ) : AttachmentApi {
 
     /**
@@ -18,7 +18,7 @@ class AttachmentsController(
      * @param req CreateAttachmentWrapperRequest
      */
     override fun createAttachment(req: CreateAttachmentWrapperRequest): CreateAttachmentWrapperResponse =
-        createAttachmentUseCase.execute(req.toCreateUseCaseInput())
+        sendAttachmentUseCase.execute(req.toCreateUseCaseInput())
             .toCreateAttachmentWrapperResponse()
 
 

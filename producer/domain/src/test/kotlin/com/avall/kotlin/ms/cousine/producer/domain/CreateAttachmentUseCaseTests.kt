@@ -1,15 +1,15 @@
 package com.avall.kotlin.ms.cousine.producer.domain
 
 import com.avall.kotlin.ms.cousine.producer.domain.model.Attachment
-import com.avall.kotlin.ms.cousine.producer.domain.port.input.ICreateAttachmentUseCase
-import com.avall.kotlin.ms.cousine.producer.domain.port.output.ISaveAttachmentPort
+import com.avall.kotlin.ms.cousine.producer.domain.port.input.ISendAttachmentUseCase
+import com.avall.kotlin.ms.cousine.producer.domain.port.output.ISendAttachmentPort
 import com.avall.kotlin.ms.cousine.producer.domain.usecase.attachment.CreateAttachmentUseCase
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
+import org.mockito.Mockito.doNothing
 import org.mockito.junit.jupiter.MockitoExtension
 import org.mockito.kotlin.any
 import org.mockito.kotlin.times
@@ -18,15 +18,15 @@ import org.mockito.kotlin.verify
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(MockitoExtension::class)
 class CreateAttachmentUseCaseTests {
-    @Mock lateinit var saveAttachmentPort: ISaveAttachmentPort
+    @Mock lateinit var sendAttachmentPort: ISendAttachmentPort
     @InjectMocks lateinit var useCase: CreateAttachmentUseCase
 
     @Test
     fun `When Calling useCase_execute Then StoreAttachmentPort is called`() {
         // Given
-        `when`(saveAttachmentPort.store(any())).thenReturn(listOf(attachment()))
+        doNothing().`when`(sendAttachmentPort).execute(any())
 
-        val input = ICreateAttachmentUseCase.Input(
+        val input = ISendAttachmentUseCase.Input(
             listOf<Attachment>(
                 attachment()
             )
@@ -36,7 +36,7 @@ class CreateAttachmentUseCaseTests {
         useCase.execute(input)
 
         // Then: Should return null
-        verify(saveAttachmentPort, times(1)).store(any())
+        verify(sendAttachmentPort, times(1)).execute(any())
 
     }
 

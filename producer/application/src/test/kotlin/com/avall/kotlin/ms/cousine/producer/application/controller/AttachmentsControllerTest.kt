@@ -3,9 +3,7 @@ package com.avall.kotlin.ms.cousine.producer.application.controller
 import com.avall.kotlin.ms.cousine.producer.api.dto.request.CreateAttachmentRequest
 import com.avall.kotlin.ms.cousine.producer.api.dto.request.CreateAttachmentWrapperRequest
 import com.avall.kotlin.ms.cousine.producer.domain.model.Attachment
-import com.avall.kotlin.ms.cousine.producer.domain.port.input.ICreateAttachmentUseCase
-import com.avall.kotlin.ms.cousine.producer.domain.port.input.IGetAttachmentUseCase
-import com.avall.kotlin.ms.cousine.producer.domain.port.input.IGetAttachmentsUseCase
+import com.avall.kotlin.ms.cousine.producer.domain.port.input.ISendAttachmentUseCase
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
@@ -19,15 +17,12 @@ import org.mockito.kotlin.verify
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
-import java.util.*
 
 @TestInstance(TestInstance.Lifecycle.PER_METHOD)
 @ExtendWith(SpringExtension::class)
 class AttachmentsControllerTest {
 
-    @Mock lateinit var createAttachmentUseCase: ICreateAttachmentUseCase
-    @Mock lateinit var getAttachmentUseCase: IGetAttachmentUseCase
-    @Mock lateinit var getAttachmentsUseCase: IGetAttachmentsUseCase
+    @Mock lateinit var createAttachmentUseCase: ISendAttachmentUseCase
 
     @InjectMocks lateinit var attachmentsController: AttachmentsController
     @BeforeEach fun setUp() {}
@@ -40,7 +35,7 @@ class AttachmentsControllerTest {
 
         //When
         `when`(createAttachmentUseCase.execute(any())).thenReturn(
-            ICreateAttachmentUseCase.Output(listOf(attachment))
+            ISendAttachmentUseCase.Output(listOf(attachment))
         )
 
         //Then
@@ -55,58 +50,11 @@ class AttachmentsControllerTest {
 
     }
 
-    @Test
-    fun `Give correct fields and verify methods When Get Attachments by objectId`() {
-        //Give
-        val attachment = getAttachment()
-
-        //When
-        `when`(getAttachmentsUseCase.execute(any())).thenReturn(
-            IGetAttachmentsUseCase.Output(
-                listOf(
-                    attachment
-                )
-            )
-        )
-
-        // then
-        val result = attachmentsController.getAttachments("objectId")
-
-        verify(getAttachmentsUseCase, times(1)).execute(any())
-
-        expectThat(result.get(0)) {
-            get { id } isEqualTo attachment.id
-            get { contentType } isEqualTo attachment.contentType
-            get { url } isEqualTo attachment.url
-        }
-    }
-
-
-    @Test
-    fun `Give correct fields and verify methods When Get Attachment by id`() {
-        //Give
-        val attachment = getAttachment()
-
-        //When
-        `when`(getAttachmentUseCase.execute(any())).thenReturn(
-            IGetAttachmentUseCase.Output(attachment)
-        )
-
-        // then
-        val result = attachmentsController.getAttachmentById("")
-
-        verify(getAttachmentUseCase, times(1)).execute(any())
-
-        expectThat(result) {
-            get { id } isEqualTo attachment.id
-            get { contentType } isEqualTo attachment.contentType
-            get { url } isEqualTo attachment.url
-        }
-    }
 
     private fun getAttachment() = Attachment(
         id = "UUID",
         objectId = "objectId",
+        objectName = "objectName",
         contentType = "contentType",
         url = "path",
         description = "description"
@@ -118,6 +66,7 @@ class AttachmentsControllerTest {
                         CreateAttachmentRequest(
                             contentType = "contentType",
                             objectId = "objectId",
+                            objectName = "objectName",
                             description = "description",
                             url = "path",
                             isPrivate = true

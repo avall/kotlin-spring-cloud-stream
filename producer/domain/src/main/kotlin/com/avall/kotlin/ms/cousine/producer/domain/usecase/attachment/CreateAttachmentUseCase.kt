@@ -6,12 +6,12 @@ import com.avall.kotlin.ms.cousine.producer.domain.port.input.ISendAttachmentUse
 import com.avall.kotlin.ms.cousine.producer.domain.port.output.ISendAttachmentPort
 
 @Interactor
-class CreateAttachmentUseCase(private val saveAttachmentPort: ISendAttachmentPort) : ISendAttachmentUseCase {
+class CreateAttachmentUseCase(private val sendAttachmentPort: ISendAttachmentPort) : ISendAttachmentUseCase {
 
     private val log = loggerFor(javaClass)
 
     override fun execute(input: ISendAttachmentUseCase.Input):ISendAttachmentUseCase.Output {
-        saveAttachmentPort.execute(input.attachments)
+        sendAttachmentPort.execute(input.attachments)
         log.info("attachment saved into CRM {}", input.attachments)
 
         return ISendAttachmentUseCase.Output(input.attachments)

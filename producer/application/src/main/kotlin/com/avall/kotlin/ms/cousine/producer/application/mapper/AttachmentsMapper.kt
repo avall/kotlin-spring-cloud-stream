@@ -4,24 +4,15 @@ import com.avall.kotlin.ms.cousine.producer.CommandPayload
 import com.avall.kotlin.ms.cousine.producer.api.dto.request.CreateAttachmentWrapperRequest
 import com.avall.kotlin.ms.cousine.producer.api.dto.response.CreateAttachmentResponse
 import com.avall.kotlin.ms.cousine.producer.api.dto.response.CreateAttachmentWrapperResponse
-import com.avall.kotlin.ms.cousine.producer.api.dto.response.GetAttachmentResponse
 import com.avall.kotlin.ms.cousine.producer.domain.model.Attachment
-import com.avall.kotlin.ms.cousine.producer.domain.port.input.ICreateAttachmentUseCase
-import com.avall.kotlin.ms.cousine.producer.domain.port.input.IGetAttachmentUseCase
-import com.avall.kotlin.ms.cousine.producer.domain.port.input.IGetAttachmentsUseCase
+import com.avall.kotlin.ms.cousine.producer.domain.port.input.ISendAttachmentUseCase
 import java.util.stream.Collectors
 
 object AttachmentsMapper {
-    fun buildGetAttachmentQuery(id: String): IGetAttachmentUseCase.Input {
-        return IGetAttachmentUseCase.Input(id)
-    }
-    fun buildGetAttachmentsQuery(objectId: String): IGetAttachmentsUseCase.Input {
-        return IGetAttachmentsUseCase.Input(objectId)
-    }
 }
 
-fun CreateAttachmentWrapperRequest.toCreateUseCaseInput(): ICreateAttachmentUseCase.Input {
-    return ICreateAttachmentUseCase.Input(
+fun CreateAttachmentWrapperRequest.toCreateUseCaseInput(): ISendAttachmentUseCase.Input {
+    return ISendAttachmentUseCase.Input(
             documents.stream()
                 .map {
                     Attachment(
@@ -37,8 +28,8 @@ fun CreateAttachmentWrapperRequest.toCreateUseCaseInput(): ICreateAttachmentUseC
                 }.collect(Collectors.toList()))
 }
 
-fun CommandPayload.toCreateUseCaseInput(): ICreateAttachmentUseCase.Input {
-    return ICreateAttachmentUseCase.Input(
+fun CommandPayload.toCreateUseCaseInput(): ISendAttachmentUseCase.Input {
+    return ISendAttachmentUseCase.Input(
         documents
             .stream()
             .map { a ->
@@ -56,25 +47,10 @@ fun CommandPayload.toCreateUseCaseInput(): ICreateAttachmentUseCase.Input {
 }
 
 
-fun IGetAttachmentsUseCase.Output.toGetAttachmentResponse(): List<GetAttachmentResponse> {
-    return attachments.map { a -> a.toGetAttachmentResponse() }
-}
-
-fun ICreateAttachmentUseCase.Output.toCreateAttachmentWrapperResponse(): CreateAttachmentWrapperResponse {
+fun ISendAttachmentUseCase.Output.toCreateAttachmentWrapperResponse(): CreateAttachmentWrapperResponse {
     return CreateAttachmentWrapperResponse(attachments.map { a -> a.toCreateAttachmentResponse() })
 }
 
-fun Attachment.toGetAttachmentResponse(): GetAttachmentResponse {
-    return GetAttachmentResponse(
-        id                  = id!!,
-        objectId            = objectId,
-        objectName          = objectName,
-        contentType         = contentType,
-        description         = description,
-        isPrivate           = isPrivate,
-        url                 = url
-    )
-}
 
 fun Attachment.toCreateAttachmentResponse(): CreateAttachmentResponse {
     return CreateAttachmentResponse(

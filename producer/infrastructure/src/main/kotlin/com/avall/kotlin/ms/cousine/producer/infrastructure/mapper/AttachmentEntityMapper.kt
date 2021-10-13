@@ -1,34 +1,26 @@
 package com.avall.kotlin.ms.cousine.producer.infrastructure.mapper
 
+import com.avall.kotlin.ms.cousine.producer.CommandAttachment
+import com.avall.kotlin.ms.cousine.producer.CommandPayload
 import com.avall.kotlin.ms.cousine.producer.domain.model.Attachment
-import com.avall.kotlin.ms.cousine.producer.infrastructure.database.AttachmentDb
 import java.util.stream.Collectors
 
 class AttachmentEntityMapper() {
     companion object {
-        fun toDomain(attachmentDb: AttachmentDb): Attachment {
-            return attachment(attachmentDb)
+        fun toEvent(attachment: Attachment): CommandAttachment {
+            return CommandAttachment(attachment)
         }
 
-        fun toDomain(attachments: List<AttachmentDb>): List<Attachment> {
-            return attachments.stream()
-                .map { attachment(it) }
-                .collect(Collectors.toList())
+        fun toPayload(attachments: List<Attachment>): CommandPayload {
+            return CommandPayload(
+                documents = attachments.stream()
+                    .map { CommandAttachment(it) }
+                    .collect(Collectors.toList())
+            )
         }
 
-        fun toEntity(attachment: Attachment): AttachmentDb {
-            return attachmentDb(attachment)
-        }
-
-        fun toEntity(attachments: List<Attachment>): List<AttachmentDb> {
-            return attachments.stream()
-                .map { attachmentDb(it) }
-                .collect(Collectors.toList())
-        }
-
-        private fun attachmentDb(attachment: Attachment):AttachmentDb =
-            AttachmentDb(
-                id = attachment.id,
+        private fun CommandAttachment(attachment: Attachment):CommandAttachment =
+            CommandAttachment(
                 objectId = attachment.objectId,
                 objectName = attachment.objectName,
                 contentType = attachment.contentType,
@@ -37,15 +29,5 @@ class AttachmentEntityMapper() {
                 url = attachment.url
         )
 
-        private fun attachment(attachmentDb: AttachmentDb) =
-            Attachment(
-                id               = attachmentDb.id,
-                objectId         = attachmentDb.objectId,
-                objectName       = attachmentDb.objectName,
-                description      = attachmentDb.description,
-                contentType      = attachmentDb.contentType,
-                isPrivate        = attachmentDb.isPrivate,
-                url              = attachmentDb.url
-        )
     }
 }
