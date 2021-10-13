@@ -76,7 +76,7 @@ allprojects {
 
 		testImplementation(Testlibraries.awaitility)
 
-		runtimeOnly(Testlibraries.h2)
+//		runtimeOnly(Testlibraries.h2)
 
 		annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 	}

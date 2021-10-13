@@ -8,13 +8,13 @@ plugins {
 	kotlin(Plugins.jpa)
 }
 
-allOpen {
-	annotations(
-		"javax.persistence.Entity",
-		"javax.persistence.MappedSuperclass",
-		"javax.persistence.Embeddable"
-	)
-}
+//allOpen {
+//	annotations(
+//		"javax.persistence.Entity",
+//		"javax.persistence.MappedSuperclass",
+//		"javax.persistence.Embeddable"
+//	)
+//}
 
 dependencies {
 	implementation(rootProject)
@@ -22,8 +22,9 @@ dependencies {
 	implementation(project(ModulesApp.domain))
 	implementation(project(ModulesApp.messaging))
 
-	implementation(SpringLibraries.springBootStarterDataJPa)
-	implementation(SpringLibraries.springBootStarterSecurity)
+//	implementation(SpringLibraries.springBootStarterDataJPa)
+//	implementation(SpringLibraries.springBootStarterSecurity)
+	implementation(SpringLibraries.springBootStarterWeb)
 	implementation(SpringLibraries.springBootStarterTomcat)
 	implementation(Libraries.customJwtToken)
 
@@ -35,11 +36,11 @@ dependencies {
 //	liquibaseRuntime(Libraries.liquibaseHibernate)
 
 	implementation(Libraries.logbook)
-	runtimeOnly(Libraries.postgress)
-	runtimeOnly(Testlibraries.h2)
+//	runtimeOnly(Libraries.postgress)
+//	runtimeOnly(Testlibraries.h2)
 
 	testImplementation(Testlibraries.testContainerJupiter)
-	testImplementation(Testlibraries.testContainerPostgresql)
+//	testImplementation(Testlibraries.testContainerPostgresql)
 	testImplementation(Libraries.logstashEncoder)
 	developmentOnly(SpringLibraries.springDevtools)
 }
