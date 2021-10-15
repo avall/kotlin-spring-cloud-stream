@@ -93,6 +93,17 @@ class ProducerTest {
                 )
             )
 
+
+
+
+        val consumer: Consumer<String, CommandPayload> = buildConsumer(
+            StringDeserializer::class.java.name,
+            JsonDeserializer::class.java.name
+        )
+
+        embeddedKafka.consumeFromEmbeddedTopics(consumer, TOPIC)
+
+
         //When
 //        createAttachmentUseCase.execute(ISendAttachmentUseCase.Input(attachments))
 
@@ -112,18 +123,11 @@ class ProducerTest {
             , "producer"+"-out-0")
 
 
+        val record: ConsumerRecord<String, CommandPayload> = getSingleRecord(consumer, TOPIC, 1000)
+
         // then
-        val consumer: Consumer<String, String> = buildConsumer(
-            StringDeserializer::class.java.name,
-            JsonDeserializer::class.java.name
-        )
-
-        embeddedKafka.consumeFromEmbeddedTopics(consumer, TOPIC)
-
-        val record: ConsumerRecord<String, String> = getSingleRecord(consumer, TOPIC, 1000)
-
         expectThat(record) {
-            get { value() } isEqualTo "{\"id\":1}"
+            get { value().documents.get(0).objectName } isEqualTo "{\"id\":1}"
         }
 
     }
