@@ -10,7 +10,7 @@ import java.util.function.Supplier
 
 @Configuration
 class ProducerConfig(
-    private val blockingQueue: BlockingQueue<CommandPayload>
+    private val blockingQueuePayload: BlockingQueue<CommandPayload>
 ) {
     private val log = loggerFor(javaClass)
 
@@ -20,6 +20,8 @@ class ProducerConfig(
      */
     @Bean
     open fun producer(): Supplier<CommandPayload> {
-        return Supplier<CommandPayload> { blockingQueue.poll() }
+        return Supplier<CommandPayload> {
+            blockingQueuePayload.poll()
+        }
     }
 }

@@ -1,5 +1,8 @@
 package com.avall.kotlin.ms.cousine.producer.application.config
 
+import com.avall.kotlin.ms.cousine.producer.CommandAttachment
+import com.avall.kotlin.ms.cousine.producer.CommandPayload
+import com.avall.kotlin.ms.cousine.producer.application.service.PublisherService
 import com.avall.kotlin.ms.cousine.producer.domain.model.Attachment
 import com.avall.kotlin.ms.cousine.producer.domain.port.input.ISendAttachmentUseCase
 import org.apache.kafka.clients.consumer.Consumer
@@ -8,7 +11,6 @@ import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.apache.kafka.common.serialization.StringDeserializer
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory
 import org.springframework.kafka.support.serializer.JsonDeserializer
@@ -43,14 +45,6 @@ import strikt.assertions.isEqualTo
         "logging.level.org.springframework.integration=debug",
         "logging.level.kafka=warn",
 
-        "spring.liquibase.enabled=false",
-        "spring.jpa.database = h2",
-        "spring.datasource.url=jdbc:hsqldb:mem:testdb",
-        "spring.datasource.username=sa",
-        "spring.datasource.password=",
-        "spring.jpa.database-platform=org.hibernate.dialect.HSQLDialect",
-        "spring.jpa.show-sql=true",
-        "spring.jpa.hibernate.ddl-auto=create"
     ]
 )
 @EmbeddedKafka(
@@ -58,15 +52,35 @@ import strikt.assertions.isEqualTo
     controlledShutdown = true,
     topics = ["command.create-documents"]
 )
-@AutoConfigureTestDatabase
 class ProducerTest {
     val TOPIC = "command.create-documents"
 
+//    @Autowired lateinit var blockingQueue: BlockingQueue<CommandPayload>
+
+
+    @Autowired lateinit var publisher: PublisherService
     @Autowired lateinit var embeddedKafka: EmbeddedKafkaBroker
     @Autowired lateinit var  createAttachmentUseCase: ISendAttachmentUseCase
 
     @Test
     fun Given_an_CommandPayload_When_send_to_topic_Then_enqueued() {
+
+//        blockingQueue.offer(
+//            CommandPayload(
+//            documents = listOf(
+//                CommandAttachment(
+//                    objectId = "objectId",
+//                    objectName = "objectName",
+//                    contentType = "contentType",
+//                    url = "path",
+//                    isPrivate = true,
+//                    description = "description"
+//                )
+//            )
+//        )
+//        )
+//        val pp = blockingQueue.poll()
+
         // Given
         val attachments: List<Attachment> = listOf(
                 Attachment(
@@ -80,7 +94,23 @@ class ProducerTest {
             )
 
         //When
-        createAttachmentUseCase.execute(ISendAttachmentUseCase.Input(attachments))
+//        createAttachmentUseCase.execute(ISendAttachmentUseCase.Input(attachments))
+
+
+        publisher.send(
+            CommandPayload(
+                documents = listOf(
+                    CommandAttachment(
+                        objectId = "objectId",
+                        objectName = "objectName",
+                        contentType = "contentType",
+                        url = "path",
+                        isPrivate = true,
+                        description = "description"
+                    )
+                ))
+            , "producer"+"-out-0")
+
 
         // then
         val consumer: Consumer<String, String> = buildConsumer(
@@ -89,7 +119,8 @@ class ProducerTest {
         )
 
         embeddedKafka.consumeFromEmbeddedTopics(consumer, TOPIC)
-        val record: ConsumerRecord<String, String> = getSingleRecord(consumer, TOPIC, 500)
+
+        val record: ConsumerRecord<String, String> = getSingleRecord(consumer, TOPIC, 1000)
 
         expectThat(record) {
             get { value() } isEqualTo "{\"id\":1}"

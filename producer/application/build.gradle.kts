@@ -40,9 +40,9 @@ dependencies {
 	implementation(SpringLibraries.springBootStarterActuator)
 	implementation(SpringLibraries.springBootStarter)
 	implementation(SpringLibraries.springBootStarterWeb)
-	implementation(SpringLibraries.springBootStarterSecurity)
-	implementation(SpringLibraries.springSecurityOauth2ResourceServer)
-	implementation(SpringLibraries.springSecurityOauth2Jose)
+//	implementation(SpringLibraries.springBootStarterSecurity)
+//	implementation(SpringLibraries.springSecurityOauth2ResourceServer)
+//	implementation(SpringLibraries.springSecurityOauth2Jose)
 	implementation(Libraries.jacksonModuleKotlin)
 	implementation(Libraries.logbook)
 	implementation(SpringLibraries.springBootStarterDataJPa)
@@ -57,6 +57,7 @@ dependencies {
 	testImplementation(Testlibraries.springCloudContractStarterVerifier) {
 		exclude(group = "com.sun.xml.bind", module = "jaxb-osgi")
 	}
+	testImplementation(SpringLibraries.springCloudStreamKafkaBinder)
 
 	testImplementation(Testlibraries.springCloudContractSpecKotlin)
 	testImplementation(Kotlin.kotlinCompilerEmbedable)

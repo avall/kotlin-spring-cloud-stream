@@ -36,7 +36,7 @@ dependencies {
 
 	implementation(Libraries.logbook)
 	runtimeOnly(Libraries.postgress)
-	runtimeOnly(Testlibraries.h2)
+	runtimeOnly(Testlibraries.h2Database)
 
 	testImplementation(Testlibraries.testContainerJupiter)
 	testImplementation(Testlibraries.testContainerPostgresql)

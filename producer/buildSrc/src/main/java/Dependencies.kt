@@ -76,6 +76,7 @@ object SpringLibraries {
     const val springBootStarterDataJPa = "org.springframework.boot:spring-boot-starter-data-jpa"
     const val springDevtools = "org.springframework.boot:spring-boot-devtools"
     const val springCloudStreamKafkaBinder = "org.springframework.cloud:spring-cloud-stream-binder-kafka"
+    const val springCloudStreamKafka = "org.springframework.cloud:spring-cloud-starter-stream-kafka"
     const val springBootStarterActuator = "org.springframework.boot:spring-boot-starter-actuator"
     const val springBootStarterWeb = "org.springframework.boot:spring-boot-starter-web"
     const val springBootStarterTomcat = "org.springframework.boot:spring-boot-starter-tomcat"
@@ -107,7 +108,7 @@ object Testlibraries {
     const val springCloudStreamTestSupport = "org.springframework.cloud:spring-cloud-stream-test-support"
     const val springKafkaTest = "org.springframework.kafka:spring-kafka-test"
     const val awaitility = "org.awaitility:awaitility"
-    const val h2 = "com.h2database:h2"
+    const val h2Database = "com.h2database:h2"
 }
 
 object ModulesApp {
