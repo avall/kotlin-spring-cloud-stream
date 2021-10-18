@@ -7,6 +7,7 @@ import com.avall.kotlin.ms.cousine.consumer.domain.port.input.ICreateAttachmentU
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import java.util.function.Consumer
+import org.springframework.messaging.Message
 
 @Configuration
 class ConsumerConfig(
@@ -19,10 +20,10 @@ class ConsumerConfig(
      * @return Consumer<CommandPayload>
      */
     @Bean
-    fun consumer():Consumer<CommandPayload> {
-        return Consumer<CommandPayload> {
-            log.info("consuming event {}", it)// l get dispatched to DefaultDispatcher
-            createAttachmentUseCsse.execute(it.toCreateUseCaseInput())
+    fun consumer():Consumer<Message<CommandPayload>> {
+        return Consumer<Message<CommandPayload>> {
+            log.info("consuming event {}", it.payload)// l get dispatched to DefaultDispatcher
+            createAttachmentUseCsse.execute(it.payload.toCreateUseCaseInput())
         };
     }
 }

@@ -46,6 +46,7 @@ dependencies {
 	implementation(Libraries.jacksonModuleKotlin)
 	implementation(Libraries.logbook)
 	implementation(SpringLibraries.springBootStarterDataJPa)
+	implementation(SpringLibraries.springCloudStreamKafkaBinder)
 
 	implementation(Libraries.swaggerCore)
 

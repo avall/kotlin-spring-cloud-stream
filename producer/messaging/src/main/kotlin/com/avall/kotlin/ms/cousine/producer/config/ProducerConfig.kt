@@ -1,4 +1,4 @@
-package com.avall.kotlin.ms.cousine.producer.application.config;
+package com.avall.kotlin.ms.cousine.producer.config;
 
 import com.avall.kotlin.ms.cousine.producer.CommandPayload
 import com.avall.kotlin.ms.cousine.producer.arch.extensions.loggerFor

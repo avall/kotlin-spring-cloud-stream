@@ -8,6 +8,7 @@ plugins {
 
 dependencies {
 	implementation(rootProject)
+	implementation(project(ModulesApp.arch))
 
 	implementation(SpringLibraries.springCloudStreamKafkaBinder)
 	implementation(Libraries.jacksonDataTypeJsr310)

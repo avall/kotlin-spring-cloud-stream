@@ -2,42 +2,25 @@ package com.avall.kotlin.ms.cousine.producer.application.config
 
 import com.avall.kotlin.ms.cousine.producer.CommandAttachment
 import com.avall.kotlin.ms.cousine.producer.CommandPayload
-import com.avall.kotlin.ms.cousine.producer.MsProducerApplication
 import com.avall.kotlin.ms.cousine.producer.application.service.PublisherService
 import com.avall.kotlin.ms.cousine.producer.domain.model.Attachment
 import com.avall.kotlin.ms.cousine.producer.domain.port.input.ISendAttachmentUseCase
 import org.apache.kafka.clients.consumer.Consumer
 import org.apache.kafka.clients.consumer.ConsumerConfig
-import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.apache.kafka.common.serialization.StringDeserializer
-import org.apache.kafka.common.serialization.StringSerializer
-import org.apache.kafka.streams.KeyValue
-import org.awaitility.Awaitility
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import org.mockito.kotlin.times
-import org.mockito.kotlin.verify
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.SpringApplication
-import org.springframework.boot.WebApplicationType
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory
-import org.springframework.kafka.core.DefaultKafkaProducerFactory
-import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.kafka.support.serializer.JsonDeserializer
-import org.springframework.kafka.support.serializer.JsonSerializer
 import org.springframework.kafka.test.EmbeddedKafkaBroker
 import org.springframework.kafka.test.context.EmbeddedKafka
 import org.springframework.kafka.test.utils.KafkaTestUtils
-import org.springframework.kafka.test.utils.KafkaTestUtils.getSingleRecord
-import org.springframework.util.Assert
+import org.springframework.messaging.Message
+import org.springframework.messaging.support.MessageBuilder
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
-import java.util.*
 import java.util.concurrent.BlockingQueue
-import java.util.concurrent.TimeUnit
-import java.util.function.Supplier
 
 
 @SpringBootTest(
@@ -73,7 +56,7 @@ class ProducerTest {
     val TOPIC = "command.create-documents"
     val GROUP = "group.documents"
 
-    @Autowired lateinit var blockingQueue: BlockingQueue<CommandPayload>
+    @Autowired lateinit var blockingQueue: BlockingQueue<Message<CommandPayload>>
     @Autowired lateinit var publisher: PublisherService
     @Autowired lateinit var embeddedKafka: EmbeddedKafkaBroker
     @Autowired lateinit var  createAttachmentUseCase: ISendAttachmentUseCase
@@ -113,7 +96,7 @@ class ProducerTest {
                 )
             )
 
-        val consumer: Consumer<String, CommandPayload> = buildConsumer(
+        val consumer: Consumer<String, Message<CommandPayload>> = buildConsumer(
             embeddedKafka,
             GROUP,
             StringDeserializer::class.java.name,
@@ -126,27 +109,32 @@ class ProducerTest {
         //When
         createAttachmentUseCase.execute(ISendAttachmentUseCase.Input(attachments))
 
-//
+
 //        publisher.send(
-//            CommandPayload(
-//                documents = listOf(
-//                    CommandAttachment(
-//                        objectId = "objectId",
-//                        objectName = "objectName",
-//                        contentType = "contentType",
-//                        url = "path",
-//                        isPrivate = true,
-//                        description = "description"
+//            MessageBuilder.withPayload(
+//                CommandPayload(
+//                    documents = listOf(
+//                        CommandAttachment(
+//                            objectId = "objectId",
+//                            objectName = "objectName",
+//                            contentType = "contentType",
+//                            url = "path",
+//                            isPrivate = true,
+//                            description = "description"
+//                        )
 //                    )
-//                ))
+//                )
+//            )
+//                .setHeader("x-tenant", "xx")
+//                .build()
 //            , "producer-out-0")
 
 
-        val records = KafkaTestUtils.getRecords<String, CommandPayload>(consumer, 1000)
+        val records = KafkaTestUtils.getRecords<String, Message<CommandPayload>>(consumer, 100)
 
         // then
         expectThat(records.records(TOPIC).elementAt(0).value()) {
-            get { documents.get(0).objectName } isEqualTo "objectName"
+            get { payload.documents.get(0).objectName } isEqualTo "objectName"
         }
 
 //        val record: ConsumerRecord<String, CommandPayload> = getSingleRecord(consumer, TOPIC, 1000)
