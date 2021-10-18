@@ -4,7 +4,7 @@ spring:
     stream:
       default-binder: kafka
       function:
-        definition: "producer"
+        definition: producer
       bindings:
         # consumer
         producer-out-0:

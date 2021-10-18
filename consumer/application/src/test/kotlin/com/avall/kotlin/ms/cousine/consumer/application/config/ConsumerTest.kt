@@ -28,7 +28,7 @@ import java.util.function.Consumer
         "spring.jackson.property-naming-strategy=SNAKE_CASE",
         "spring.jackson.default-property-inclusion=non_null",
 
-        "spring.cloud.stream. default-binder=kafka",
+        "spring.cloud.stream.default-binder=kafka",
         "spring.cloud.stream.function.definition=consumer",
         "spring.cloud.stream.kafka.binder.brokers=\${spring.embedded.kafka.brokers}",
 
@@ -62,7 +62,6 @@ import java.util.function.Consumer
 class ConsumerTest {
     @Autowired lateinit var publisher: PublisherService
     @Captor private val commandPayloadCaptor: ArgumentCaptor<CommandPayload>?=null
-    @MockBean lateinit var  createAttachmentUseCase: ICreateAttachmentUseCase
 
     @MockBean(name = "consumer") lateinit var consumer: Consumer<CommandPayload>
 

@@ -26,6 +26,7 @@ dependencies {
 //	implementation(SpringLibraries.springBootStarterSecurity)
 	implementation(SpringLibraries.springBootStarterWeb)
 	implementation(SpringLibraries.springBootStarterTomcat)
+	implementation(SpringLibraries.springCloudStreamKafka)
 	implementation(Libraries.customJwtToken)
 
 	implementation(Libraries.jacksonModuleKotlin)

@@ -6,16 +6,25 @@ import com.avall.kotlin.ms.cousine.producer.domain.port.output.ISendAttachmentPo
 import com.avall.kotlin.ms.cousine.producer.infrastructure.mapper.AttachmentEntityMapper
 import org.springframework.stereotype.Component
 import java.util.concurrent.BlockingQueue
+import org.springframework.messaging.Message
+import org.springframework.messaging.support.MessageBuilder
 
 
 @Component
 class SendAttachmentAdapter(
-    private val blockingQueuePayload: BlockingQueue<CommandPayload>
+    private val blockingQueuePayload: BlockingQueue<Message<CommandPayload>>
 ): ISendAttachmentPort {
 
     override fun execute(attachments: List<Attachment>) {
         blockingQueuePayload.offer(
-            AttachmentEntityMapper.toPayload(attachments)
+            createEvent(AttachmentEntityMapper.toPayload(attachments))
         )
     }
+
+    private fun createEvent(payload: CommandPayload): Message<CommandPayload> {
+        return MessageBuilder.withPayload(payload)
+            .setHeader("x-tenant", "xx")
+            .build()
+    }
+
 }

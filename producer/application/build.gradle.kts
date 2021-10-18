@@ -46,6 +46,7 @@ dependencies {
 	implementation(Libraries.jacksonModuleKotlin)
 	implementation(Libraries.logbook)
 	implementation(SpringLibraries.springBootStarterDataJPa)
+	implementation(SpringLibraries.springCloudStreamKafka)
 
 	implementation(Libraries.swaggerCore)
 
@@ -57,7 +58,7 @@ dependencies {
 	testImplementation(Testlibraries.springCloudContractStarterVerifier) {
 		exclude(group = "com.sun.xml.bind", module = "jaxb-osgi")
 	}
-	testImplementation(SpringLibraries.springCloudStreamKafkaBinder)
+	testImplementation(SpringLibraries.springCloudStreamKafka)
 
 	testImplementation(Testlibraries.springCloudContractSpecKotlin)
 	testImplementation(Kotlin.kotlinCompilerEmbedable)

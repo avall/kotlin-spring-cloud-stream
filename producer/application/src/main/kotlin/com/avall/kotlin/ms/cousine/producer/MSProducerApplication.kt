@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.FilterType
+import java.util.concurrent.CountDownLatch
 
 @SpringBootApplication
 @ComponentScan(
@@ -14,12 +15,12 @@ import org.springframework.context.annotation.FilterType
 		classes = [Interactor::class]
 	)]
 )
-class MSProducerApplication {
+class MsProducerApplication {
 	companion object {
 		@JvmStatic
 		fun main(args: Array<String>) {
 			SpringApplication.run(
-				MSProducerApplication::class.java,
+				MsProducerApplication::class.java,
 				*args
 			)
 		}
