@@ -22,9 +22,13 @@ class SendAttachmentAdapter(
     }
 
     private fun createEvent(payload: CommandPayload): Message<CommandPayload> {
+        val tenant = "X-Tenant"
         return MessageBuilder.withPayload(payload)
 //            .setHeader(KafkaHeaders.MESSAGE_KEY, "")
-            .setHeader("x-tenant", "xx")
+            .setHeader(
+                tenant,
+                if  ((1..10).random() % 2 == 0) "xx" else "yy"
+            )
             .build()
     }
 

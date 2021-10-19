@@ -1,7 +1,7 @@
 spring:
   # kafka
   cloud:
-    function.routing-expression: (headers['x-tenant'].equals('xx') ) ? 'consumer':null
+    function.routing-expression: (headers['X-Tenant'].equals('xx') ) ? 'consumer':null
     stream:
       default-binder: kafka
       function:

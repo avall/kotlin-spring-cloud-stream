@@ -13,7 +13,7 @@ object AttachmentsMapper {
 
 fun CreateAttachmentWrapperRequest.toCreateUseCaseInput(): ISendAttachmentUseCase.Input {
     return ISendAttachmentUseCase.Input(
-            documents.stream()
+            attachments = documents.stream()
                 .map {
                     Attachment(
                         id                  = null,
@@ -25,12 +25,13 @@ fun CreateAttachmentWrapperRequest.toCreateUseCaseInput(): ISendAttachmentUseCas
                         url                 = it.url!!
 
                     )
-                }.collect(Collectors.toList()))
+                }.collect(Collectors.toList())
+    )
 }
 
-fun CommandPayload.toCreateUseCaseInput(): ISendAttachmentUseCase.Input {
+fun CommandPayload.toCreateUseCaseInput(pTenant:String): ISendAttachmentUseCase.Input {
     return ISendAttachmentUseCase.Input(
-        documents
+        attachments = documents
             .stream()
             .map { a ->
                 Attachment(
