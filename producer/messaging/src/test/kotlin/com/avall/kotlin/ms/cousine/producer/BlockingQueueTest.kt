@@ -1,20 +1,22 @@
-package com.avall.kotlin.ms.cousine.producer.application.config
+package com.avall.kotlin.ms.cousine.producer
 
-import com.avall.kotlin.ms.cousine.producer.CommandPayload
-import com.avall.kotlin.ms.cousine.producer.domain.model.Attachment
-import com.avall.kotlin.ms.cousine.producer.domain.port.input.ISendAttachmentUseCase
+import com.avall.kotlin.ms.cousine.producer.config.BlockingQueueConfig
+import com.avall.kotlin.ms.cousine.producer.config.ProducerConfig
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.kafka.test.context.EmbeddedKafka
 import org.springframework.messaging.Message
+import org.springframework.messaging.support.MessageBuilder
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
+import java.util.concurrent.BlockingQueue
 import java.util.function.Supplier
 
 
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.MOCK,
+    classes = [BlockingQueueConfig::class, ProducerConfig::class],
     properties = [
         "spring.profiles.active=test",
         "spring.jackson.property-naming-strategy=SNAKE_CASE",
@@ -42,29 +44,32 @@ import java.util.function.Supplier
     controlledShutdown = true,
     topics = ["command.create-documents"]
 )
-class ProducerTest {
+class BlockingQueueTest {
 
-    @Autowired lateinit var  createAttachmentUseCase: ISendAttachmentUseCase
+    @Autowired lateinit var blockingQueuePayload: BlockingQueue<Message<CommandPayload>>
     @Autowired lateinit var producer: Supplier<Message<CommandPayload>>
 
     @Test
-    fun Given_an_CommandPayload_When_send_to_topic_Then_enqueued() {
-        // Given
-        val attachments: List<Attachment> = listOf(
-                Attachment(
-                    objectId = "objectId",
-                    objectName = "objectName",
-                    contentType = "contentType",
-                    url = "path",
-                    isPrivate = true,
-                    description = "description"
+    open fun test() {
+        blockingQueuePayload.offer(
+            MessageBuilder.withPayload(
+                CommandPayload(
+                    documents = listOf(
+                        CommandAttachment(
+                            objectId = "objectId",
+                            objectName = "objectName",
+                            contentType = "contentType",
+                            url = "path",
+                            isPrivate = true,
+                            description = "description"
+                        )
+                    )
                 )
             )
+                .setHeader("x-tenant", "xx")
+                .build()
+        )
 
-        //When
-        createAttachmentUseCase.execute(ISendAttachmentUseCase.Input(attachments))
-
-        //Then
         expectThat(producer.get()) {
             get { payload.documents.get(0).objectName } isEqualTo "objectName"
         }

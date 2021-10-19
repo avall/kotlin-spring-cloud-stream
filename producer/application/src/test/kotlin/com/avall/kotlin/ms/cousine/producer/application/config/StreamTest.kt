@@ -24,14 +24,13 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
 
-
 @ExtendWith(SpringExtension::class)
 @EmbeddedKafka(
     partitions = 1,
     controlledShutdown = true,
     topics = ["command.create-documents"]
 )
-class Producer1Test {
+class StreamTest {
     val TOPIC = "command.create-documents"
 
     @Autowired private lateinit var embeddedKafka: EmbeddedKafkaBroker

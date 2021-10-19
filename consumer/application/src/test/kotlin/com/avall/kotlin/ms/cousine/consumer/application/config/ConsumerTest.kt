@@ -3,7 +3,6 @@ package com.avall.kotlin.ms.cousine.consumer.application.config
 import com.avall.kotlin.ms.cousine.consumer.CommandAttachment
 import com.avall.kotlin.ms.cousine.consumer.CommandPayload
 import com.avall.kotlin.ms.cousine.consumer.application.service.PublisherService
-import com.avall.kotlin.ms.cousine.consumer.domain.port.input.ICreateAttachmentUseCase
 import org.awaitility.Awaitility.waitAtMost
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -16,6 +15,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.kafka.test.context.EmbeddedKafka
+import org.springframework.messaging.Message
+import org.springframework.messaging.support.MessageBuilder
 import java.util.concurrent.TimeUnit
 import java.util.function.Consumer
 
@@ -68,19 +69,21 @@ class ConsumerTest {
     @Test
     fun Given_an_CommandPayload_When_send_to_topic_Then_consumed() {
         // Given
-        val event: CommandPayload = CommandPayload(
-            documents = listOf(
-                CommandAttachment(
-                    objectId = "objectId",
-                    objectName = "objectName",
-                    contentType = "contentType",
-                    url = "path",
-                    isPrivate = true,
-                    description = "description"
+        val event: Message<CommandPayload> =
+        MessageBuilder.withPayload(
+            CommandPayload(
+                documents = listOf(
+                    CommandAttachment(
+                        objectId = "objectId",
+                        objectName = "objectName",
+                        contentType = "contentType",
+                        url = "path",
+                        isPrivate = true,
+                        description = "description"
+                    )
                 )
             )
-        )
-
+        ).build()
         //When
         publisher.send(event, "consumer"+"-in-0")
 
@@ -94,25 +97,25 @@ class ConsumerTest {
                 assertAll(
                     {
                         assertEquals(
-                            event.documents.get(0).description, captorValue.documents.get(0).description,
+                            event.payload.documents.get(0).description, captorValue.documents.get(0).description,
                             "objectId"
                         )
                     },
                     {
                         assertEquals(
-                            event.documents.get(0).isPrivate, captorValue.documents.get(0).isPrivate,
+                            event.payload.documents.get(0).isPrivate, captorValue.documents.get(0).isPrivate,
                             "parentObjectName"
                         )
                     },
                     {
                         assertEquals(
-                            event.documents.get(0).contentType, captorValue.documents.get(0).contentType,
+                            event.payload.documents.get(0).contentType, captorValue.documents.get(0).contentType,
                             "contentType"
                         )
                     },
                     {
                         assertEquals(
-                            event.documents.get(0).url, captorValue.documents.get(0).url,
+                            event.payload.documents.get(0).url, captorValue.documents.get(0).url,
                             "fileName"
                         )
                     })
