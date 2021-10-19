@@ -12,7 +12,7 @@ class CreateAttachmentUseCase(private val sendAttachmentPort: ISendAttachmentPor
 
     override fun execute(input: ISendAttachmentUseCase.Input):ISendAttachmentUseCase.Output {
         sendAttachmentPort.execute(input.attachments)
-        log.info("attachment saved into CRM {}", input.attachments)
+        log.info("attachment saved {}", input.attachments)
 
         return ISendAttachmentUseCase.Output(input.attachments)
     }

@@ -130,7 +130,7 @@ class ProducerTest {
 //            , "producer-out-0")
 
 
-        val records = KafkaTestUtils.getRecords<String, Message<CommandPayload>>(consumer, 100)
+        val records = KafkaTestUtils.getRecords<String, Message<CommandPayload>>(consumer, 10000)
 
         // then
         expectThat(records.records(TOPIC).elementAt(0).value()) {
