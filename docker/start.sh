@@ -6,4 +6,5 @@
 ./docker/wait-for-it.sh --timeout=0 logstash:5002
 ./docker/wait-for-it.sh --timeout=0 keycloak:8080
 ./docker/wait-for-it.sh --timeout=0 kibana:5601
+cd $1
 gradle :application:bootRun
