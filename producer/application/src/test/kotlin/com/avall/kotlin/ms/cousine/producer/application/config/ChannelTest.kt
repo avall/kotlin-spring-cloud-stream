@@ -42,9 +42,9 @@ import java.util.function.Supplier
     controlledShutdown = true,
     topics = ["command.create-documents"]
 )
-class ProducerTest {
+class ChannelTest {
 
-    @Autowired lateinit var  createAttachmentUseCase: ISendAttachmentUseCase
+    @Autowired lateinit var createAttachmentUseCase: ISendAttachmentUseCase
     @Autowired lateinit var producer: Supplier<Message<CommandPayload>>
 
     @Test

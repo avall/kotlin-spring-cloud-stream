@@ -59,6 +59,14 @@ dependencies {
 		exclude(group = "com.sun.xml.bind", module = "jaxb-osgi")
 	}
 	testImplementation(SpringLibraries.springCloudStreamKafka)
+	testImplementation("org.springframework.cloud:spring-cloud-stream") {
+		artifact {
+			name = "spring-cloud-stream"
+			extension = "jar"
+			type ="test-jar"
+			classifier = "test-binder"
+		}
+	}
 
 	testImplementation(Testlibraries.springCloudContractSpecKotlin)
 	testImplementation(Kotlin.kotlinCompilerEmbedable)

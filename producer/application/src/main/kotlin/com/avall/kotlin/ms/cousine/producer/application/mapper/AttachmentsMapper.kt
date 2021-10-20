@@ -29,7 +29,7 @@ fun CreateAttachmentWrapperRequest.toCreateUseCaseInput(): ISendAttachmentUseCas
     )
 }
 
-fun CommandPayload.toCreateUseCaseInput(pTenant:String): ISendAttachmentUseCase.Input {
+fun CommandPayload.toCreateUseCaseInput(): ISendAttachmentUseCase.Input {
     return ISendAttachmentUseCase.Input(
         attachments = documents
             .stream()

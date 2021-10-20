@@ -14,6 +14,7 @@ spring:
           destination: ${APP_TOPIC_EXECUTE_CREATE_ATTACHMENTS_COMMAND:command.create-documents}
           group: ${APP_TOPIC_EXECUTE_CREATE_ATTACHMENTS_GROUP:group.documents}
           consumer:
+            max-attempts: 3
             concurrency: 6
 
       kafka:
